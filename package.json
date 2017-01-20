@@ -1,0 +1,37 @@
+{
+  "name": "calhouns_mern",
+  "version": "1.0.0",
+  "description": "using the mern stack to develop a website for my business",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrs341/calhounsMERN.git"
+  },
+  "keywords": [
+    "mongodb",
+    "express",
+    "react",
+    "node"
+  ],
+  "author": "Jason Sinn",
+  "license": "ISC",
+
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "body-parser": "^1.15.0",
+    "cheerio": "^0.20.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.6",
+    "morgan": "^1.7.0",
+    "request": "^2.69.0"
+  },
+
+  "bugs": {
+    "url": "https://github.com/jrs341/calhounsMERN/issues"
+  },
+  "homepage": "https://github.com/jrs341/calhounsMERN#readme"
+}

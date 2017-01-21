@@ -13,7 +13,8 @@ var Promise = require("bluebird");
 //
 // Example gets saved as a class, so we can create new Example objects
 // and send them as validated, formatted data to our mongoDB collection.
-var Example = require("./public/customerModel.js");
+var Customer = require("./public/customerModel.js");
+var Employee = require("./public/employeeModel.js");
 mongoose.Promise = Promise;
 
 
@@ -57,10 +58,10 @@ app.get("/", function(req, res) {
 });
 
 // Route to post our form submission to mongoDB via mongoose
-app.post("/submit", function(req, res) {
+app.post("/submitCustomer", function(req, res) {
 
   // We use the "Example" class we defined above to check our req.body against our user model
-  var user = new Example(req.body);
+  var user = new Customer(req.body);
 
   // With the new "Example" object created, we can save our data to mongoose
   // Notice the different syntax. The magic happens in userModel.js
@@ -76,6 +77,24 @@ app.post("/submit", function(req, res) {
   });
 });
 
+app.post("/submitEmployee", function(req, res) {
+
+  // We use the "Example" class we defined above to check our req.body against our user model
+  var user = new Employee(req.body);
+
+  // With the new "Example" object created, we can save our data to mongoose
+  // Notice the different syntax. The magic happens in userModel.js
+  user.save(function(error, doc) {
+    // Send any errors to the browser
+    if (error) {
+      res.send(error);
+    }
+    // Otherwise, send the new doc to the browser
+    else {
+      res.send(doc);
+    }
+  });
+});
 // Connection to PORT
 app.listen(PORT, function() {
   console.log(`Listening On Port: ${PORT}`);

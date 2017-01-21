@@ -13,9 +13,9 @@ var Promise = require("bluebird");
 //
 // Example gets saved as a class, so we can create new Example objects
 // and send them as validated, formatted data to our mongoDB collection.
-var Customer = require("./public/customerModel.js");
-var Employee = require("./public/employeeModel.js");
-var MeterReadings = require("./public/meterReadingsModel.js");
+var Customer = require("./models/customerModel.js");
+var Employee = require("./models/employeeModel.js");
+var MeterReadings = require("./models/meterReadingsModel.js");
 mongoose.Promise = Promise;
 
 

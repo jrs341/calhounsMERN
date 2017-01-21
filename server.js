@@ -15,6 +15,7 @@ var Promise = require("bluebird");
 // and send them as validated, formatted data to our mongoDB collection.
 var Customer = require("./public/customerModel.js");
 var Employee = require("./public/employeeModel.js");
+var MeterReadings = require("./public/meterReadingsModel.js");
 mongoose.Promise = Promise;
 
 
@@ -81,6 +82,25 @@ app.post("/submitEmployee", function(req, res) {
 
   // We use the "Example" class we defined above to check our req.body against our user model
   var user = new Employee(req.body);
+
+  // With the new "Example" object created, we can save our data to mongoose
+  // Notice the different syntax. The magic happens in userModel.js
+  user.save(function(error, doc) {
+    // Send any errors to the browser
+    if (error) {
+      res.send(error);
+    }
+    // Otherwise, send the new doc to the browser
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+app.post("/submitMeterReadings", function(req, res) {
+
+  // We use the "Example" class we defined above to check our req.body against our user model
+  var user = new MeterReadings(req.body);
 
   // With the new "Example" object created, we can save our data to mongoose
   // Notice the different syntax. The magic happens in userModel.js

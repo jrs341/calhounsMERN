@@ -1,6 +1,6 @@
-function updateAll() {
-	if (document.getElementById('all').checked) { 
-		window.location = '/views/meterReadings.html';
+function meterUpdate() {
+	if (document.getElementById('meter_update').checked) { 
+		window.location = '/views/metersToUpdate.html';
 		return false; 
 	} else {
 		return true;

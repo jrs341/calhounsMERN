@@ -58,7 +58,7 @@ app.get("/", function(req, res) {
   res.send(index.html);
 });
 
-app.get("/chooseMeterUpdate"), function(req, res) {
+app.get("/chooseUpdateProcess"), function(req, res) {
   res.send(chooseMeterUpdate.html);
 }
 

@@ -3,7 +3,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>User Schema</title>
+    <title>Choose Update Process</title>
     <style>
       input {
         display: block;
@@ -13,9 +13,10 @@
     </style>
   </head>
   <body>
+  <h1>Step 1 Choose Update Process</h1>
     <form name="updateType" action="" method="get">
-      <label>Update All</label>
-      <input type="checkbox" name="all" id="all" value="meterReadings.html" onClick="return updateAll();"/>
+      <label>Update Meter</label>
+      <input type="checkbox" name="meter_update" id="meter_update" value="metersToUpdate.html" onClick="return meterUpdate();"/>
         </br>
         </br>
       <label>Checkin</label>
@@ -25,6 +26,6 @@
       <label>Checkout</label>
       <input type="checkbox" name="checkout" id="checkout" value="checkout.html" onClick="return checkOut()"/>
   <!-- <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script> -->
-  <script src="../js/chooseMeterUpdate.js"></script>
+  <script src="../js/chooseUpdateProcess.js"></script>
 </body>
 </html>

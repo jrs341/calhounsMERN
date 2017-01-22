@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>User Schema</title>
+    <title>All Meters</title>
     <style>
       input {
         display: block;
@@ -13,6 +12,12 @@
     </style>
   </head>
   <body>
+    <form name="updateMeters" action="" method="get">
+        <label>All Meters</label>
+        <input type="checkbox" name="choose_meters" id="choose_meters" value="" onClick="return chooseMeters();"/>
+          </br>
+          </br>
+    </form>
     <form action="/submitMeterReadings" method="post">
       <input type="text" name="meter" placeholder="Meter ID">
       <input type="text" name="reading" placeholder="Meter Reading">
@@ -20,7 +25,7 @@
     </form>
   </body>
  <!--  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script> -->
-  <script src="../js/meterReadings.js"></script>
+  <script src="../js/updateAllMeterReadings.js"></script>
 </html>
 
 </body>

@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>User Schema</title>
+    <style>
+      input {
+        display: block;
+        font-size: 24px;
+        height: 36px;
+      }
+    </style>
+  </head>
+  <body>
+    <form name="updateType" action="" method="get">
+      <label>Update All</label>
+      <input type="checkbox" name="all" id="all" value="meterReadings.html" onClick="return updateAll();"/>
+        </br>
+        </br>
+      <label>Checkin</label>
+      <input type="checkbox" name="checkin" id="checkin" value="checkin.html" onClick="return checkIn();"/>
+        </br>
+        </br>
+      <label>Checkout</label>
+      <input type="checkbox" name="checkout" id="checkout" value="checkout.html" onClick="return checkOut()"/>
+  <!-- <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script> -->
+  <script src="../js/chooseMeterUpdate.js"></script>
+</body>
+</html>

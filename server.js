@@ -58,6 +58,18 @@ app.get("/", function(req, res) {
   res.send(index.html);
 });
 
+app.get("/chooseMeterUpdate"), function(req, res) {
+  res.send(chooseMeterUpdate.html);
+}
+
+app.get("/checkin"), function(req, res) {
+  res.send(checkin.html);
+}
+
+app.get("/checkout"), function(req, res) {
+  res.send(checkout.html);
+}
+
 // Route to post our form submission to mongoDB via mongoose
 app.post("/submitCustomer", function(req, res) {
 
@@ -115,6 +127,25 @@ app.post("/submitMeterReadings", function(req, res) {
     }
   });
 });
+
+// app.get("/meterReadings", function(req, res) {
+  
+//   MeterReadings.find({})
+//   // ..and populate all of the notes associated with it
+//   // .populate("note")
+//   // now, execute our query
+//   .exec(function(error, doc) {
+//     // Log any errors
+//     if (error) {
+//       console.log(error);
+//     }
+//     // Otherwise, send the doc to the browser as a json object
+//     else {
+//       res.json(doc);
+//     }
+//   });
+// });
+
 // Connection to PORT
 app.listen(PORT, function() {
   console.log(`Listening On Port: ${PORT}`);

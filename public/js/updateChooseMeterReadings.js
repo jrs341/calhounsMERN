@@ -17,13 +17,21 @@ $(document).ready(function() {
     	temp.push(data);
     	for(i=0; i<data.length; i++) {
     	var meter = data[i].meter;
-    	$("#allMeters").append("<label>" + data[i].meter + "</label></br>");
-    	$("#allMeters").append("<input id='" + meter + "' type='checkbox' name='reading' </br></br>");
+    	$("#allMeters").append("<label>" + meter + "</label></br>");
+    	$("#allMeters").append("<input id='" + meter + "' type='checkbox' name='reading' onclick='getId()'</br>");
     }
     $("#allMeters").append("<input id='submit' type='submit'>");
   });
   return false;
 });
+
+function getId() {
+	console.log('hit getId');
+	console.log(event.target.id);
+	var meter = event.target.id;
+	$("#"+meter+"").after("<input id='" + meter + "' type='text' name='reading' placeholder='Meter " + meter + " Reading'></br>");
+	// console.log(tempMeter);
+}
 
 $(document).on("click", "#submit", function() {
 	for (i=0; i<temp[0].lenght; i++) {

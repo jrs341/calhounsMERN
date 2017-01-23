@@ -1,7 +1,5 @@
 $(document).ready(function() {getMeters()});
 
-
-
 var temp = [];
 
 function getMeters() {
@@ -22,7 +20,6 @@ function getMeters() {
   });
   return false;
 };
-// saveAllReadings()
 
 $(document).on("click", "#submit", function() {
 	console.log('clicked');
@@ -41,10 +38,8 @@ $(document).on("click", "#submit", function() {
 		.done(function(data) {
      	 // Log the response
      	 console.log(data);
-     	 // Empty the notes section
-      	// $("#notes").empty();
     	});
 	}
+	// Empty the temp array
+     temp = [];
 });
-
-// });

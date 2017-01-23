@@ -12,19 +12,13 @@
     </style>
   </head>
   <body>
-    <form name="updateMeters" action="" method="get">
-        <label>All Meters</label>
-        <input type="checkbox" name="choose_meters" id="choose_meters" value="" onClick="return chooseMeters();"/>
-          </br>
-          </br>
-    </form>
-    <form action="/submitMeterReadings" method="post">
-      <input type="text" name="meter" placeholder="Meter ID">
-      <input type="text" name="reading" placeholder="Meter Reading">
-      <input type="submit">
-    </form>
+   <!--  <button type="submit" id="getMeters">Meters</button> -->
+   <!--  <form id="meterId" action="/submitAllMeterReadings" method="post">
+    </form> -->
+  <div id="meterId">
+  </div>
   </body>
- <!--  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script src="../js/updateAllMeterReadings.js"></script>
 </html>
 

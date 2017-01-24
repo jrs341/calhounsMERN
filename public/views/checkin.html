@@ -13,13 +13,24 @@
   </head>
   <body>
   <h1>Checkin</h1>
-    <form action="/submitMeterReadings" method="post">
-      <input type="text" name="meter" placeholder="Meter ID">
-      <input type="text" name="reading" placeholder="Meter Reading">
-      <input type="submit">
-    </form>
+  <h1>Customer Lookup</h1>
+  <!-- <form action="/submitMeterReadings" method="post"> -->
+      <input type="text" name="customerLookupFirstName" placeholder="Enter First Name">
+      <input type="text" name="customerLookupLastName" placeholder="Enter Last Name">
+      <!-- need to hit a seach route here -->
+      <!-- display results on a new page -->
+      <button type="submit">Search</button>
+    <!-- </form> -->
+
+  <h1>New Customer</h1>
+    <!-- <form action="/submitMeterReadings" method="post"> -->
+      <input type="text" name="newCustomerFirstName" placeholder="Enter First Name">
+      <input type="text" name="newCustomerLastName" placeholder="Enter Last Name">
+      <!-- need to go to another page and get additional information and enter first and last name into db -->
+      <button type="submit">Submit</button>
+    <!-- </form> -->
   </body>
- <!--  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script src="../js/meterReadings.js"></script>
 </html>
 

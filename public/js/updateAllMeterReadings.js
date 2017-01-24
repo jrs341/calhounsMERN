@@ -12,9 +12,9 @@ function getMeters() {
     console.log(data);
     temp.push(data);
     for(i=0; i<data.length; i++) {
-    	var meter = data[i].meter;
-    	$("#meterId").append("<label>" + data[i].meter + "</label></br>");
-    	$("#meterId").append("<input id='" + meter + "' type='text' name='reading' placeholder='Meter " + data[i].meter + " Reading'></br></br>");
+    	var meter = data[i];
+    	$("#meterId").append("<label>" + meter + "</label></br>");
+    	$("#meterId").append("<input id='" + meter + "' type='text' name='reading' placeholder='Meter " + meter + " Reading'></br></br>");
     }
     $("#meterId").append("<input id='submit' type='submit'>");
   });

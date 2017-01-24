@@ -130,7 +130,8 @@ app.post("/submitAllMeterReadings", function(req, res) {
 
 app.get("/meter", function(req, res) {
   // finds all the individual meters in the db
- MeterReadings.find({ }, {_id: 1, meter: 1 }, function(error, doc) {
+  // .find({ }, {_id: 1, meter: 1 }
+ MeterReadings.distinct("meter", function(error, doc) {
  
     // Log any errors
     if (error) {

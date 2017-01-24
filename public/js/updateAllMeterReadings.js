@@ -9,7 +9,6 @@ function getMeters() {
     dataType: "json"
   })
   .done(function(data) {
-    console.log(data);
     temp.push(data);
     for(i=0; i<data.length; i++) {
     	var meter = data[i];
@@ -22,24 +21,25 @@ function getMeters() {
 };
 
 $(document).on("click", "#submit", function() {
-	console.log('clicked');
 	for(i=0; i<temp[0].length; i++) {
-		var meter = temp[0][i].meter;
+		var meter = temp[0][i];
 		$.ajax({
 		type: "POST",
 		url: "/submitAllMeterReadings",
 		data: {
 		 // mongo id for each meter
-      	meter: temp[0][i].meter,
+      	meter: temp[0][i],
       	// Value taken reading text area
       	reading: $("#"+ meter +"").val()
       		}
 		})
 		.done(function(data) {
-     	 // Log the response
-     	 console.log(data);
-    	});
-	}
-	// Empty the temp array
-     temp = [];
+	   });
+	
+  };
+  // Empty the temp array
+    temp = [];
+    $("#meterId").empty();
+    $("#meterId").append("<h1> All meters were updated");
+    $("#meterId").append("<button type='button' href='/'>Return to homepage</button>");
 });

@@ -42,4 +42,42 @@ $(document).on("click", "#submit", function() {
     $("#meterId").empty();
     $("#meterId").append("<h1> All meters were updated");
     $("#meterId").append("<button type='button' href='/'>Return to homepage</button>");
+    displayDifference();
+});
+
+function displayDifference() {
+  // here need to get last two updates from double
+  $.ajax({
+    type: "GET",
+    url: "/lasttworeadings",
+    dataType: "json"
+  })
+  .done(function(data) {
+    console.log(data);
+    // for(i=0; i<data.length; i++) {
+    //   var meter = data[i];
+    //   $("#meterId").append("<label>" + meter + "</label></br>");
+    //   $("#meterId").append("<input id='" + meter + "' type='text' name='reading' placeholder='Meter " + meter + " Reading'></br></br>");
+    // }
+    // $("#meterId").append("<input id='submit' type='submit'>");
+  });
+  return false;
+};
+
+$(document).on("click", "#difference", function() {
+  $.ajax({
+    type: "GET",
+    url: "/lasttworeadings",
+    dataType: "json"
+  })
+  .done(function(data) {
+    console.log(data);
+    // for(i=0; i<data.length; i++) {
+    //   var meter = data[i];
+    //   $("#meterId").append("<label>" + meter + "</label></br>");
+    //   $("#meterId").append("<input id='" + meter + "' type='text' name='reading' placeholder='Meter " + meter + " Reading'></br></br>");
+    // }
+    // $("#meterId").append("<input id='submit' type='submit'>");
+  });
+  return false;
 });

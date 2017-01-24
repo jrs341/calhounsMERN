@@ -112,11 +112,11 @@ app.post("/submitEmployee", function(req, res) {
 app.post("/submitAllMeterReadings", function(req, res) {
 
   // We use the "Example" class we defined above to check our req.body against our user model
-  var user = new MeterReadings(req.body);
+  var meterReading = new MeterReadings(req.body);
 
   // With the new "Example" object created, we can save our data to mongoose
   // Notice the different syntax. The magic happens in userModel.js
-  user.save(function(error, doc) {
+  meterReading.save(function(error, doc) {
     // Send any errors to the browser
     if (error) {
       res.send(error);
@@ -135,13 +135,26 @@ app.get("/meter", function(req, res) {
  
     // Log any errors
     if (error) {
-      console.log(error);
+      res.send(error);
     }
     // Otherwise, send the doc to the browser as a json object
     else {
       res.send(doc);
-      // res.json(found);
     }
+  });
+});
+
+app.get("/lasttworeadings", function(req, res) {
+
+  MeterReadings.find({}, null, { sort: { 'created_at' : -1 } }, function(error, doc) {
+  
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+
   });
 });
 

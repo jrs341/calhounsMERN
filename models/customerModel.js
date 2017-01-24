@@ -57,7 +57,8 @@ var CustomerSchema = new Schema({
   }, 
   space: {
     type: String,
-    trim: true
+    trim: true,
+    // default: need a funciton here to get the meter
   }
 });
 

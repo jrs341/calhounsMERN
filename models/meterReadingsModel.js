@@ -14,12 +14,13 @@ var MeterReadingsSchema = new Schema({
     type: String,
     trim: true,
     required: "Meter ID is Required"
+    // unique: true
   },
-  reading: {
+  reading: [{
     type: String,
     trim: true,
     required: "Meter Reading is Required"
-  },
+  }],
   customer: {
     type: String,
     trim: true,

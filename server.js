@@ -110,18 +110,15 @@ app.post("/submitEmployee", function(req, res) {
 });
 
 app.post("/submitAllMeterReadings", function(req, res) {
+  
+  // var meterReading = new MeterReadings(req.body);
+  console.log(req.params.meter);
+  MeterReadings.findOneAndUpdate({meter:req.body.meter}, { $push: { reading: req.body.reading } }, {safe: true, upsert: true, new : true}, function(error, doc) {
 
-  // We use the "Example" class we defined above to check our req.body against our user model
-  var meterReading = new MeterReadings(req.body);
-
-  // With the new "Example" object created, we can save our data to mongoose
-  // Notice the different syntax. The magic happens in userModel.js
-  meterReading.save(function(error, doc) {
-    // Send any errors to the browser
     if (error) {
       res.send(error);
     }
-    // Otherwise, send the new doc to the browser
+    
     else {
       res.send(doc);
     }
@@ -131,7 +128,8 @@ app.post("/submitAllMeterReadings", function(req, res) {
 app.get("/meter", function(req, res) {
   // finds all the individual meters in the db
   // .find({ }, {_id: 1, meter: 1 }
- MeterReadings.distinct("meter", function(error, doc) {
+ // MeterReadings.distinct("meter", function(error, doc) {
+MeterReadings.find({}, function(error, doc) {
  
     // Log any errors
     if (error) {
@@ -144,21 +142,21 @@ app.get("/meter", function(req, res) {
   });
 });
 
-app.get("/lasttworeadings", function(req, res) {
-
-  MeterReadings.find({}, null, { sort: { 'created_at' : -1 } }, function(error, doc) {
+// app.get("/lasttworeadings", function(req, res) {
+// // http://blog.rueckstiess.com/mongodb/2013/06/13/recency-vs-sorting.html
+//   MeterReadings.find({meter : {$in : ['a', 'b']}}, null, { sort: { '_id' : -1 }, sort : {'meter' : 1}}, function(error, doc) {
   
-    if (error) {
-      res.send(error);
-    }
-    else {
-      res.send(doc);
-    }
+//     if (error) {
+//       res.send(error);
+//     }
+//     else {
+//       res.send(doc);
+//     }
 
-  });
-});
+//   });
+// });
 
-// Connection to PORT
+// // Connection to PORT
 app.listen(PORT, function() {
   console.log(`Listening On Port: ${PORT}`);
 });

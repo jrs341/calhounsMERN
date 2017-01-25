@@ -1,50 +1,56 @@
 
-// replace with function getMeters()
-// $(document).on("click", "#submit", function() {
 // temp array to hold the response data
 var temp = [];
 // temp array to hold the meter id of chosen meters
 var tempMeter = [];
 
-$(document).ready(function() {
+function getMeters() {
   	$.ajax({
     type: "GET",
     url: "/meter",
     dataType: "json"
   	})
   	.done(function(data) {
-    	console.log(data);
     	temp.push(data);
     	for(i=0; i<data.length; i++) {
-    	var meter = data[i].meter;
-    	$("#allMeters").append("<label>" + meter + "</label></br>");
-    	$("#allMeters").append("<input id='" + meter + "' type='checkbox' name='reading' onclick='getId()'</br>");
+    	// var meter = i;
+    	$("#allMeters").append("<label>" + data[i].meter + "</label></br>");
+    	$("#allMeters").append("<input id='" + i + "' type='checkbox' name='reading' onclick='getId()'></br>");
     }
-    $("#allMeters").append("<input id='submit' type='submit'>");
+    $("#allMeters").append("<input id='submitChosen' type='submit'>");
   });
   return false;
-});
+};
 
+// used i in getMeters functions because I was using id's that were the same and causing problems with the post
+// function is called when a checkbox is clicked
 function getId() {
-	console.log('hit getId');
 	console.log(event.target.id);
 	var meter = event.target.id;
-	$("#"+meter+"").after("<input id='" + meter + "' type='text' name='reading' placeholder='Meter " + meter + " Reading'></br>");
-	// console.log(tempMeter);
+	$("#"+meter+"").after("<input id='" + temp[0][meter].meter + "' type='text' name='reading' placeholder='Meter " + temp[0][meter].meter + " Reading'></br>");
+	tempMeter.push(temp[0][meter].meter);
+	console.log(tempMeter);
 }
 
-$(document).on("click", "#submit", function() {
-	for (i=0; i<temp[0].lenght; i++) {
-		var meter = temp[0][i].meter;
-		if($("#"+meter+"").is(":checked")) {
-		// if (document.getElementById(""+meter+"").checked) {
-			$("#"+meter+"").append("<input id='" + meter + "' type='text' name='reading'placeholder='Meter " + meter + " Reading'></br></br>");
-		}else{
-			$("#"+meter+"").empty;
-		}
-	};
-	$("#chosenMeters").append("<input id='submitChosen' type='submit'>");
-});
+// ===================================================
+	// Need a function to removed data from array if box is unchecked
+// ===================================================
+
+// $(document).on("click", "#submit", function() {
+// 	for (i=0; i<temp[0].lenght; i++) {
+// 		var meter = temp[0][i].meter;
+// 		if($("#"+meter+"").is(":checked")) {
+// 		// if (document.getElementById(""+meter+"").checked) {
+// 			$("#"+meter+"").append("<input id='" + meter + "' type='text' name='reading'placeholder='Meter " + meter + " Reading'></br></br>");
+// 		}else{
+// 			// nothing in meter to empty need a div or something
+// 			$("#"+meter+"").empty;
+// 		}
+// 	};
+// 	$("#chosenMeters").append("<input id='submitChosen' type='submit'>");
+// });
+
+
 // replace with function getMeters()
 
 // if input id is true get those meter or meters
@@ -73,18 +79,20 @@ $(document).on("click", "#submit", function() {
 //   return false;
 // });
 
+$(document).ready(function() {getMeters()});
+
 $(document).on("click", "#submitChosen", function() {
 	console.log('clicked');
-	for(i=0; i<temp[0].length; i++) {
-		var meter = temp[0][i].meter;
+	for(i=0; i<tempMeter.length; i++) {
+		var meter = tempMeter[i];
 		$.ajax({
 		type: "POST",
 		url: "/submitAllMeterReadings",
 		data: {
 		 // mongo id for each meter
-      	meter: temp[0][i].meter,
+      	meter: tempMeter[i],
       	// Value taken reading text area
-      	reading: $("#"+ meter +"").val()
+      	reading: $("#"+ meter +"").val().trim()
       		}
 		})
 		.done(function(data) {
@@ -94,4 +102,8 @@ $(document).on("click", "#submitChosen", function() {
 	}
 	// Empty the temp array
      temp = [];
+     tempMeter = [];
 });
+
+
+

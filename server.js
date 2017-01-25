@@ -66,11 +66,9 @@ app.post("/submitCustomer", function(req, res) {
  // check our req.body against our user model
   var user = new Customer(req.body);
   user.save(function(error, doc) {
-    // Send any errors to the browser
     if (error) {
       res.send(error);
     }
-    // Otherwise, send the new doc to the browser
     else {
       res.send(doc);
     }
@@ -81,11 +79,9 @@ app.post("/submitEmployee", function(req, res) {
  // check our req.body against our user model
   var user = new Employee(req.body);
   user.save(function(error, doc) {
-    // Send any errors to the browser
     if (error) {
       res.send(error);
     }
-    // Otherwise, send the new doc to the browser
     else {
       res.send(doc);
     }
@@ -112,20 +108,6 @@ app.get("/meter", function(req, res) {
     else {
       res.send(doc);
     }
-  });
-});
-
-app.get("/lasttworeadings", function(req, res) {
-// http://blog.rueckstiess.com/mongodb/2013/06/13/recency-vs-sorting.html
-  MeterReadings.find({}, null, { sort: { '_id' : -1 }, sort : {'meter' : 1}}, function(error, doc) {
-  
-    if (error) {
-      res.send(error);
-    }
-    else {
-      res.send(doc);
-    }
-
   });
 });
 

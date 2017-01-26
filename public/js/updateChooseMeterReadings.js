@@ -11,6 +11,8 @@ function setChangeListen(meterName) {
 				$(this).after("<input id='" + meterName + "' type='text' name='reading' placeholder='Meter " + meterName + " Reading'></br>");
 				tempMeter.push(meterName);
 		} else {
+			var index = tempMeter.indexOf(""+ meterName +"");
+			tempMeter.splice(index, 1);
 			$("#" + meterName + "").remove();
 		}	
 	});

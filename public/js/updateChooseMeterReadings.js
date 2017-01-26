@@ -8,12 +8,9 @@ var tempMeter = [];
 function setChangeListen(meterName) {
 	$("#checkbox" + meterName + "").change(function () {
 		if ($(this).is(':checked')) {
-			$(this).after("<input id='" + meterName + "' type='text' name='reading' placeholder='Meter " + meterName + " Reading'></br>");
+				$(this).after("<input id='" + meterName + "' type='text' name='reading' placeholder='Meter " + meterName + " Reading'></br>");
 				tempMeter.push(meterName);
-				console.log(tempMeter);
-
 		} else {
-			console.log('unchecked');
 			$("#" + meterName + "").remove();
 		}	
 	});
@@ -38,30 +35,15 @@ function getMeters() {
   return false;
 };
 
-// used i in getMeters functions because I was using id's that were the same and causing problems with the post
-// function is called when a checkbox is clicked
-
-
 // ===================================================
 	// Need a function to removed data from array if box is unchecked
 // ===================================================
 
-$('#checkbox').change(function() {
-  if ($(this).is(':checked')) {
-    console.log('Checked');
-    getId();
-  } else {
-    console.log('Unchecked');
-  }
-});
-
-
 $(document).ready(function() {getMeters()});
 
 $(document).on("click", "#submitChosen", function() {
-	console.log('clicked');
 	for(i=0; i<tempMeter.length; i++) {
-		var meter = tempMeter[i];
+		// var meter = tempMeter[i];
 		$.ajax({
 		type: "POST",
 		url: "/submitAllMeterReadings",
@@ -69,7 +51,7 @@ $(document).on("click", "#submitChosen", function() {
 		 // mongo id for each meter
       	meter: tempMeter[i],
       	// Value taken reading text area
-      	reading: $("#"+ meter +"").val().trim()
+      	reading: $("#"+ tempMeter[i] +"").val().trim()
       		}
 		})
 		.done(function(data) {

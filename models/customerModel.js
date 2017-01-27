@@ -30,26 +30,26 @@ var CustomerSchema = new Schema({
     unique: true,
     match: [/.+\@.+\..+/, "Please enter a valid e-mail address"]
   },
-    address_line_1: {
-      type: String,
-      trim: true
-    },
-    locality: {
-      type: String,
-      trim: true
-    },
-    administrative_district_level_1: {
-      type: String,
-      trim: true
-    },
-    postal_code: {
-      type: String,
-      trim: true
-    },
-    country: {
-      type: String,
-      trim: true
-    },
+  address_line_1: {
+    type: String,
+    trim: true
+  },
+  locality: {
+    type: String,
+    trim: true
+  },
+  administrative_district_level_1: {
+    type: String,
+    trim: true
+  },
+  postal_code: {
+    type: String,
+    trim: true
+  },
+  country: {
+    type: String,
+    trim: true
+  },
   // This will make a userCreated entry in our doc, by default the current time string.
   created_at: {
     type: Date,

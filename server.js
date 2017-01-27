@@ -64,12 +64,15 @@ app.get("/checkout", function(req, res) {
 
 app.post("/submitCustomer", function(req, res) {
  // check our req.body against our user model
-  var user = new Customer(req.body);
-  user.save(function(error, doc) {
+  var customer = new Customer(req.body);
+
+  customer.save(function(error, doc) {
+
     if (error) {
       res.send(error);
     }
     else {
+      console.log(req.body);
       res.send(doc);
     }
   });
@@ -77,8 +80,8 @@ app.post("/submitCustomer", function(req, res) {
 
 app.post("/submitEmployee", function(req, res) {
  // check our req.body against our user model
-  var user = new Employee(req.body);
-  user.save(function(error, doc) {
+  var employee = new Employee(req.body);
+  employee.save(function(error, doc) {
     if (error) {
       res.send(error);
     }
@@ -88,8 +91,26 @@ app.post("/submitEmployee", function(req, res) {
   });
 });
 
+// this route will insert the Square Customer ID into the meter reading
+app.post("/addCustomerToMeter", function(req, res) {
+
+})
+
+app.post("/newMeter", function(req, res) {
+
+  var newMeter = new MeterReadings(req.body);
+  newMeter.save(function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  })
+});
+
 app.post("/submitAllMeterReadings", function(req, res) {
-  console.log(req.params.meter);
+  // console.log(req.params.meter);
   MeterReadings.findOneAndUpdate({meter:req.body.meter}, { $push: { reading: req.body.reading } }, {safe: true, upsert: true, new : true}, function(error, doc) {
     if (error) {
       res.send(error);

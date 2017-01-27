@@ -28,10 +28,9 @@ function displayDifference() {
   })
   .done(function(data) {
 
-    var current = (data[0].reading.length)-1;
-    var previous = (data[0].reading.length)-2;
-
     for(i=0; i<data.length; i++) {
+      var current = (data[i].reading.length)-1;
+      var previous = (data[i].reading.length)-2;      
       var meter = data[i].meter;
       var previousReading = data[i].reading[previous];
       var currentReading = data[i].reading[current];
@@ -58,7 +57,7 @@ $(document).on("click", "#submit", function() {
           }
     })
     .done(function(data) {
-      console.log(data);
+      // console.log(data);
      });
   
   };

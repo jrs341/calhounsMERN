@@ -23,7 +23,16 @@
       <input type="text" name ="address.administrative_district_level_1" placeholder="State">
       <input type="text" name ="address.postal_code" placeholder="Zip Code">
       <input type="text" name ="address.country" placeholder="Country">
-      <input type="submit">
+      <button type="submit">Submit</button> 
     </form>
+
+    <form action="/searchCustomer" method="get">
+      <!-- <input type="text" name="given_name" placeholder="First Name">
+      <input type="text" name="family_name" placeholder="Last Name"> -->
+      <input type="text" name ="email" placeholder="Email Address">
+      <button type="submit">Search</button>
+    </form>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="../js/customer.js"></script>
   </body>
   </html>

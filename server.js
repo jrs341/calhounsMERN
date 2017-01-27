@@ -62,6 +62,19 @@ app.get("/checkout", function(req, res) {
   res.send(checkout.html);
 });
 
+app.get("/searchCustomer", function(req, res){
+  
+    Customer.find({email: req.body.email}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+      console.log(doc);
+    }
+  });
+});
+
 app.post("/submitCustomer", function(req, res) {
  // check our req.body against our user model
   var customer = new Customer(req.body);

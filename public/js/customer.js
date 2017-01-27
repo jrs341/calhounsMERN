@@ -19,7 +19,31 @@ function getMeters() {
   return false;
 };
 
-function submitAllMeterReadings() {
+// this function gets the last two meter readings from the database
+function displayDifference() {
+  $.ajax({
+    type: "GET",
+    url: "/meter",
+    dataType: "json"
+  })
+  .done(function(data) {
+
+    for(i=0; i<data.length; i++) {
+      var current = (data[i].reading.length)-1;
+      var previous = (data[i].reading.length)-2;      
+      var meter = data[i].meter;
+      var previousReading = data[i].reading[previous];
+      var currentReading = data[i].reading[current];
+      var usage = currentReading - previousReading;
+      $("#meterId").append("<label>" + meter + " previous reading: " + previousReading + " current reading: " + currentReading + " Total KWH used: " + usage + "</label></br>");
+    }
+  });
+  return false;
+};
+
+$(document).ready(function() {getMeters()});
+
+$(document).on("click", "#submit", function() {
   for(i=0; i<temp[0].length; i++) {
     var meter = temp[0][i].meter;
     $.ajax({
@@ -41,32 +65,6 @@ function submitAllMeterReadings() {
     temp = [];
     $("#meterId").empty();
     $("#meterId").append("<h1> All meters were updated");
-    $("#meterId").append("<a href='/'><button type='button'>Return to homepage</button></a>");
+    $("#meterId").append("<button type='button' href='/'>Return to homepage</button>");
     displayDifference();
-};
-
-// this function gets the last two meter readings from the database
-function displayDifference() {
-  $.ajax({
-    type: "GET",
-    url: "/meter",
-    dataType: "json"
-  })
-  .done(function(data) {
-    for(i=0; i<data.length; i++) {
-      var current = (data[i].reading.length)-1;
-      var previous = (data[i].reading.length)-2;      
-      var meter = data[i].meter;
-      var previousReading = data[i].reading[previous];
-      var currentReading = data[i].reading[current];
-      var usage = currentReading - previousReading;
-      $("#meterId").append("<label>" + meter + " previous reading: " + previousReading + " current reading: " + currentReading + " Total KWH used: " + usage + "</label></br>");
-    }
-  });
-  return false;
-};
-
-$(document).ready(function() {getMeters()});
-
-$(document).on("click", "#submit", function() {submitAllMeterReadings()});
-  
+});

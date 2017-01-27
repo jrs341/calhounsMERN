@@ -3,7 +3,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>User Schema</title>
+    <title>Customer</title>
     <style>
       input {
         display: block;
@@ -13,25 +13,12 @@
     </style>
   </head>
   <body>
-    <form action="/submitCustomer" method="post">
-      <input type="text" name="given_name" placeholder="First Name">
-      <input type="text" name="family_name" placeholder="Last Name">
-      <input type="text" name ="phone_number" placeholder="Phone Number">
-      <input type="text" name ="email" placeholder="Email Address">
-      <input type="text" name ="address_line_1" placeholder="Address Line 1">
-      <input type="text" name ="address.locality" placeholder="City">
-      <input type="text" name ="address.administrative_district_level_1" placeholder="State">
-      <input type="text" name ="address.postal_code" placeholder="Zip Code">
-      <input type="text" name ="address.country" placeholder="Country">
-      <button type="submit">Submit</button> 
-    </form>
-
-    <form action="/searchCustomer" method="get">
-      <!-- <input type="text" name="given_name" placeholder="First Name">
-      <input type="text" name="family_name" placeholder="Last Name"> -->
-      <input type="text" name ="email" placeholder="Email Address">
-      <button type="submit">Search</button>
-    </form>
+    <div id="searchResult">
+    </div>
+    <div id="newCustomerForm">
+    </div>
+    <div id="searchCustomerForm">
+    </div>
   <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
   <script src="../js/customer.js"></script>
   </body>

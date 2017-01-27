@@ -1,70 +1,83 @@
+var attName = ['given_name', 'family_name', 'phone_number', 'email', 'address_line_1', 'locality', 'administrative_district_1', 'postal_code', 'country'];
 
-var temp = [];
+var attPlaceHolder = ['First Name', 'Last Name', 'Phone Number', 'Email Address', 'Address Line 1', 'City', 'State', 'Postal Code', 'Country'];
 
-function getMeters() {
-  $.ajax({
-    type: "GET",
-    url: "/meter",
-    dataType: "json"
-  })
-  .done(function(data) {
-    temp.push(data);
-    for(i=0; i<data.length; i++) {
-    	var meter = data[i].meter;
-    	$("#meterId").append("<label>" + meter + "</label></br>");
-    	$("#meterId").append("<input id='" + meter + "' type='text' name='reading' placeholder='Meter " + meter + " Reading'></br></br>");
-    }
-    $("#meterId").append("<input id='submit' type='submit'>");
-  });
-  return false;
+function newCustomerForm() {
+  for (var i = 0; i < attName.length; i++) {
+    $("newCustomerForm").append("<label>" + attPlaceHolder[i] + "</label></br>");
+    $("#newCustomerForm").append("<input id='" + attName[i] + "' type='text' name='" + attName[i] + "' placeholder='" + attPlaceHolder[i] + "'></br></br>");
+  }
+ $("#newCustomerForm").append("<input id='submitNewCustomerForm' type='submit'></br></br>"); 
 };
 
-// this function gets the last two meter readings from the database
-function displayDifference() {
-  $.ajax({
-    type: "GET",
-    url: "/meter",
-    dataType: "json"
-  })
-  .done(function(data) {
-
-    for(i=0; i<data.length; i++) {
-      var current = (data[i].reading.length)-1;
-      var previous = (data[i].reading.length)-2;      
-      var meter = data[i].meter;
-      var previousReading = data[i].reading[previous];
-      var currentReading = data[i].reading[current];
-      var usage = currentReading - previousReading;
-      $("#meterId").append("<label>" + meter + " previous reading: " + previousReading + " current reading: " + currentReading + " Total KWH used: " + usage + "</label></br>");
-    }
-  });
-  return false;
+function searchCustomerForm() {
+  $("searchCustomerForm").append("<label> Search By Email Address </label></br>");
+  $("#searchCustomerForm").append("<input id='searchByEmail' type='text' name='email' placeholder='Enter Email Address'></br>");
+  $("#searchCustomerForm").append("<input id='submitCustomerSearch' type='submit'>"); 
 };
 
-$(document).ready(function() {getMeters()});
-
-$(document).on("click", "#submit", function() {
-  for(i=0; i<temp[0].length; i++) {
-    var meter = temp[0][i].meter;
-    $.ajax({
+function submitNewCustomer() {
+  $.ajax({
     type: "POST",
-    url: "/submitAllMeterReadings",
+    url: "/submitCustomer",
     data: {
-        // mongo id for each meter
-        meter: temp[0][i].meter,
-        // Value taken reading text area
-        reading: $("#"+ meter +"").val().trim()
+          given_name: $("#given_name").val().trim(),
+          family_name: $("#family_name").val().trim(),
+          phone_number: $("#phone_number").val().trim(),
+          email: $("#email").val().trim(),
+          address_line_1: $("#address_line_1").val().trim(),
+          locality: $("#locality").val().trim(),
+          administrative_district_1: $("#administrative_district_1").val().trim(),
+          postal_code: $("#postal_code").val().trim(),
+          country: $("#country").val().trim()
           }
     })
     .done(function(data) {
       // console.log(data);
      });
-  
-  };
-    // Empty the temp array
-    temp = [];
-    $("#meterId").empty();
-    $("#meterId").append("<h1> All meters were updated");
-    $("#meterId").append("<button type='button' href='/'>Return to homepage</button>");
-    displayDifference();
+    $("#newCustomerForm").empty();
+    $("#searchCustomerForm").empty();
+    $("#newCustomerForm").append("<h1> Customer Has Been Added");
+    $("#newCustomerForm").append("<a href='/'> <button type='button' >Return to homepage</button></a>");
+};
+
+function submitCustomerSearch() {
+  var thisEmail = $("#searchByEmail").val().trim();
+  $.ajax({
+    type: "GET",
+    url: "/searchCustomer/" + thisEmail
+    })
+    .done(function(data) {
+      if (data == "") {
+        // console.log('its null');
+        $("#newCustomerForm").empty();
+        $("#searchResult").empty();
+        $("#searchResult").append("<h1> Sorry we did not find a record matching that email Please fill out the form or try searching again");
+        $("#searchReult").append("<label> Click here to enter your information</label>");
+        $("#searchResult").append("<input type='submit' id='toNewCustomerForm'></br>");
+      } else {
+        $("#newCustomerForm").empty();
+        $("#searchCustomerForm").empty();
+        $("#newCustomerForm").append("<h1> Please Verify the Information is Still Correct");
+        $("#newCustomerForm").append("<a href='/'> <button id='returnHome' type='button' >Return to homepage</button></a>");
+      }
+     });   
+};
+
+$(document).ready(function() {
+  newCustomerForm();
+  searchCustomerForm();
+});
+
+$(document).on("click", "#submitNewCustomerForm", function() {
+  submitNewCustomer();
+});
+
+$(document).on("click", "#submitCustomerSearch", function() {submitCustomerSearch();
+});
+
+$(document).on("click", "#toNewCustomerForm", function() {
+  $("#searchResult").empty();
+  $("#searchCustomerForm").empty();
+  newCustomerForm();
 });

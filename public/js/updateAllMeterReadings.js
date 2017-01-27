@@ -35,9 +35,7 @@ function submitAllMeterReadings() {
     .done(function(data) {
       // console.log(data);
      });
-  
   };
-    // Empty the temp array
     temp = [];
     $("#meterId").empty();
     $("#meterId").append("<h1> All meters were updated");

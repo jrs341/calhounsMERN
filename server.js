@@ -62,11 +62,11 @@ app.get("/checkout", function(req, res) {
   res.send(checkout.html);
 });
 
-app.get("/searchCustomer", function(req, res){
-  
-    Customer.find({email: req.body.email}, function(error, doc) {
+app.get("/searchCustomer/:email", function(req, res){
+    Customer.findOne({"email": req.params.email}, function(error, doc) {
     if (error) {
       res.send(error);
+      console.log(error);
     }
     else {
       res.send(doc);

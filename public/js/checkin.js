@@ -109,7 +109,7 @@ if(typeof(Storage) !== "undefined") {
 };
 
 $(document).ready(function() {
-  newCustomerForm();
+  // newCustomerForm();
   searchCustomerForm();
 });
 
@@ -123,7 +123,7 @@ $(document).on("click", "#submitNewCustomerForm", function() {
     .done(function(data) { 
       localStorage._id = ""+data._id+"";
       console.log(localStorage._id);
-      });
+    });
 });
 
 $(document).on("click", "#submitCustomerSearch", function() {

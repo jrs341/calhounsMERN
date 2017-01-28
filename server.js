@@ -134,6 +134,18 @@ app.post("/addCustomerToMeter", function(req, res) {
   });
 });
 
+app.post("/removeCustomerFromMeter", function(req, res) {
+  console.log(req.body.customer);
+  MeterReadings.findOneAndUpdate({customer:req.body.customer}, {customer: "null" }, {upsert: true}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
 app.post("/newMeter", function(req, res) {
 
   var newMeter = new MeterReadings(req.body);

@@ -12,15 +12,20 @@
     </style>
   </head>
   <body>
-  <h1>Checkout</h1>
-    <form action="/submitMeterReadings" method="post">
-      <input type="text" name="meter" placeholder="Meter ID">
-      <input type="text" name="reading" placeholder="Meter Reading">
-      <input type="submit">
-    </form>
+  <h1>Customer Checkout</h1>
+  <a href="./admin.html"><button type="button" name="checkin"> Return to Admin Page </button> </a>
+    </br>
+    </br>
+  <h1>Customer Lookup</h1>
+  
+    <div id="searchResult">
+    </div>
+    <div id="searchCustomerForm">
+    </div>
+
   </body>
- <!--  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script> -->
-  <script src="../js/meterReadings.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+  <script src="../js/checkout.js"></script>
 </html>
 
 </body>

@@ -50,6 +50,10 @@ app.get("/", function(req, res) {
   res.send(index.html);
 });
 
+app.get("/admin", function(req, res) {
+  res.send(admin.html);
+});
+
 app.get("/chooseUpdateProcess", function(req, res) {
   res.send(chooseMeterUpdate.html);
 });
@@ -57,6 +61,10 @@ app.get("/chooseUpdateProcess", function(req, res) {
 app.get("/checkin", function(req, res) {
   res.send(checkin.html);
 });
+
+app.get("/addCustomerToCabinOrSpace", function(req, res) {
+  res.send(addCustomerToCabinOrSpace);
+})
 
 app.get("/checkout", function(req, res) {
   res.send(checkout.html);
@@ -115,8 +123,16 @@ app.post("/submitEmployee", function(req, res) {
 
 // this route will insert the Square Customer ID into the meter reading
 app.post("/addCustomerToMeter", function(req, res) {
-
-})
+  console.log(req.body.customer);
+  MeterReadings.findOneAndUpdate({meter:req.body.meter}, {customer: req.body.customer }, {upsert: true}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
 
 app.post("/newMeter", function(req, res) {
 

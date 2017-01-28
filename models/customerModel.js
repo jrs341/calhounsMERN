@@ -16,19 +16,20 @@ var CustomerSchema = new Schema({
   family_name: {
     type: String,
     trim: true,
-    required: "Last Name Required",
+    // required: "Last Name Required",
   },
   phone_number: {
     type: String,
     trim: true,
-    required: "Phone Number Required"
+    // required: "Phone Number Required"
   },
   // email is a string, and it must be a unique one in our collection
   // Notice how it must match our regex, which checks for email
   email: {
     type: String,
     unique: true,
-    match: [/.+\@.+\..+/, "Please enter a valid e-mail address"]
+    match: [/.+\@.+\..+/, "Please enter a valid e-mail address"],
+    required: "Email Address is Required"
   },
   address_line_1: {
     type: String,

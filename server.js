@@ -78,14 +78,23 @@ app.get("/searchCustomer/:email", function(req, res){
 app.post("/submitCustomer", function(req, res) {
  // check our req.body against our user model
   var customer = new Customer(req.body);
-
   customer.save(function(error, doc) {
-
     if (error) {
       res.send(error);
     }
     else {
       console.log(req.body);
+      res.send(doc);
+    }
+  });
+});
+
+app.post("/updateCustomer", function(req, res) {
+  Customer.findOneAndUpdate({_id: req.body._id},req.body, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
       res.send(doc);
     }
   });
@@ -123,7 +132,6 @@ app.post("/newMeter", function(req, res) {
 });
 
 app.post("/submitAllMeterReadings", function(req, res) {
-  // console.log(req.params.meter);
   MeterReadings.findOneAndUpdate({meter:req.body.meter}, { $push: { reading: req.body.reading } }, {safe: true, upsert: true, new : true}, function(error, doc) {
     if (error) {
       res.send(error);

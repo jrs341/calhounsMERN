@@ -90,15 +90,10 @@ function submitCustomerSearch() {
         $("#searchResult").empty();
         $("#searchResult").append("<h1> Sorry we did not find a record matching that email try searching again");
         searchCustomerForm();
-        // $("#searchReult").append("<label> Click here to enter your information</label>");
-        // $("#searchResult").append("<input type='submit' id='toNewCustomerForm'></br>");
       } else {
-        // $("#newCustomerForm").empty();
         $("#searchCustomerForm").empty();
         $("#searchResult").append("<h1> Please Verify Your Information is Correct");
         $("#searchResult").append("<h1> You are checking out of ???")
-        // newCustomerForm();
-        // autoFill(data);
         $("#searchResult").append("<input type='button' id='checkout' value='Checkout'>");
       }
      });   
@@ -114,10 +109,7 @@ function checkout() {
     })
     .done(function(data) {
     });
-    // $("#newCustomerForm").empty();
-    // $("#searchCustomerForm").empty();
     $("#searchCustomerForm").append("<h1> Customer Has Been Checkedout");
-    // $("#newCustomerForm").append("<a href='addCustomerToCabinOrSpace.html'> <button type='button' >Next</button></a>");
 };
 
 if(typeof(Storage) !== "undefined") {
@@ -127,21 +119,7 @@ if(typeof(Storage) !== "undefined") {
 };
 
 $(document).ready(function() {
-  // newCustomerForm();
   searchCustomerForm();
-});
-
-$(document).on("click", "#submitNewCustomerForm", function() {
-  var thisEmail = $("#email").val().trim();
-  submitNewCustomer();
-  $.ajax({
-    type: "GET",
-    url: "/searchCustomer/" + thisEmail
-    })
-    .done(function(data) { 
-      localStorage._id = ""+data._id+"";
-      console.log(localStorage._id);
-      });
 });
 
 $(document).on("click", "#submitCustomerSearch", function() {
@@ -156,16 +134,6 @@ $(document).on("click", "#submitCustomerSearch", function() {
       console.log(localStorage._id);
     });
 });
-
-$(document).on("click", "#updateCustomerInfo", function() {
-  updateCustomerInfo();
-});
-
-// $(document).on("click", "#toNewCustomerForm", function() {
-//   $("#searchResult").empty();
-//   $("#searchCustomerForm").empty();
-//   newCustomerForm();
-// });
 
 $(document).on("click", "#checkout", function() {
   checkout();

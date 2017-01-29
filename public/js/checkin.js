@@ -12,6 +12,10 @@ function newCustomerForm() {
  $("#newCustomerForm").append("<input id='submitNewCustomerForm' type='button' value='Submit'></br></br>"); 
 };
 
+function addCustomerInfoToLocalStorage() {
+
+}
+
 function autoFill(data) {
   customerId.push(data._id);
   for (var key in data) {
@@ -109,7 +113,7 @@ if(typeof(Storage) !== "undefined") {
 };
 
 $(document).ready(function() {
-  // newCustomerForm();
+  newCustomerForm();
   searchCustomerForm();
 });
 
@@ -122,7 +126,7 @@ $(document).on("click", "#submitNewCustomerForm", function() {
     })
     .done(function(data) { 
       localStorage._id = ""+data._id+"";
-      console.log(localStorage._id);
+      // console.log(localStorage._id);
     });
 });
 
@@ -134,20 +138,17 @@ $(document).on("click", "#submitCustomerSearch", function() {
     url: "/searchCustomer/" + thisEmail
     })
     .done(function(data) { 
-      localStorage._id = ""+data._id+"";
-      console.log(localStorage._id);
+      for(key in data) {
+        localStorage.setItem(""+key+"", data[key]);
+      }
+      // localStorage._id = ""+data._id+"";
+      // console.log(localStorage);
     });
 });
 
 $(document).on("click", "#updateCustomerInfo", function() {
   updateCustomerInfo();
 });
-
-// $(document).on("click", "#toNewCustomerForm", function() {
-//   $("#searchResult").empty();
-//   $("#searchCustomerForm").empty();
-//   newCustomerForm();
-// });
 
 $(document).on("click", "next", function() {
 

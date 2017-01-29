@@ -121,7 +121,7 @@ app.post("/submitEmployee", function(req, res) {
   });
 });
 
-// this route will insert the Square Customer ID into the meter reading
+// this route will insert the mongo ID into the meter reading
 app.post("/addCustomerToMeter", function(req, res) {
   console.log(req.body.customer);
   MeterReadings.findOneAndUpdate({meter:req.body.meter}, {customer: req.body.customer }, {upsert: true}, function(error, doc) {

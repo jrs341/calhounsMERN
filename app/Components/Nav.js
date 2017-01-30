@@ -1,13 +1,12 @@
 var React = require("react");
 // var helpers = require("../utils/helpers");
-var Admin = React.createClass({
+var Nav = React.createClass({
 
 	render: function() {
 		return (
-			<div> Should be Admin Page
-			</div>
+			<div> Soon to be Nav bar </div>
 		);
 	}
 });
 
-module.exports = Admin;
+module.exports = Nav;

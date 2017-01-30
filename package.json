@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "dev": "webpack -w"
+    "dev": "webpack -w",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -34,7 +35,8 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-promise-middleware": "^4.2.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "require": "^2.4.20"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",

@@ -40,10 +40,10 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-// Routes
-// app.get(`*`, function(req, res) {
-//   res.sendFile('public/index.html', { root: __dirname });
-// });
+// Routes this is from example and used for React
+app.get(`*`, function(req, res) {
+  res.sendFile('public/index.html', { root: __dirname });
+});
 
 // index route
 app.get("/", function(req, res) {

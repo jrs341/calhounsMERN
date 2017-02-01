@@ -22,12 +22,12 @@ export default class HomePage extends React.Component {
               I hope this serves as a good starting point for everyone! This example should serve as a good example of how to layout your React applications. It also incorporates npm packages for a grid system and a front-end componenet library built for React.
             </CardText>
             <CardActions>
-              
+              <Link to={'contactUs'}>
                 <RaisedButton
-                  label="Go to Second Page"
+                  label="Go to Contact Us"
                   primary={true}
                 />
-              
+              </Link>
             </CardActions>
           </Card>
         </Col>

@@ -1,16 +1,11 @@
-var React = require("react");
-// var helpers = require("../utils/helpers");
-var Button = React.createClass({
-	getDefaultProps: function() {
-    return {text: 'Button'};
-	},
+import React from 'react'
 
-	render: function() {
+export default class Button extends React.Component{
+	
+	render() {
 		return (
-			<button> {this.props.text}
-			</button>
+		<button> {this.props.text}
+		</button>
 		);
 	}
-});
-
-module.exports = Button;
+}

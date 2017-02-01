@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import axios from 'axios'
-import { searchEmail, emailValue } from '../../actions/checkinActions'
+import { searchEmail } from '../../actions/checkinActions'
 import { Row, Col } from 'react-grid-system'
 
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
@@ -13,20 +13,20 @@ export default class Checkin extends React.Component {
   constructor() {
     super()
     this.searchEmail = searchEmail
-    this.emailValue = emailValue
   }
 
 
   render() {
     return (
       <Row>
+
         <Col md={8} offset={{ md: 2 }}>
           <Card>
-            <CardTitle
+            <CardTitle id='searchResult'
               title="Checkin"
               subtitle=" "
             />
-            <CardText>
+            <CardText id='newCustomerForm'>
               <TextField
                   id='emailSearch'
                   type='text'
@@ -37,6 +37,11 @@ export default class Checkin extends React.Component {
                   label="Submit Email"
                   primary={true}
                   onClick={this.searchEmail}
+                /> 
+            <RaisedButton
+                  label="New Customer"
+                  primary={true}
+                  // onClick={}
                 /> 
             </CardActions>
             

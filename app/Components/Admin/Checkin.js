@@ -1,18 +1,28 @@
 import React from 'react'
+import { connect } from "react-redux"
+
 import { Link } from 'react-router'
-import axios from 'axios'
-import { searchEmail } from '../../actions/checkinActions'
+
+import { searchEmail, newCustomerForm } from '../../actions/checkinActions'
 import { Row, Col } from 'react-grid-system'
 
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
+@connect((store) =>{
+  return {
+    // process: store. ,
+    // instruction: store. 
+
+  }
+})
 export default class Checkin extends React.Component {
 
   constructor() {
     super()
     this.searchEmail = searchEmail
+    this.newCustomerForm = newCustomerForm
   }
 
 
@@ -23,8 +33,8 @@ export default class Checkin extends React.Component {
         <Col md={8} offset={{ md: 2 }}>
           <Card>
             <CardTitle id='searchResult'
-              title="Checkin"
-              subtitle=" "
+              title={this.props.process}
+              subtitle="{this.props.instruction} "
             />
             <CardText id='newCustomerForm'>
               <TextField
@@ -41,7 +51,7 @@ export default class Checkin extends React.Component {
             <RaisedButton
                   label="New Customer"
                   primary={true}
-                  // onClick={}
+                  onClick={this.newCustomerForm}
                 /> 
             </CardActions>
             

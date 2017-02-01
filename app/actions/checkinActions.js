@@ -24,14 +24,11 @@ export function searchEmail() {
       //   $("#searchCustomerForm").empty();
         $("#searchResult").append("<h1> Please Verify Your Information is Correct");
         newCustomerForm();
-      //   autoFill(data);
+        autoFill(data);
       //   $("#newCustomerForm").append("<a href='addCustomerToCabinOrSpace.html'> <button type='button' >Next</button></a>");
-      console.log('found it');
       }
-
       thisEmail = [];
-    });
-		
+    });		
 };
 
 function emailValue() {
@@ -40,11 +37,21 @@ function emailValue() {
 	console.log(thisEmail);
 };
 
-function newCustomerForm() {
+export function newCustomerForm() {
   for (var i = 0; i < attName.length; i++) {
     $("newCustomerForm").append("<label>" + attPlaceHolder[i] + "</label></br>");
     $("#newCustomerForm").append("<input id='" + attName[i] + "' type='text' name='" + attName[i] + "' placeholder='" + attPlaceHolder[i] + "'></br></br>");
   }
  $("#newCustomerForm").append("<input id='submitNewCustomerForm' type='button' value='Submit'></br></br>"); 
+};
+
+function autoFill(data) {
+  customerId.push(data._id);
+  for (var key in data) {
+    $("#"+key+"").val(data[key]);
+  }
+  // $("#submitNewCustomerForm").remove();
+  // $("#newCustomerForm").append("<input id='updateCustomerInfo' type='button' value='Update'></br></br>");
+  // $("#newCustomerForm").append("<a href='addCustomerToCabinOrSpace.html'><button id='next' type='button'>Next</button></a></br></br>") 
 };
  

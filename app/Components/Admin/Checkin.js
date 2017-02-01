@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import axios from 'axios'
-import { searchEmail } from '../../actions/checkinActions'
+import { searchEmail, emailValue } from '../../actions/checkinActions'
 import { Row, Col } from 'react-grid-system'
 
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
@@ -10,19 +10,12 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 export default class Checkin extends React.Component {
 
-
-  searchEmail() {
-    var thisEmail = 'john@me.com';
-    console.log('hit search email');
-    var queryURL = "/searchCustomer/" + thisEmail;
-    return $.ajax({
-    type: 'GET',
-    url: '/searchCustomer/' + thisEmail
-    })
-    .done((data) => {
-      console.log(data);
-    });
+  constructor() {
+    super()
+    this.searchEmail = searchEmail
+    this.emailValue = emailValue
   }
+
 
   render() {
     return (
@@ -35,6 +28,7 @@ export default class Checkin extends React.Component {
             />
             <CardText>
               <TextField
+                  id='emailSearch'
                   type='text'
                 />
             </CardText>

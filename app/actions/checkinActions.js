@@ -10,13 +10,14 @@ export function searchEmail() {
 	emailValue();
     console.log('hit search email');
     var queryURL = "/searchCustomer/" + thisEmail[0];
-    return $.ajax({
+    return axios({
     type: 'GET',
     url: '/searchCustomer/' + thisEmail
     })
-    .done((data) => {
-      console.log(data);
-      if (data == "") {
+    .then((response) => {
+      console.log(response);
+      
+      if (response == "") {
         $("#searchResult").empty();
         $("#searchResult").append("<h1> Sorry we did not find a record matching that email Please fill out the form or try searching again");
       } else {
@@ -24,7 +25,7 @@ export function searchEmail() {
       //   $("#searchCustomerForm").empty();
         $("#searchResult").append("<h1> Please Verify Your Information is Correct");
         newCustomerForm();
-        autoFill(data);
+        autoFill(response);
       //   $("#newCustomerForm").append("<a href='addCustomerToCabinOrSpace.html'> <button type='button' >Next</button></a>");
       }
       thisEmail = [];
@@ -45,10 +46,10 @@ export function newCustomerForm() {
  $("#newCustomerForm").append("<input id='submitNewCustomerForm' type='button' value='Submit'></br></br>"); 
 };
 
-function autoFill(data) {
-  customerId.push(data._id);
-  for (var key in data) {
-    $("#"+key+"").val(data[key]);
+function autoFill(response) {
+
+  for (var key in response.data) {
+    $("#"+key+"").val(response.data[key]);
   }
   // $("#submitNewCustomerForm").remove();
   // $("#newCustomerForm").append("<input id='updateCustomerInfo' type='button' value='Update'></br></br>");

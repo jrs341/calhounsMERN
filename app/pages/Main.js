@@ -10,8 +10,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 injectTapEventPlugin();
 // -----------------------------------------------------------------
 
-import NavBar from '../Components/Navbar'
-import Footer from '../Components/Footer'
+import NavBar from '../Components/Navbar/NavBar'
+import Footer from '../Components/Footer/Footer'
 
 export default class Main extends React.Component {
 

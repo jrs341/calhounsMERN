@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router'
 import { Container } from 'react-grid-system'
 import { Row, Col } from 'react-grid-system'
 import AppBar from 'material-ui/AppBar'
@@ -16,7 +16,7 @@ export default class NavBar extends React.Component {
 		return (
 			<AppBar
 				style = {style}
-				iconElementLeft = {<img src='./css/images/circleC.png'/>}
+				iconElementLeft = {<Link to={'/'}><img src='./css/images/circleC.png'/></Link>}
 				title = "Calhoun's Riverside RV Retreat"
 				iconElementRight = {<RightDrawer />}
 			/>

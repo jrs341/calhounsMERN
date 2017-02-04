@@ -4,6 +4,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 import Main from '../pages/Main'
 import HomePage from '../pages/HomePage'
 import ContactUs from '../pages/ContactUs'
+import Rates from '../pages/Rates'
 import Admin from '../pages/Admin'
 import UpdateMeters from '../Components/Admin/UpdateMeters'
 import UpdateAllMeters from '../Components/Admin/UpdateAllMeters'
@@ -15,6 +16,7 @@ module.exports = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
       <Route path="contactUs" component={ContactUs} />
+      <Route path="rates" component={Rates} />
       <Route path="admin" component={Admin} />
       	<Route path="checkin" component={Checkin} />
       	<Route path="checkout" component={Checkout} />

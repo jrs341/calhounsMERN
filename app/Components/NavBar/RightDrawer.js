@@ -41,7 +41,7 @@ export default class RightDrawer extends React.Component {
 	           title="Menu" />
 	           	<MenuItem onTouchTap={this.handleClose}> About </MenuItem>
 	          	<Link to={'contactUs'}><MenuItem onTouchTap={this.handleClose}>Contact Us </MenuItem></Link> 
-	          	<MenuItem onTouchTap={this.handleClose}> Rates </MenuItem>
+	          	<Link to={'rates'}><MenuItem onTouchTap={this.handleClose}> Rates </MenuItem></Link>
 	          	<MenuItem onTouchTap={this.handleClose}> Reservations </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Rental Agreements </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Rules </MenuItem>
@@ -49,6 +49,8 @@ export default class RightDrawer extends React.Component {
 	          	<MenuItem onTouchTap={this.handleClose}> Local Weather </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> River Level </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Meet Calhoun </MenuItem>
+	          	<MenuItem onTouchTap={this.handleClose}> Local News </MenuItem>
+
 
 	        </Drawer>
 	     </div>

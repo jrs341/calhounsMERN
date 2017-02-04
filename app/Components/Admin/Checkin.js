@@ -6,14 +6,22 @@ import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system'
 
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
+import axios from 'axios'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
-@connect((store) =>{
-  return {
-     
-  }
-})
+const displayBlock = {
+  display: 'inlineBlock',
+  width: 200
+}
+const emailSearchField = {
+  display: 'block'
+}
+
+const submitButton = {
+  width: 200
+}
+
 export default class Checkin extends React.Component {
 
   constructor() {
@@ -34,20 +42,24 @@ export default class Checkin extends React.Component {
       process: 'Checkin',
       searchEmailInput: '',
       searchResponse: {},
+      searchResultInfo: 'Please enter your email address to search our records for your information or fill out the new customer form.'
     }
+
     this.updateSearchEmailInput = this.updateSearchEmailInput.bind(this);
     this.updateSearchResponse = this.updateSearchResponse.bind(this);
     this.searchEmail = this.searchEmail.bind(this);
-    this.updateSubtitle = this.updateSubtitle.bind(this);
+    this.updateSearchResultInfo = this.updateSearchResultInfo.bind(this);
   }
 
   formRow(fieldInfo) {
     return (
-      <span key={fieldInfo.displayName}>
-        <label>{fieldInfo.displayName}</label>
-        <input placeholder={fieldInfo.displayName} value={this.state.searchResponse[fieldInfo.dataName]}></input>
-      </span>
-    )
+      <TextField
+        key={fieldInfo.displayName}
+        value={this.state.searchResponse[fieldInfo.dataName]}
+        hintText={fieldInfo.displayName}
+        floatingLabelText={fieldInfo.displayName}>
+      </TextField>
+      );
   }
 
   updateSearchEmailInput(event, newInput) {
@@ -58,8 +70,8 @@ export default class Checkin extends React.Component {
     this.setState({searchResponse: searchResponse});
   }
 
-  updateSubtitle(instructions) {
-    this.setState({subtitle: instructions})
+  updateSearchResultInfo(searchResultInfo) {
+    this.setState({searchResultInfo: searchResultInfo})
   }
 
   searchEmail() {
@@ -70,9 +82,10 @@ export default class Checkin extends React.Component {
     }).then((response) => {
       console.log(response);
       if (response.data == "") {
-        this.updateSearchResponse('did not find it');
+        this.updateSearchResultInfo('Sorry we did not find that email in out records, please try a different email or fill out the customer information form');
       } else {
         this.updateSearchResponse(response.data);
+        this.updateSearchResultInfo('Found it! Please verfiy all of your information is still correct.');
       }
     });
 }
@@ -85,24 +98,28 @@ export default class Checkin extends React.Component {
           <Card>
             <CardTitle
               title={this.state.process}
-              subtitle=''
+              subtitle={this.state.searchResultInfo}
             />
             <CardText>
               <TextField
-                  id='emailSearch'
-                  type='text'
-                  onChange={this.updateSearchEmailInput}
-                />
-                {this.inputFieldInfo.map(fieldInfo => this.formRow(fieldInfo))}
+                id='emailSearch'
+                type='text'
+                hintText='Customer Email Search'
+                floatingLabelText='Customer Email Search'
+                onChange={this.updateSearchEmailInput}
+              />
+              <RaisedButton
+                style= {displayBlock}
+                label="Submit Email"
+                primary={true}
+                onClick={this.searchEmail}
+              /> 
+              {this.inputFieldInfo.map(fieldInfo => this.formRow(fieldInfo))}
             </CardText>
             <CardActions>
             <RaisedButton
-                  label="Submit Email"
-                  primary={true}
-                  onClick={this.searchEmail}
-                /> 
-            <RaisedButton
-                  label="New Customer"
+                  style={submitButton}
+                  label="Submit"
                   primary={true}
                 /> 
             </CardActions>

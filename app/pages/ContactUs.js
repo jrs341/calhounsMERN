@@ -4,7 +4,6 @@ import { Row, Col } from 'react-grid-system'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import { Card, CardTitle, CardText, CardActions} from 'material-ui/Card'
-import FontAwesome from 'react-fontawesome'
 import GpsFixed from 'material-ui/svg-icons/device/gps-fixed'
 import Location from 'material-ui/svg-icons/communication/location-on'
 import Phone from 'material-ui/svg-icons/communication/phone'
@@ -77,7 +76,6 @@ export default class ContactUs extends React.Component {
                   title="Contact Calhoun"
               />
               <CardText>
-                
                 <p> <Phone />
                     <abbr title="Phone">P</abbr>: (361) 550-7536</p>
                 <p> <Email />

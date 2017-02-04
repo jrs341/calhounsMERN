@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router'
 import Drawer from 'material-ui/Drawer'
 import AppBar from 'material-ui/AppBar'
 import MenuItem from 'material-ui/MenuItem'
@@ -9,6 +9,7 @@ import Menu from 'material-ui/svg-icons/navigation/menu'
 import FlatButton from 'material-ui/FlatButton'
 
 export default class RightDrawer extends React.Component {
+
 	constructor(props) {
 	    super(props);
 	    this.state = {open: false};
@@ -38,8 +39,16 @@ export default class RightDrawer extends React.Component {
 	          <AppBar 
 	           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
 	           title="Menu" />
-	          	<MenuItem onTouchTap={this.handleClose}> Contact Us </MenuItem>
+	           	<MenuItem onTouchTap={this.handleClose}> About </MenuItem>
+	          	<Link to={'contactUs'}><MenuItem onTouchTap={this.handleClose}>Contact Us </MenuItem></Link> 
+	          	<MenuItem onTouchTap={this.handleClose}> Rates </MenuItem>
+	          	<MenuItem onTouchTap={this.handleClose}> Reservations </MenuItem>
+	          	<MenuItem onTouchTap={this.handleClose}> Rental Agreements </MenuItem>
+	          	<MenuItem onTouchTap={this.handleClose}> Rules </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Cabins </MenuItem>
+	          	<MenuItem onTouchTap={this.handleClose}> Local Weather </MenuItem>
+	          	<MenuItem onTouchTap={this.handleClose}> River Level </MenuItem>
+	          	<MenuItem onTouchTap={this.handleClose}> Meet Calhoun </MenuItem>
 
 	        </Drawer>
 	     </div>

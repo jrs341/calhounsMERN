@@ -52,6 +52,9 @@ app.get(`/`, function(req, res) {
 // app.get("/", function(req, res) {
 //   res.send(index.html);
 // });
+app.get("/constactUs", function(req, res) {
+  res.send(contactUs.html);
+});
 
 app.get("/admin", function(req, res) {
   res.send(admin.html);

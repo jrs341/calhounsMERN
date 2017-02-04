@@ -12,6 +12,11 @@ injectTapEventPlugin();
 
 import NavBar from '../Components/Navbar/NavBar'
 import Footer from '../Components/Footer/Footer'
+// adjust this style if the size of the nav or footer changes
+const style = {
+  marginTop: 90,
+  marginBottom: 100
+};
 
 export default class Main extends React.Component {
 
@@ -20,7 +25,7 @@ export default class Main extends React.Component {
       <MuiThemeProvider>
         <div>
           <NavBar />
-          <Container>
+          <Container style={style}>
             {this.props.children}
           </Container>
           <Footer />

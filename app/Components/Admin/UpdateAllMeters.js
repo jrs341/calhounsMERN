@@ -4,9 +4,24 @@ import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system'
 
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
-
+import axios from 'axios'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 export default class UpdateAllMeters extends React.Component {
 
+    constructor() {
+    super()
+    this.inputFieldInfo = [
+    {displayName: 'Meter ID', dataName: 'meter'}, 
+    
+    ];
+    
+    // this.state = {
+    //   getMeterResponse: {},
+    //   instructions: 'Please enter all meter readings.'
+    // };
+  }
+  
   render() {
     return (
       <Row>

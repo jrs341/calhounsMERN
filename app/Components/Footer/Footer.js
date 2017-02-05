@@ -10,9 +10,10 @@ const google = <FontAwesome name='google' size='2x'> </FontAwesome>;
 const facebook = <FontAwesome name='facebook' size='2x'> </FontAwesome>;
 
 const style = {
+	background: 'white',
 	position: 'fixed',
 	width: '100%',
-	height: 50,
+	height: 60,
 	bottom: 0,
 	overflowY: 'hidden'
 }
@@ -30,6 +31,7 @@ export default class Footer extends React.Component {
 	
 	render() {
 		return (
+			
 			<Row style={style}>
 				
 				<Col md={8} offset={{ md: 4 }}>
@@ -55,6 +57,7 @@ export default class Footer extends React.Component {
 		        </Col>
 		       
 		    </Row> 
+		  
 		);
 	}
 }

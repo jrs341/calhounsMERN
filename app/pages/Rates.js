@@ -37,7 +37,7 @@ export default class ContactUs extends React.Component {
                     <TableRowColumn>Per Extra Person</TableRowColumn>
                     <TableRowColumn>$7.00</TableRowColumn>
                     <TableRowColumn>$30.00</TableRowColumn>
-                    <TableRowColumn>$60.00*</TableRowColumn>
+                    <TableRowColumn>$60.00</TableRowColumn>
                 </TableRow>
                 <TableRow>
                     <TableRowColumn>Cabin **</TableRowColumn>
@@ -50,13 +50,13 @@ export default class ContactUs extends React.Component {
         </Row>
         <Row>
             <ol>
-                <li> For monthly stays there is a $100 security deposit for RV spaces and a $200 security deposit for cabins.  The security deposit is refundable upon checkout.</li><br></br>
+                <li> For monthly stays there is a $100 security deposit for RV spaces and a $200 security deposit for cabins.  The security deposit is NOT used to pay final rent or electric bills.</li><br></br>
                 <li> For monthly guests rent and electric are due each month based on your arrival date, ex. if you arrive on October 16th your next payment will be due on November 16th. The billing cycle for each month is on the 23rd of each month, when you receive an invoice the due date is your arrival date even though you received an invoice on the 23rd.</li><br></br> 
                 <li> Electricity is .11 per KWH for RV spaces and .15 per KWH for cabins.</li><br></br>
             </ol>
             <ul>
                 <li> * Electric is billed seperatly for monthly stays</li><br></br>
-                <li> ** Maximum occupancy for a cabin is 2 adults</li><br></br>
+                <li> ** Maximum occupancy per cabin is 2 adults</li><br></br>
             </ul>
         </Row>
     </div>

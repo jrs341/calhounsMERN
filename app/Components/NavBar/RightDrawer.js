@@ -63,6 +63,7 @@ export default class RightDrawer extends React.Component {
 	          	<MenuItem onTouchTap={this.handleClose}> River Level </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Meet Calhoun </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Local News </MenuItem>
+	          	<MenuItem href='http://localhost:3000/amp.html#development=1'>AMP Page</MenuItem>
 	        </Drawer>
 	     </div>
 		);

@@ -10,6 +10,14 @@ var Schema = mongoose.Schema;
 // Instantiate a userSchema object with the Schema class we just made
 var EmployeeSchema = new Schema({
   // username is a string. We will trim any trailing whitespace. It's also required
+  given_name: {
+    type: String,
+    trim: true
+  },
+  family_name: {
+    type: String,
+    trim: true
+  },
   username: {
     type: String,
     trim: true,

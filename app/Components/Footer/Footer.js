@@ -1,8 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'react-grid-system'
 import { Link } from 'react-router'
-import {BottomNavigation, BottomNavigationItem} from 'material-ui/BottomNavigation';
-import Paper from 'material-ui/Paper'
 import IconButton from 'material-ui/IconButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import FontAwesome from 'react-fontawesome'

@@ -8,6 +8,21 @@ import NavigationClose from 'material-ui/svg-icons/navigation/close'
 import Menu from 'material-ui/svg-icons/navigation/menu'
 import FlatButton from 'material-ui/FlatButton'
 
+const linkStyle = {
+	textDecoration: 'none'
+}
+
+const flatButtonStyle = {
+	varticalAlign: 'middle'
+}
+
+const menuButtonStyle = {
+	height: 30,
+	width: 30,
+	fill: 'white',
+	color: 'white'
+}
+
 export default class RightDrawer extends React.Component {
 
 	constructor(props) {
@@ -23,10 +38,8 @@ export default class RightDrawer extends React.Component {
     	return (
 	      <div>
 	        <FlatButton
-	          // label="Menu"
-	          // LabelPostion="before"
-	          // primary={true}
-	          icon={<Menu />}
+	          style={flatButtonStyle}
+	          icon={<Menu style={menuButtonStyle} />}
 	          onTouchTap={this.handleToggle}
 	        />
 	        <Drawer 
@@ -36,12 +49,12 @@ export default class RightDrawer extends React.Component {
           	 open={this.state.open}
           	 onRequestChange={(open) => this.setState({open})}
           	>
-	          <AppBar 
-	           iconElementLeft={<IconButton><NavigationClose /></IconButton>}
+	          <AppBar
+	           iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}
 	           title="Menu" />
 	           	<MenuItem onTouchTap={this.handleClose}> About </MenuItem>
-	          	<Link to={'contactUs'}><MenuItem onTouchTap={this.handleClose}>Contact Us </MenuItem></Link> 
-	          	<Link to={'rates'}><MenuItem onTouchTap={this.handleClose}> Rates </MenuItem></Link>
+	          	<Link to={'contactUs'} style={{textDecoration: 'none'}}><MenuItem style={linkStyle} onTouchTap={this.handleClose}>Contact Us </MenuItem></Link> 
+	          	<Link to={'rates'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> Rates </MenuItem></Link>
 	          	<MenuItem onTouchTap={this.handleClose}> Reservations </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Rental Agreements </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Rules </MenuItem>
@@ -50,8 +63,6 @@ export default class RightDrawer extends React.Component {
 	          	<MenuItem onTouchTap={this.handleClose}> River Level </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Meet Calhoun </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Local News </MenuItem>
-
-
 	        </Drawer>
 	     </div>
 		);

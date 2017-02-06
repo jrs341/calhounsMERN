@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server",
-    "dev": "webpack -w"
+    "dev": "webpack -w",
+    "build": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "material-ui": "^0.16.6",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-fontawesome": "^1.5.0",
     "react-grid-system": "git+https://github.com/zoover/react-grid-system.git",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.1",
@@ -34,7 +36,8 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.7.4",
     "redux-promise-middleware": "^4.2.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "require": "^2.4.20"
   },
   "devDependencies": {
     "babel-core": "^6.3.13",

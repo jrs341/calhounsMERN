@@ -40,14 +40,24 @@ db.once("open", function() {
   console.log("Mongoose connection successful.");
 });
 
-// Routes
+// Routes this is from example and used for React
 // app.get(`*`, function(req, res) {
 //   res.sendFile('public/index.html', { root: __dirname });
 // });
 
+app.get(`/`, function(req, res) {
+  res.sendFile('public/index.html', { root: __dirname });
+});
 // index route
-app.get("/", function(req, res) {
-  res.send(index.html);
+// app.get("/", function(req, res) {
+//   res.send(index.html);
+// });
+app.get("/AMP", function(req, res) {
+  res.sendFile(amp.html)
+});
+
+app.get("/constactUs", function(req, res) {
+  res.send(contactUs.html);
 });
 
 app.get("/admin", function(req, res) {

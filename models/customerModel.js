@@ -23,6 +23,10 @@ var CustomerSchema = new Schema({
     trim: true,
     // required: "Phone Number Required"
   },
+  phone_number_alt: {
+    type: String,
+    trim: true,
+  },
   // email is a string, and it must be a unique one in our collection
   // Notice how it must match our regex, which checks for email
   email: {
@@ -48,6 +52,110 @@ var CustomerSchema = new Schema({
     trim: true
   },
   country: {
+    type: String,
+    trim: true
+  },
+  drivers_license_num: {
+    type: String,
+    trim: true
+  },
+  drivers_license_state: {
+    type: String,
+    trim: true
+  },
+  additional_occupant_1: {
+    type: String,
+    trim: true
+  },
+  additional_occupant_2: {
+    type: String,
+    trim: true
+  },
+  additional_occupant_3: {
+    type: String,
+    trim: true
+  },
+  additional_occupant_4: {
+    type: String,
+    trim: true
+  },
+  additional_occupant_1_age: {
+    type: String,
+    trim: true
+  },
+  additional_occupant_2_age: {
+    type: String,
+    trim: true
+  },
+  additional_occupant_3_age: {
+    type: String,
+    trim: true
+  },
+  additional_occupant_4_age: {
+    type: String,
+    trim: true
+  },
+  pets_number_of: {
+    type: String,
+    trim: true
+  },
+  pets_type: {
+    type: String,
+    trim: true
+  },
+  pets_breed: {
+    type: String,
+    trim: true
+  },
+  unit_type: {
+    type: String,
+    trim: true
+  },
+  unit_license: {
+    type: String,
+    trim: true
+  },
+  unit_state: {
+    type: String,
+    trim: true
+  },
+  unit_year: {
+    type: String,
+    trim: true
+  },
+  unit_length: {
+    type: String,
+    trim: true
+  },
+  vehicle_1_type: {
+    type: String,
+    trim: true
+  },
+  vehicle_2_type: {
+    type: String,
+    trim: true
+  },
+  vehicle_1_license: {
+    type: String,
+    trim: true
+  },
+  vehicle_2_license: {
+    type: String,
+    trim: true
+  },
+  vehicle_1_state: {
+    type: String,
+    trim: true
+  },
+  vehicle_2_state: {
+    type: String,
+    trim: true
+  },
+  vehicle_1_year: {
+    type: String,
+    trim: true
+  },
+  vehicle_2_year: {
     type: String,
     trim: true
   },

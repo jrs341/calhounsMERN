@@ -1,0 +1,449 @@
+<!doctype html>
+<html amp lang="en">
+  <head>
+    <meta charset="utf-8">
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+    <!-- <link rel="canonical" href="https://ampbyexample.com/components/amp-social-share/"> -->
+    <title>Calhoun's</title>
+    <link rel="canonical" href="http://example.ampproject.org/article-metadata.html" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "NewsArticle",
+        "headline": "Open-source framework for publishing content",
+        "datePublished": "2015-10-07T12:02:41Z",
+        "image": [
+          "logo.jpg"
+        ]
+      }
+    </script>
+    <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}
+    </style></noscript>
+
+    <style amp-custom>
+      /* any custom style goes here */
+      body {
+        background-image: url("./css/images/old_map.png");
+        padding-left: 7px;
+        padding-right: 5px;
+        color: #5a4130;
+      }
+
+      nav {
+        background-image: url("./css/images/old_map.png");
+        border-bottom: 1.4px solid #213fd9;
+        position: fixed;
+        width: 100%;
+        top:0;
+        z-index: 300;
+      }
+
+      button {
+        border-color: #213fd9;
+        border-width: 1.4px;
+      }
+
+       button:active {
+        border-color: #213fd9;
+      }
+
+      h1 {
+        text-align: center; 
+        margin-right: 7px;
+      }
+
+      p {
+        text-indent: 10px;
+        margin-right: 7px;
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      #lastP {
+        text-align: center; 
+        margin-bottom: 150px
+      }
+
+      #copyWrite {
+        text-align: center; 
+        font-size: 8px; 
+        color: #213fd9;
+      }
+
+      .btn{
+        text-decoration:none;
+        color:#333333;
+        font-size:12px;
+        font-weight:bold;
+        padding:0 15px;
+        line-height:32px;
+        height: auto;
+        display:inline-block;
+        text-align:center;
+        background-color:#F5DEB3;
+      }
+
+      .btn.pill{
+        -webkit-border-radius: 16px;
+        -moz-border-radius: 16px;
+        border-radius: 16px;
+      }
+
+      #logo {
+        display: inline-block;
+        width: 212px;
+        margin-top: 5px;
+        margin-left: -5px;
+      }
+
+      #brand {
+        color: #213fd9;
+        margin: 0px 0px 5px 7px;
+        text-indent: 0px;
+      }
+/*start nav menu*/
+      #menu {
+        margin-top:25px;
+        margin-right: 12px;
+        display:inline-block;
+        float: right;
+      }
+
+      #menu ul {
+        list-style:none;
+        position:relative;
+        float:right;
+        margin:0;
+        padding:0
+      }
+
+      #menu ul a {
+        display:block;
+        color: #5a4130;
+        text-decoration:none;
+        line-height:32px;
+        padding:0 15px;
+      }
+
+      #menu ul li {
+        z-index: 200;
+        position:relative;
+        float:right;
+        margin:0;
+        margin-right: 2px;
+        padding:0;
+        background-image: url("./css/images/old_map.png");
+      }
+
+      #menu ul li.current-menu-item {
+        background:#ddd
+      }
+
+      #menu ul ul {
+        display: none;
+        position:absolute;
+        top:100%;
+        left:0;
+        background: none;
+        padding:0
+      }
+
+      #menu ul ul li {
+        background:#ccc;
+        float:none;
+        background-image: url("./css/images/old_map.png");
+      }
+
+      #menu ul ul li:hover {
+        background:#F5DEB3;
+      }
+
+      #menu ul ul a {
+        line-height:120%;
+        padding:10px 15px
+      }
+
+      #menu ul ul ul {
+        top:0;
+        left:100%
+      }
+
+      #menu ul li:hover > ul {
+        display:block
+      }
+
+/*end nav menu*/
+
+/*start collapsed nav menu*/
+      #collapsedMenu {
+        margin-top: 32px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        z-index: 100;
+      }
+
+      #collapsedMenu ul{
+        list-style:none;  
+        margin:0;
+        padding:0; 
+        border-bottom-left-radius:5px;
+        border-bottom-right-radius:5px;  
+      }
+
+      #collapsedMenu ul li {
+        display:block;
+        height:25px;
+        width: 140px;    
+        padding:5px;
+        background-image: url("./css/images/old_map.png"); 
+        /*transition:all .5s;*/
+        opacity:0;
+      }
+
+      #collapsedMenu ul a {
+        text-decoration: none;
+        cursor: default;
+        color: #5a4130;
+      }
+
+      #collapsedMenu ul li:hover{
+        background:#F5DEB3;
+      }
+
+      #collapsedMenu ul li:last-child{
+        border-bottom-left-radius:4px;
+        border-bottom-right-radius:4px;
+      }
+
+      #collapsedMenu label:before{
+        height:2.4px;
+        width:24px;
+        background:#213fd9;
+        display:inline-block;
+        content:"";
+        box-shadow:0px -7px 0px 0px #213fd9,
+                   0px -14px 0px 0px #213fd9;
+        margin-right:10px;
+        transition:all .5s;
+        position:relative;
+        opacity:1;
+      }
+
+      #collapsedMenu label{
+        /*display:block;  */
+        padding:10px;
+        /*color:white;  */
+        /*cursor:pointer; */
+      }
+     
+      #collapsedMenu input[type="checkbox"]{
+        visibility:hidden;
+        /*position:absolute;*/
+        margin-left: 70px;
+      }
+
+      #collapse:checked ~ li{  
+        margin-top:0;
+        opacity:1;
+      }
+
+      #collapse:checked{
+        /*position:relative;*/
+        right:calc(-160px);
+        opacity:0.5; 
+      }
+
+/*end collapsed nav menu*/
+
+      header {
+        margin-top: 99px;
+        z-index: 1;
+      }
+
+      footer {
+        background-image: url("./css/images/old_map.png");
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 110px;
+        border-top: 1.5px solid #213fd9;
+      }
+
+      #social {
+        width: 188px;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+/*media queries*/
+
+@media (min-width: 530px) {
+  #collapsedMenu {
+    display: none;
+  }
+}
+
+@media (max-width: 529px) {
+  #menu {
+    display: none;
+  }
+}
+
+    </style>
+
+  </head>
+
+  <body>
+
+    <nav>
+    <div id="logo">
+      <amp-img src="./css/images/circleC.png" height="61" width="70"
+      >
+      </amp-img>
+      <a href="AMP.html"><p id="brand">Calhoun's Riverside RV Retreat</p></a>
+    </div>
+
+    <div id="menu">
+      <ul>
+        <li><button class="btn pill"><a href="/">Additional Information</a></button>
+          <ul>
+            <li>
+              <a href="rates.html">Current Rates</a>
+            </li>
+            <li>
+              <a href="cabins.html">Cabins</a>
+            </li>
+            <li>
+              <a href="rules.html">Rules</a>
+            </li>
+            <li>
+              <a href="rentalAgreements.html">Rental Agreements</a>
+            </li>
+            <li>
+              <a href="boatramp.html">Boat Ramp</a>
+            </li>
+            <li>
+              <a href="meetCalhoun.html">Meet Calhoun</a>
+            </li>
+            <li>
+              <a href="http://www.lacrossealertsmobile.com/v1.2/#device-7FFF4349485CC4E6">Current Weather</a>
+            </li>
+            <li>
+              <a href="http://www.accuweather.com/en/us/port-lavaca-tx/77979/weather-forecast/335931">Local Weather Radar</a>
+            </li>
+            <li>
+              <a href="riverLevel.html">River Level Info</a>
+            </li>
+          </ul>
+        </li>
+        <li><button class="btn pill"><a href="/">Contact</a></button>
+        </li>
+      </ul>
+    </div>
+
+    <div id="collapsedMenu">
+      <ul>
+        <input type="checkbox" id="collapse"/> 
+        <label for="collapse"></label> 
+        <li>
+          <a href="contact.html">Contact</a>
+        </li>         
+        <li>
+          <a target="_blank" href="rates.html">Current Rates</a>
+        </li>
+        <li>
+          <a target="_blank" href="cabins.html">Cabins</a>
+        </li>
+        <li>
+          <a target="_blank" href="rules.html">Rules</a>
+        </li>
+        <li>
+          <a target="_blank" href="rentalAgreements.html">Rental Agreements</a>
+        </li>
+        <li>
+          <a target="_blank" href="boatramp.html">Boat Ramp</a>
+        </li>
+        <li>
+          <a target="_blank" href="meetCalhoun.html">Meet Calhoun</a>
+        </li>
+        <li>
+          <a target="_blank" href="http://www.lacrossealertsmobile.com/v1.2/#device-7FFF4349485CC4E6">Current Weather</a>
+        </li>
+        <li>
+          <a target="_blank" href="http://www.accuweather.com/en/us/port-lavaca-tx/77979/weather-forecast/335931">Local Weather Radar</a>
+        </li>
+        <li>
+          <a target="_blank" href="riverLevel.html">River Level Info</a>
+        </li>
+      </ul>
+    </div>
+    </nav>
+
+    <header>
+   
+      <amp-img src="./css/images/headerPic-1280"
+        srcset="./css/images/headerPic-1024.jpg 1024w, ./css/images/headerPic-800.jpg 800w, ./css/images/headerPic-640.jpg 640w, ./css/images/headerPic-300.jpg 300w"
+        width="1280"
+        height="610"
+        layout="responsive"
+        alt="an image">
+      </amp-img>
+
+    </header>
+  
+      <h1>
+        Your Front Row Seat to a Texas Gem, 
+      </br>
+        The Guadalupe River
+      </h1>
+
+      <p>
+        Calhoun’s Riverside RV Retreat offers visitors the best of the Guadulupe River. Just outside Tivoli, Texas, and a short drive from Victoria, Port O'Connor and Point Comfort, Calhoun’s is centrally located and filled with wildlife. Once you see it you’ll know: Calhoun’s is unlike any other Texas RV park. Here, visitors can take advantage of some of the best fishing, bow fishing, boating, and canoing and kayaking in Texas, or simply enjoy the river from their RV! Just 17 miles from Port Lavaca, 30 miles from Rockport and Victoria, Calhoun’s offers a peaceful RV camping experience nestled beneath giant oak trees
+      </p>
+      
+      <p>
+        Forget trying to get a spot on the bay, Calhoun’s is just 5 short miles by boat from the San Antonio Bay. The river is plenty deep enough to accommodate larger boats, and with Calhoun’s private boat ramp, getting there is easy. Located in the center of the Crescent Coast, visitors can boat their way to the Gulf of Mexico, while enjoying an abundancy of wildlife.
+      </p>
+      
+      <p>
+        Calhoun’s offers more than a little something for everyone. Whether you enjoy deer, water fowel or feral hog hunting, this is a sportsmen’s paradise. If you’re a Winter Texan looking for an alternative to the crowds, Calhoun’s is a unique Texas RV Park centrally located to the region’s historic and resort towns. Tired of RV parks without a tree in sight? Wanting a little room to get comfortable? Seeking a little adventure on the river? Calhoun’s is a different kind of place. Paddle down the river one day, take a drive to Corpus Christi the next and enjoy all the variety in this quiet corner of the Crescent Coast. 
+      </p>
+      <p>
+        Owned and operated by a U.S. Army veteran, Calhoun’s is all about providing sportsmen, Winter Texans and families with a great place to experience the best of Texas!
+      </p>
+      <p id="lastP">
+        Need lodging? <button class="btn pill"><a href="cabins.html">Checkout our cabins!</a></button>
+      </p>
+    <footer>
+      <div id="social">
+        
+        <amp-social-share type="twitter"
+          data-param-app_id="254325784911610"
+          data-param-text="Check out Calhoun's on Twitter"
+          data-param-url="https://twitter.com/CalhounsRV"
+          data-param-attribution="AMPhtml"></amp-social-share>
+        <amp-social-share type="gplus"
+          data-param-app_id="254325784911610"
+          data-param-text="Check out Calhoun's on google+"
+          data-param-url="https://plus.google.com/u/1/+Calhounsriversidervretreat?hl=en"
+          data-param-attribution="AMPhtml">
+        </amp-social-share>
+        <amp-social-share type="facebook"
+          data-param-app_id="254325784911610"
+          data-param-text="Check out Calhoun's on facebook"
+          data-param-url="https://www.facebook.com/Calhouns-Riverside-RV-Retreat-119688484898552/"
+          data-param-attribution="AMPhtml">
+        </amp-social-share>
+      
+      </div>
+
+      <p id="copyWrite">Copyright &copy; Calhoun's Riverside RV Retreat 2016</p>
+    </footer>
+
+  </body>
+</html>

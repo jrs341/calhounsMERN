@@ -24,7 +24,44 @@ const pStyle = {
   varticalAlign: 'middle'
 }
 
+
+
+
+{/*import {myForm, TextField} from '@react-component/my-form';
+
+export default (props) => {
+ } = props;
+   const emailRegex = new RegExp('/\S+@\S+\.\S+/');
+    const phoneRegEx = new RegExp('/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-/\s\.]{0,1}[0-9]{4}$/');
+    return (
+<myForm>
+  <TextField id="smsNumber" value={userInfo.smsNumber} name="smsNumberName" required requiredError="Mobile is a required field." validations={{matchRegexp:phoneRegEx}} validationErrors={{matchRegexp:'Enter a valid mobile.'}} onChange={changeSmsNumber} floatingLabelText={t('userProfile.mobile', "Mobile")} floatingLabelFixed={true} hintText={t('userProfile.mobile', "Mobile")}/>
+</myForm>
+   );
+};*/}
+
+
+
+const emailRegex = /^\S+@\S+\.\S+$/;
+const phoneRegEx = /^[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-/\s.]?[0-9]{4}$/;
+
 export default class ContactUs extends React.Component {
+
+  constructor() {
+  super()
+
+  this.onChangePhone = this.onChangePhone.bind(this);
+  this.onChangeEmail = this.onChangeEmail.bind(this);
+  }
+
+  onChangePhone() {
+
+  }
+
+  onChangeEmail() {
+
+  }
+
 
   render() {
     return (
@@ -53,6 +90,7 @@ export default class ContactUs extends React.Component {
                 <TextField
                   hintText="Email"
                   floatingLabelText="Email"
+                  onChange={this.onChangeEmail}
                 /><br />
                 <TextField
                   hintText="Message Field"

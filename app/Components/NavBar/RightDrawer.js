@@ -52,17 +52,17 @@ export default class RightDrawer extends React.Component {
 	          <AppBar
 	           iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}
 	           title="Menu" />
-	           	<MenuItem onTouchTap={this.handleClose}> About </MenuItem>
+	           	{/*<MenuItem onTouchTap={this.handleClose}> About </MenuItem>*/}
 	          	<Link to={'contactUs'} style={{textDecoration: 'none'}}><MenuItem style={linkStyle} onTouchTap={this.handleClose}>Contact Us </MenuItem></Link> 
 	          	<Link to={'rates'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> Rates </MenuItem></Link>
-	          	<MenuItem onTouchTap={this.handleClose}> Reservations </MenuItem>
+	          	{/*<MenuItem onTouchTap={this.handleClose}> Reservations </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Rental Agreements </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Rules </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Cabins </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Local Weather </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> River Level </MenuItem>
 	          	<MenuItem onTouchTap={this.handleClose}> Meet Calhoun </MenuItem>
-	          	<MenuItem onTouchTap={this.handleClose}> Local News </MenuItem>
+	          	<MenuItem onTouchTap={this.handleClose}> Local News </MenuItem>*/}
 	          	<MenuItem href='http://localhost:3000/amp.html#development=1'>AMP Page</MenuItem>
 	        </Drawer>
 	     </div>

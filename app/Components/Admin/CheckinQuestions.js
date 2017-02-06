@@ -16,6 +16,7 @@ export default class CheckinQuestions extends React.Component {
 		super()
 
 		this.state = {
+			hellNo: false,
 			cabin: false,
 			rvSpace: false,
 			daily: false,
@@ -25,6 +26,7 @@ export default class CheckinQuestions extends React.Component {
 			petYes: false,
 			petNum_1: true,
 			petNum_2: true,
+			petNumMore: true,
 			dogNo: true,
 			dogYes: true,
 			dogDropDown: true,
@@ -39,13 +41,19 @@ export default class CheckinQuestions extends React.Component {
 		this.monthlyState = this.monthlyState.bind(this);
 		this.petNoState = this. petNoState.bind(this);
 		this.petYesState = this.petYesState.bind(this);
+		this.petNum_1State = this.petNum_1State.bind(this);
+		this.petNum_2State = this.petNum_2State.bind(this);
+		this.petNumMoreState = this.petNumMoreState.bind(this);
 		this.dogNoState = this.dogNoState.bind(this);
 		this.dogYesState = this.dogYesState.bind(this);
+		this.vehicleNum = this.vehicleNum.bind(this);
+		this.trailerNum = this.trailerNum.bind(this);
 	}
 
 	cabinState(event, isInputChecked) {
 		if(isInputChecked){
 			this.setState({rvSpace: true});
+			this.setState({petYes: true});
 		}else{
 			this.setState({cabin: false});
 			this.setState({rvSpace: false});
@@ -54,7 +62,7 @@ export default class CheckinQuestions extends React.Component {
 
 	rvSpaceState(event, isInputChecked) {
 		if(isInputChecked){
-			
+			this.setState({cabin: true});
 		}else{
 			this.setState({rvSpace: false});
 			this.setState({cabin: false});
@@ -83,7 +91,7 @@ export default class CheckinQuestions extends React.Component {
 		}
 	}
 
-	monthlyState(event, isInputChecked) {
+	monthlyState (event, isInputChecked) {
 		if(isInputChecked){
 			this.setState({daily: true});
 			this.setState({weekly: true});
@@ -107,23 +115,53 @@ export default class CheckinQuestions extends React.Component {
 			this.setState({petNo: true});
 			this.setState({petNum_1: false});
 			this.setState({petNum_2: false});
+			this.setState({petNumMore: false});
 			this.setState({dogNo: false});
 			this.setState({dogYes: false});
 		}else{
 			this.setState({petNo: false});
 			this.setState({petNum_1: true});
 			this.setState({petNum_2: true});
+			this.setState({petNumMore: true});
 			this.setState({dogNo: true});
 			this.setState({dogYes: true});
 		}
 	}
 
-	// petNumState(event, isInputChecked) {
-	// 	if(isInputChecked) {
-	// 		this.setState({petNum_1: false});
-	// 		this.setState({petNum_2: true});
-	// 	}
-	// }
+	petNum_1State(event, isInputChecked) {
+		if(isInputChecked) {
+			this.setState({petNum_2: true});
+			this.setState({petNumMore: true});
+		}else{
+			this.setState({petNum_2: false});
+			this.setState({petNumMore: false});
+		}
+	}
+
+	petNum_2State(event, isInputChecked) {
+		if(isInputChecked) {
+			this.setState({petNum_1: true});
+			this.setState({petNumMore: true});
+		}else{
+			this.setState({petNum_1: false});
+			this.setState({petNumMore: false});
+		}
+	}
+
+	petNumMoreState(event, isInputChecked){
+		if(isInputChecked){
+			this.setState({petNum_1: true});
+			this.setState({petNum_2: true});
+			this.setState({dogNo: true});
+			this.setState({dogYes: true});
+			alert('It is policy at Calhoun\'s Riverside RV Retreat to limit the number of pets to a maximum of 2 per RV space');
+		}else{
+			this.setState({petNum_1: false});
+			this.setState({petNum_2: false});
+			this.setState({dogNo: false});
+			this.setState({dogYes: false});
+		}
+	}
 
 	dogNoState(event, isInputChecked) {
 		if(isInputChecked) {
@@ -145,6 +183,18 @@ export default class CheckinQuestions extends React.Component {
 			this.setState({dogDropDown: true});
 			this.setState({breed_1: true});
 			this.setState({breed_2: true});
+		}
+	}
+
+	vehicleNum(event, isInputChecked) {
+		if(isInputChecked) {
+			alert('Please call Calhoun\'s at 361 550 7536 to discuss parking options. It is a policy at Calhoun\'s to only allow two vehicles per site.');
+		}
+	}
+
+	trailerNum(event, isInputChecked) {
+		if(isInputChecked) {
+			alert('Please call Calhoun\'s at 361 550 7536 to discuss parking options. It is a policy at Calhoun\'s for trailers to be parked in designated areas.');
 		}
 	}
 
@@ -188,7 +238,7 @@ export default class CheckinQuestions extends React.Component {
 					<h3> Please select an arrival date. </h3>
 						<RangedDatePicker
 						/>
-					<h3> How many additional adults other than you are in your group? </h3>
+					<h3> How many additional adults, other than you, are in your group? </h3>
 						<Checkbox
 						  label="0"
 						/>
@@ -229,10 +279,17 @@ export default class CheckinQuestions extends React.Component {
 						<Checkbox
 						  label="1"
 						  disabled={this.state.petNum_1}
+						  onCheck={this.petNum_1State}
 						/>
 						<Checkbox
 						  label="2"
 						  disabled={this.state.petNum_2}
+						  onCheck={this.petNum_2State}
+						/>
+						<Checkbox
+						  label="More than 2"
+						  disabled={this.state.petNumMore}
+						  onCheck={this.petNumMoreState}
 						/>
 					<h3> Are any of the pets a dog or dogs? </h3>
 						<Checkbox
@@ -245,11 +302,11 @@ export default class CheckinQuestions extends React.Component {
 					      disabled={this.state.dogYes}
 					      onCheck={this.dogYesState}
 					    />
-					<h3> Is the dog or any of the dogs mixed or full bred with any of the following breeds? </h3>
+					<h3> Is the dog or any of the dogs mixed or full bred with any of the following breeds? If not please select none of the above from the menu. </h3>
 						<DogDropDown
 						disabled={this.state.dogDropDown}
 						/>
-					<h3> If not please enter the breed of your dog or dogs </h3>
+					<h3> If not please enter the breed of your dog or dogs in the fields below</h3>
 						<TextField
 						  disabled={this.state.breed_1}
 					      hintText="Breed of Dog 1"
@@ -269,13 +326,17 @@ export default class CheckinQuestions extends React.Component {
 						<Checkbox
 						  label="2"
 						/>
-
+						<Checkbox
+						  label="More than 2"
+						  onCheck={this.vehicleNum}
+						/>
 					<h3> Will you have additional vehicles, ex. boats, trailers, etc...</h3>
 						<Checkbox
 						  label="No"
 						/>
 						<Checkbox
 						  label="Yes"
+						  onCheck={this.trailerNum}
 						/>
 	            </CardText>
 	            <CardActions>

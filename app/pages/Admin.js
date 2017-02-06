@@ -20,7 +20,7 @@ export default class Admin extends React.Component {
         <Col md={8} offset={{ md: 2 }}>
           <Card>
             <CardActions>
-              <Link to={'checkin'}>
+              <Link to={'checkinQuestions'}>
                 <RaisedButton 
                   style={buttonStyle}
                   label='Checkin'

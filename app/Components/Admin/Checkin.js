@@ -84,7 +84,8 @@ export default class Checkin extends React.Component {
   formRow(fieldInfo) {
     return (
       <TextField
-        key={fieldInfo.displayName}
+        name={fieldInfo.dataName}
+        key={fieldInfo.dataName}
         value={this.state.searchResponse[fieldInfo.dataName]}
         hintText={fieldInfo.displayName}
         floatingLabelText={fieldInfo.displayName}
@@ -107,7 +108,7 @@ export default class Checkin extends React.Component {
 
   updateFormRow(event, newInput) {
     var searchResponse = this.state.searchResponse;
-    searchResponse.given_name = newInput;
+    searchResponse[event.target.name] = newInput;
     this.setState({searchResponse: searchResponse});
   }
 

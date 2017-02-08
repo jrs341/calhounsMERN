@@ -10,9 +10,6 @@ const submitButton = {
   width: 200
 }
 
-// onChange={this.updateFormRow}>
-
-    // need a variable in the dataname and displayname
 export default class UpdateAllMeters extends React.Component {
 
     constructor() {
@@ -25,15 +22,17 @@ export default class UpdateAllMeters extends React.Component {
 
       this.updateMetersResponse = this.updateMetersResponse.bind(this);
       this.getMeters = this.getMeters.bind(this);
+      this.updateFormRow = this.updateFormRow.bind(this);
     }
     
-  formRow(fieldInfo) {
+  formRow(fieldInfo, index) {
     return (
       <TextField
-        name={fieldInfo.meter}
-        key={fieldInfo.meter}
-        hintText={fieldInfo.meter}
-        floatingLabelText={fieldInfo.meter}>
+        name={index.toString()}
+        key={index}
+        hintText={`Meter: ${fieldInfo.meter}`}
+        floatingLabelText={`Meter: ${fieldInfo.meter}`}
+        onBlur={this.updateFormRow}>
       </TextField>
       );
   }
@@ -41,6 +40,13 @@ export default class UpdateAllMeters extends React.Component {
   updateMetersResponse(getRequestResponse) {
     this.setState({getMetersResponse: getRequestResponse});
     console.log(this.state.getMetersResponse[1].meter);
+  }
+
+  updateFormRow(event, newInput) {
+    var newReading = this.state.getMetersResponse;
+    newReading[event.target.name].reading.push(event.target.value);
+    this.setState({getMetersResponse: newReading});
+    console.log(newReading[event.target.name]);
   }
 
   getMeters() {
@@ -51,7 +57,6 @@ export default class UpdateAllMeters extends React.Component {
       if (response.data == "") {
         console.log('error!');
       } else {
-        console.log(response.data);
         this.updateMetersResponse(response.data);
         }
     });
@@ -88,7 +93,7 @@ componentDidMount() {
               subtitle={this.state.instructions}
             />
             <CardText>
-              {this.state.getMetersResponse.map(fieldInfo => this.formRow(fieldInfo))}
+              {this.state.getMetersResponse.map((fieldInfo, index) => this.formRow(fieldInfo, index))}
             </CardText>
             <CardActions>
              <RaisedButton

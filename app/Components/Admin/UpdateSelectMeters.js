@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-
 import { Row, Col } from 'react-grid-system'
-
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 
@@ -16,7 +14,7 @@ export default class UpdateMeters extends React.Component {
           <Card>
             <CardTitle
               title="Update Select Meters"
-              subtitle="Choose Meters to update"
+              subtitle="Search by Meter Id"
             />
             <CardText>
               

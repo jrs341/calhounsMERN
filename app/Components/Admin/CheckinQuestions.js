@@ -57,6 +57,7 @@ export default class CheckinQuestions extends React.Component {
 		}else{
 			this.setState({cabin: false});
 			this.setState({rvSpace: false});
+			this.setState({petYes: false})
 		}
 	}
 
@@ -106,7 +107,11 @@ export default class CheckinQuestions extends React.Component {
 		if(isInputChecked) {
 			this.setState({petYes: true});
 		}else{
-			this.setState({petYes: false});
+			if(!this.state.cabin) {
+				this.setState({petYes: true});
+			}else{
+				this.setState({petYes: false})
+			}
 		}
 	}
 

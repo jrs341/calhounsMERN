@@ -170,6 +170,8 @@ app.post("/newMeter", function(req, res) {
 });
 
 app.post("/submitAllMeterReadings", function(req, res) {
+  console.log(req.body.meter);
+  console.log(req.body.reading);
   MeterReadings.findOneAndUpdate({meter:req.body.meter}, { $push: { reading: req.body.reading } }, {safe: true, upsert: true, new : true}, function(error, doc) {
     if (error) {
       res.send(error);

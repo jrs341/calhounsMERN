@@ -23,6 +23,7 @@ export default class UpdateAllMeters extends React.Component {
       this.updateMetersResponse = this.updateMetersResponse.bind(this);
       this.getMeters = this.getMeters.bind(this);
       this.updateFormRow = this.updateFormRow.bind(this);
+      this.sumbitNewReadings = this.sumbitNewReadings.bind(this);
     }
     
   formRow(fieldInfo, index) {
@@ -47,6 +48,7 @@ export default class UpdateAllMeters extends React.Component {
     newReading[event.target.name].reading.push(event.target.value);
     this.setState({getMetersResponse: newReading});
     console.log(newReading[event.target.name]);
+    console.log(this.state.getMetersResponse[1].reading);
   }
 
   getMeters() {
@@ -65,24 +67,18 @@ export default class UpdateAllMeters extends React.Component {
 componentDidMount() {
   this.getMeters();
 }
+// this.state.getMetersResponse[1].meter, 
+// this.state.getMetersResponse[1].reading[1]
+sumbitNewReadings() {
+    return axios.post('/submitAllMeterReadings', 
+      {
+        meter: 'a',
+        reading: 45
+      }).then(function(response){
+      console.log('saved');
+    });
+}
 
-// sumbitNewReadings() {
-//     return axios({
-//       type: 'POST',
-//       url: '/submitAllMeterReadings',
-//       data: {
-
-//           meter: what is this object?
-
-//           reading: what is this object?
-
-//             }
-//       }).then((response) => {
-//         console.log(response); 
-//       }
-//     });
-// }
-  
   render() {
     return (
       <Row>

@@ -104,8 +104,6 @@ sumbitNewMeter() {
       {
         meter: this.state.newMeterId,
 
-        // reading: this.state.newMeterReading
-
       }).then(function(response){ 
       console.log('saved');
     });
@@ -140,12 +138,12 @@ sumbitNewMeter() {
               primary={true}
               onClick={this.sumbitNewReadings}
               />  
-              {/*<RaisedButton
+             {/*<RaisedButton
               style={submitButton}
               label="New Meter"
               primary={true}
               onClick={this.sumbitNewMeter}
-              /> */} 
+              />*/}  
             </CardActions>
           </Card>
         </Col>

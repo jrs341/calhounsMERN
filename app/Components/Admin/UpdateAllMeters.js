@@ -67,16 +67,20 @@ export default class UpdateAllMeters extends React.Component {
 componentDidMount() {
   this.getMeters();
 }
-// this.state.getMetersResponse[1].meter, 
-// this.state.getMetersResponse[1].reading[1]
+// [1].reading.length
 sumbitNewReadings() {
+  console.log(this.state.getMetersResponse.length);
+  for (var i=1; i<this.state.getMetersResponse.length-2; i++){
     return axios.post('/submitAllMeterReadings', 
       {
-        meter: 'a',
-        reading: 45
-      }).then(function(response){
+        meter: this.state.getMetersResponse[i].meter,
+
+        reading: this.state.getMetersResponse[i].reading[this.state.getMetersResponse[i].reading.length-1]
+
+      }).then(function(response){ 
       console.log('saved');
     });
+  }
 }
 
   render() {

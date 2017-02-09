@@ -159,6 +159,14 @@ var CustomerSchema = new Schema({
     type: String,
     trim: true
   },
+  meter: {
+    type: String,
+    trim: true,
+  },
+  reading: [{
+    type: String,
+    trim: true,
+  }],
   // This will make a userCreated entry in our doc, by default the current time string.
   created_at: {
     type: Date,

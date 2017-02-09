@@ -19,8 +19,7 @@ var MeterReadingsSchema = new Schema({
   reading: [{
     reading: {
     type: Number,
-    trim: true,
-    // required: "Meter Reading is Required"
+    trim: true
     },
     created_at: {
       type: Date,
@@ -30,7 +29,11 @@ var MeterReadingsSchema = new Schema({
   customer: {
     type: String,
     trim: true,
-    // default: need a function here to match the customer
+    default: 'null'
+  },
+  amp: {
+    type: String,
+    trim: true
   },
   created_at: {
     type: Date,

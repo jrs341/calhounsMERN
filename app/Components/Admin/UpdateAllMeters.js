@@ -17,13 +17,18 @@ export default class UpdateAllMeters extends React.Component {
       
       this.state = {
         getMetersResponse: [],
-        instructions: 'Please enter all meter readings.'
+        instructions: 'Please enter all meter readings.',
+        newMeterId: '',
+        newMeterReading: ''
       }
 
       this.updateMetersResponse = this.updateMetersResponse.bind(this);
       this.getMeters = this.getMeters.bind(this);
       this.updateFormRow = this.updateFormRow.bind(this);
       this.sumbitNewReadings = this.sumbitNewReadings.bind(this);
+      this.sumbitNewMeter = this.sumbitNewMeter.bind(this);
+      this.sumbitNewMeterId = this.sumbitNewMeterId.bind(this);
+      this.sumbitNewMeterReading = this.sumbitNewMeterReading.bind(this);
     }
     
   formRow(fieldInfo, index) {
@@ -40,15 +45,25 @@ export default class UpdateAllMeters extends React.Component {
 
   updateMetersResponse(getRequestResponse) {
     this.setState({getMetersResponse: getRequestResponse});
-    console.log(this.state.getMetersResponse[1].meter);
+    // console.log(this.state.getMetersResponse[1].meter);
+    console.log(getRequestResponse);
   }
 
   updateFormRow(event, newInput) {
     var newReading = this.state.getMetersResponse;
-    newReading[event.target.name].reading.push(event.target.value);
+    newReading[event.target.name].reading = Number(event.target.value);
     this.setState({getMetersResponse: newReading});
     console.log(newReading[event.target.name]);
-    console.log(this.state.getMetersResponse[1].reading);
+  }
+
+  sumbitNewMeterId(event) {
+    console.log(event.target.value);
+    this.setState({newMeterId: event.target.value});
+  }
+
+  sumbitNewMeterReading(event) {
+    console.log(event.target.value);
+    this.setState({newMeterReading: Number(event.target.value)});
   }
 
   getMeters() {
@@ -67,21 +82,34 @@ export default class UpdateAllMeters extends React.Component {
 componentDidMount() {
   this.getMeters();
 }
-// [1].reading.length
-sumbitNewReadings() {
-  console.log(this.state.getMetersResponse.length);
-  for (var i=1; i<this.state.getMetersResponse.length-2; i++){
-    return axios.post('/submitAllMeterReadings', 
-      {
-        meter: this.state.getMetersResponse[i].meter,
 
-        reading: this.state.getMetersResponse[i].reading[this.state.getMetersResponse[i].reading.length-1]
+sumbitNewReadings() {
+  var array = this.state.getMetersResponse;
+  var arrayLength = this.state.getMetersResponse.length;
+  for (var i=0; i<arrayLength; i++){
+        axios.post('/submitAllMeterReadings', 
+      {
+        _id: array[i]._id,
+
+        reading: array[i].reading
 
       }).then(function(response){ 
       console.log('saved');
     });
   }
 }
+
+sumbitNewMeter() {
+        axios.post('/newMeter', 
+      {
+        meter: this.state.newMeterId,
+
+        // reading: this.state.newMeterReading
+
+      }).then(function(response){ 
+      console.log('saved');
+    });
+  }
 
   render() {
     return (
@@ -94,6 +122,16 @@ sumbitNewReadings() {
             />
             <CardText>
               {this.state.getMetersResponse.map((fieldInfo, index) => this.formRow(fieldInfo, index))}
+            {/*<TextField
+              hintText= 'New Meter'
+              floatingLabelText= 'New Meter'
+              onBlur={this.sumbitNewMeterId}>
+            </TextField>
+            <TextField
+              hintText= 'New Meter Reading'
+              floatingLabelText= 'New Meter Reading'
+              onBlur={this.sumbitNewMeterReading}>
+            </TextField>*/}
             </CardText>
             <CardActions>
              <RaisedButton
@@ -102,6 +140,12 @@ sumbitNewReadings() {
               primary={true}
               onClick={this.sumbitNewReadings}
               />  
+              {/*<RaisedButton
+              style={submitButton}
+              label="New Meter"
+              primary={true}
+              onClick={this.sumbitNewMeter}
+              /> */} 
             </CardActions>
           </Card>
         </Col>

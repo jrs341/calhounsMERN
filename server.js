@@ -20,7 +20,7 @@ app.use(logger("dev"));
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-
+app.use(bodyParser.json());
 // Middleware
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -162,15 +162,20 @@ app.post("/newMeter", function(req, res) {
   newMeter.save(function(error, doc) {
     if (error) {
       res.send(error);
+      console.log(error);
     }
     else {
       res.send(doc);
+      console.log(doc);
     }
   })
 });
 
 app.post("/submitAllMeterReadings", function(req, res) {
-  MeterReadings.findOneAndUpdate({meter:req.body.meter}, { $push: { reading: req.body.reading } }, {safe: true, upsert: true, new : true}, function(error, doc) {
+  console.log(req.body._id);
+  console.log(req.body.meter);
+  console.log(req.body.reading);
+  MeterReadings.findOneAndUpdate({_id:req.body._id}, { $push: {reading: { reading: req.body.reading } }},{safe: true}, function(error, doc) {
     if (error) {
       res.send(error);
     }
@@ -181,7 +186,7 @@ app.post("/submitAllMeterReadings", function(req, res) {
 });
 
 app.get("/meter", function(req, res) {
-  MeterReadings.find({}, function(error, doc) {
+  MeterReadings.find({}, {meter: 1, reading: 1}, function(error, doc) {
     if (error) {
       res.send(error);
     }

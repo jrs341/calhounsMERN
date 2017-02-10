@@ -22,6 +22,8 @@ const submitButton = {
   width: 200
 }
 
+var postRoute = '';
+
 export default class Checkin extends React.Component {
 
   constructor() {
@@ -69,7 +71,7 @@ export default class Checkin extends React.Component {
       searchEmailInput: '',
       searchResponse: {},
       searchResultInfo: 'Please enter your email address to search our records for your information or fill out the new customer form.',
-      newCustomerInfo: {}
+      postRoute: '/submitCustomer'
     }
 
     this.updateSearchEmailInput = this.updateSearchEmailInput.bind(this);
@@ -84,7 +86,8 @@ export default class Checkin extends React.Component {
   formRow(fieldInfo) {
     return (
       <TextField
-        key={fieldInfo.displayName}
+        name={fieldInfo.dataName}
+        key={fieldInfo.dataName}
         value={this.state.searchResponse[fieldInfo.dataName]}
         hintText={fieldInfo.displayName}
         floatingLabelText={fieldInfo.displayName}
@@ -107,7 +110,7 @@ export default class Checkin extends React.Component {
 
   updateFormRow(event, newInput) {
     var searchResponse = this.state.searchResponse;
-    searchResponse.given_name = newInput;
+    searchResponse[event.target.name] = newInput;
     this.setState({searchResponse: searchResponse});
   }
 
@@ -118,9 +121,11 @@ export default class Checkin extends React.Component {
     }).then((response) => {
       if (response.data == "") {
         this.updateSearchResultInfo('Sorry we did not find that email in out records, please try a different email or fill out the customer information form');
+        postRoute = '/submitCustomer';
       } else {
         this.updateSearchResponse(response.data);
         this.updateSearchResultInfo('Please verfiy all of your information is still correct.');
+        postRoute = '/updateCustomer';
       }
     });
   }
@@ -130,8 +135,54 @@ export default class Checkin extends React.Component {
   }
 
   openForm() {
+
     var formInfo = this.state.searchResponse;
-    var url = "https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=302b34c0-b394-4859-8b81-e21e487c7e01&Tennant_UserName="+ formInfo.given_name + "&Tennant_Email="+ formInfo.email + "&given_name="+ formInfo.given_name +"&family_name="+formInfo.family_name+"&address_line_1="+ formInfo.address_line_1+"&phone_number="+ formInfo.phone_number+"&phone_number_alt="+formInfo.phone_number_alt+"&locality="+formInfo.locality+"&administrative_district_level_1="+formInfo.administrative_district_level_1+"&postal_code="+formInfo.postal_code+"&country="+formInfo.country+"&drivers_license_num="+formInfo.drivers_license_num+"&drivers_license_state="+formInfo.drivers_license_state+"&additional_occupant_1="+formInfo.additional_occupant_1+"&additional_occupant_2="+formInfo.additional_occupant_2+"&additional_occupant_3="+formInfo.additional_occupant_3+"&additional_occupant_4="+formInfo.additional_occupant_4+"&additional_occupant_1_age="+formInfo.additional_occupant_1_age+"&additional_occupant_2_age="+formInfo.additional_occupant_2_age+"&additional_occupant_3_age="+formInfo.additional_occupant_3_age+"&additional_occupant_4_age="+formInfo.additional_occupant_4_age+"&pets_number_of="+formInfo.pets_number_of+"&pets_type="+formInfo.pets_type+"&pets_breed="+formInfo.pets_breed+"&unit_type="+formInfo.unit_type+"&unit_license="+formInfo.unit_license+"&unit_state="+formInfo.unit_state+"&unit_year="+formInfo.unit_year+"&unit_length="+formInfo.unit_length+"&vehicle_1_type="+formInfo.vehicle_1_type+"&vehicle_2_type="+formInfo.vehicle_2_type+"&vehicle_1_license="+formInfo.vehicle_1_license+"&vehicle_2_license="+formInfo.vehicle_2_license+"&vehicle_1_state="+formInfo.vehicle_1_state+"&vehicle_2_state="+formInfo.vehicle_2_state+"&vehicle_1_year="+formInfo.vehicle_1_year+"&vehicle_2_year="+formInfo.vehicle_2_year;
+    axios.post(postRoute, 
+      {
+        _id: formInfo._id,
+        given_name: formInfo.given_name,
+        family_name: formInfo.family_name,
+        phone_number: formInfo.phone_number,
+        phone_number_alt: formInfo.phone_number_alt,
+        email: formInfo.email,
+        address_line_1: formInfo.address_line_1,
+        locality: formInfo.locality,
+        administrative_district_level_1: formInfo.administrative_district_level_1,
+        postal_code: formInfo.postal_code,
+        country: formInfo.country,
+        drivers_license_num: formInfo.drivers_license_num,
+        drivers_license_state: formInfo.drivers_license_state,
+        additional_occupant_1: formInfo.additional_occupant_1,
+        additional_occupant_2: formInfo.additional_occupant_2,
+        additional_occupant_3: formInfo.additional_occupant_3,
+        additional_occupant_1_age: formInfo.additional_occupant_1_age,
+        additional_occupant_2_age: formInfo.additional_occupant_2_age,
+        additional_occupant_3_age: formInfo.additional_occupant_3_age,
+        pets_number_of: formInfo.pets_number_of,
+        pets_type: formInfo.pets_type,
+        pets_breed: formInfo.pets_breed,
+        unit_type: formInfo.unit_type,
+        unit_license: formInfo.unit_license,
+        unit_state: formInfo.unit_state,
+        unit_year: formInfo.unit_year,
+        unit_length: formInfo.unit_length,
+        vehicle_1_type: formInfo.vehicle_1_type,
+        vehicle_2_type: formInfo.vehicle_2_type,
+        vehicle_1_license: formInfo.vehicle_1_license,
+        vehicle_2_license: formInfo.vehicle_2_license,
+        vehicle_1_state: formInfo.vehicle_1_state,
+        vehicle_2_state: formInfo.vehicle_2_state,
+        vehicle_1_year: formInfo.vehicle_1_year,
+        vehicle_2_year: formInfo.vehicle_2_year,
+        meter: formInfo.meter,
+        reading: formInfo.reading,
+
+      }).then(function(response){ 
+      console.log('saved');
+    });
+    
+    var formInfo = this.state.searchResponse;
+    var url = "https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=302b34c0-b394-4859-8b81-e21e487c7e01&Tennant_UserName="+ formInfo.given_name + "&Tennant_Email="+ formInfo.email + "&given_name="+ formInfo.given_name +"&family_name="+formInfo.family_name+"&address_line_1="+ formInfo.address_line_1+"&phone_number="+ formInfo.phone_number+"&phone_number_alt="+formInfo.phone_number_alt+"&locality="+formInfo.locality+"&administrative_district_level_1="+formInfo.administrative_district_level_1+"&postal_code="+formInfo.postal_code+"&country="+formInfo.country+"&drivers_license_num="+formInfo.drivers_license_num+"&drivers_license_state="+formInfo.drivers_license_state+"&additional_occupant_1="+formInfo.additional_occupant_1+"&additional_occupant_2="+formInfo.additional_occupant_2+"&additional_occupant_3="+formInfo.additional_occupant_3+"&additional_occupant_4="+formInfo.additional_occupant_4+"&additional_occupant_1_age="+formInfo.additional_occupant_1_age+"&additional_occupant_2_age="+formInfo.additional_occupant_2_age+"&additional_occupant_3_age="+formInfo.additional_occupant_3_age+"&additional_occupant_4_age="+formInfo.additional_occupant_4_age+"&pets_number_of="+formInfo.pets_number_of+"&pets_type="+formInfo.pets_type+"&pets_breed="+formInfo.pets_breed+"&unit_type="+formInfo.unit_type+"&unit_license="+formInfo.unit_license+"&unit_state="+formInfo.unit_state+"&unit_year="+formInfo.unit_year+"&unit_length="+formInfo.unit_length+"&vehicle_1_type="+formInfo.vehicle_1_type+"&vehicle_2_type="+formInfo.vehicle_2_type+"&vehicle_1_license="+formInfo.vehicle_1_license+"&vehicle_2_license="+formInfo.vehicle_2_license+"&vehicle_1_state="+formInfo.vehicle_1_state+"&vehicle_2_state="+formInfo.vehicle_2_state+"&vehicle_1_year="+formInfo.vehicle_1_year+"&vehicle_2_year="+formInfo.vehicle_2_year+"&nightly=X&30amp=X";
     var win = window.open(url, '_blank');
     win.focus();
   }

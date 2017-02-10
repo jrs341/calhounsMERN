@@ -53,7 +53,8 @@ var CustomerSchema = new Schema({
   },
   country: {
     type: String,
-    trim: true
+    trim: true,
+    default: 'US'
   },
   drivers_license_num: {
     type: String,
@@ -159,12 +160,22 @@ var CustomerSchema = new Schema({
     type: String,
     trim: true
   },
+  reading: [{
+    reading: {
+    type: Number,
+    trim: true
+    },
+    created_at: {
+      type: Date,
+      default: Date.now
+    }
+  }],
   // This will make a userCreated entry in our doc, by default the current time string.
   created_at: {
     type: Date,
     default: Date.now
   }, 
-  space: {
+  meter: {
     type: String,
     trim: true,
     // default: need a funciton here to get the meter

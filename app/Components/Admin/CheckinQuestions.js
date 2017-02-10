@@ -10,16 +10,6 @@ import RaisedButton from 'material-ui/RaisedButton'
 import RangedDatePicker from '../RangedDatePicker'
 import DogDropDown from '../DogDropDown'
 
-var cabin = false;
-var rvSpace = false;
-var thirtyAmp;
-var fiftyAmp;
-var daily;
-var weekly;
-var monthly;
-var dogYes;
-var breed_1;
-
 export default class CheckinQuestions extends React.Component {
 
 	constructor() {

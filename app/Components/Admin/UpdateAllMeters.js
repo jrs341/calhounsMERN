@@ -138,6 +138,14 @@ sumbitNewMeter() {
               primary={true}
               onClick={this.sumbitNewReadings}
               />  
+              <CardActions>
+              <Link to='monthlyBilling'>
+               <RaisedButton
+                style={submitButton}
+                label="Monthly Billing"
+                primary={true}
+                />
+              </Link>  
              {/*<RaisedButton
               style={submitButton}
               label="New Meter"

@@ -1,0 +1,1 @@
+db.readings.find({meter: 'c3'}).sort('created_date').limit(2);

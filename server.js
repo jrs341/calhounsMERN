@@ -93,6 +93,23 @@ app.get("/searchCustomer/:email", function(req, res){
   });
 });
 
+app.get("/getCustomerBillingInfo", function(req, res){
+  Customer.find({meter: all not null} {given_name: 1, family_name: 1, email: 1, meter: 1, checkin: 1}, function(error, doc) {
+    if (error) {
+      res.send(error);
+      console.log(error);
+    }
+    else {
+      res.send(doc);
+      console.log(doc);
+    }
+  });
+});
+
+app.get("/getCustomerKwhUsage", function(req, res){
+  Customer.find({meter: all not null} {reading: 1 .sort('created_date').limit(2)})
+})
+
 app.post("/submitCustomer", function(req, res) {
  // check our req.body against our user model
   var customer = new Customer(req.body);

@@ -7,6 +7,7 @@ import ContactUs from '../pages/ContactUs'
 import Rates from '../pages/Rates'
 import Admin from '../pages/Admin'
 import UpdateAllMeters from '../Components/Admin/UpdateAllMeters'
+import MonthlyBilling from '../Components/Admin/MonthlyBilling'
 import CheckinQuestions from '../Components/Admin/CheckinQuestions'
 import Checkin from '../Components/Admin/Checkin'
 import Checkout from '../Components/Admin/Checkout'
@@ -21,6 +22,7 @@ module.exports = (
       	<Route path="checkin" component={Checkin} />
       	<Route path="checkout" component={Checkout} />
       	<Route path="updateMeters" component={UpdateAllMeters} />
+        <Route path="monthlyBilling" component={MonthlyBilling} />
       <IndexRoute component={HomePage} />
     </Route>
   </Router>

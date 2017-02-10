@@ -177,8 +177,13 @@ var CustomerSchema = new Schema({
   }, 
   meter: {
     type: String,
-    trim: true,
+    trim: true
     // default: need a funciton here to get the meter
+  },
+
+  checkin: {
+    type: String,
+    trim: true
   }
 });
 

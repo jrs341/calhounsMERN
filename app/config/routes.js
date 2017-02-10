@@ -17,7 +17,7 @@ module.exports = (
       <Route path="contactUs" component={ContactUs} />
       <Route path="rates" component={Rates} />
       <Route path="admin" component={Admin} />
-        <Route path="checkinQuestions" components={CheckinQuestions}/>
+        <Route path="checkinQuestions" component={CheckinQuestions}/>
       	<Route path="checkin" component={Checkin} />
       	<Route path="checkout" component={Checkout} />
       	<Route path="updateMeters" component={UpdateAllMeters} />

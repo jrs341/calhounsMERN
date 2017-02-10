@@ -10,6 +10,16 @@ import RaisedButton from 'material-ui/RaisedButton'
 import RangedDatePicker from '../RangedDatePicker'
 import DogDropDown from '../DogDropDown'
 
+var cabin = false;
+var rvSpace = false;
+var thirtyAmp;
+var fiftyAmp;
+var daily;
+var weekly;
+var monthly;
+var dogYes;
+var breed_1;
+
 export default class CheckinQuestions extends React.Component {
 
 	constructor() {
@@ -52,7 +62,7 @@ export default class CheckinQuestions extends React.Component {
 			checkin: ''
 		}
 
-		this.cabinState = this.cabinState.bind(this);
+		this.CabinState = this.CabinState.bind(this);
 		this.rvSpaceState = this.rvSpaceState.bind(this);
 		this.thirtyAmpState = this.thirtyAmpState.bind(this);
 		this.fiftyAmpState = this.fiftyAmpState.bind(this);
@@ -82,7 +92,7 @@ export default class CheckinQuestions extends React.Component {
 		this.chooseRvSpaceState = this. chooseRvSpaceState.bind(this);
 	}
 
-	cabinState(event, isInputChecked) {
+	CabinState(event, isInputChecked) {
 		if(isInputChecked){
 			this.setState({rvSpace: true});
 			this.setState({petYes: true});
@@ -432,6 +442,7 @@ export default class CheckinQuestions extends React.Component {
 
 	render() {
 		return(
+
 		  <Row>
 	        <Col md={8} offset={{ md: 2 }}>
 	          <Card>
@@ -444,7 +455,7 @@ export default class CheckinQuestions extends React.Component {
 		                <Checkbox
 					      label="Cabin"
 					      disabled={this.state.cabin}
-					      onCheck={this.cabinState}
+					      onCheck={this.CabinState}
 					    />
 					    <Checkbox
 					      label="RV Space"

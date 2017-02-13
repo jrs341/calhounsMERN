@@ -26,19 +26,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Database configuration for mongoose
 // db: calhouns
-mongoose.connect("mongodb://localhost/calhouns");
+// mongoose.connect("mongodb://localhost/calhouns");
 // Hook mongoose connection to db
-var db = mongoose.connection;
+// var db = mongoose.connection;
 
 // Log any mongoose errors
-db.on("error", function(error) {
-  console.log("Mongoose Error: ", error);
-});
+// db.on("error", function(error) {
+//   console.log("Mongoose Error: ", error);
+// });
 
 // Log a success message when we connect to our mongoDB collection with no issues
-db.once("open", function() {
-  console.log("Mongoose connection successful.");
-});
+// db.once("open", function() {
+//   console.log("Mongoose connection successful.");
+// });
 
 // Routes this is from example and used for React
 // app.get(`*`, function(req, res) {

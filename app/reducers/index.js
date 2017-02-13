@@ -4,6 +4,17 @@ import cabinState from "./checkinQuestionsReducer.js"
 import rvSpaceState from "./checkinQuestionsReducer.js"
 import thirtyAmpState from "./checkinQuestionsReducer.js"
 import fiftyAmpState from "./checkinQuestionsReducer.js"
+import dailyState from "./checkinQuestionsReducer.js"
+import weeklyState from "./checkinQuestionsReducer.js"
+import monthlyState from "./checkinQuestionsReducer.js"
+import adultNum_0State from "./checkinQuestionsReducer.js"
+import adultNum_1State from "./checkinQuestionsReducer.js"
+import adultNum_2State from "./checkinQuestionsReducer.js"
+import adultNum_3State from "./checkinQuestionsReducer.js"
+import childNum_0State from "./checkinQuestionsReducer.js"
+import childNum_1State from "./checkinQuestionsReducer.js"
+import childNum_2State from "./checkinQuestionsReducer.js"
+import childNum_3State from "./checkinQuestionsReducer.js"
 
 export default combineReducers({
   cabinState,
@@ -13,4 +24,8 @@ export default combineReducers({
   dailyState,
   weeklyState,
   monthlyState,
+  adultNum_0State,
+  adultNum_1State,
+  adultNum_2State,
+  adultNum_3State,
 })

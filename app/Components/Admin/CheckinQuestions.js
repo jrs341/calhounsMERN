@@ -1,7 +1,20 @@
 import React from 'react'
 import { connect } from "react-redux"
 
-import { changeCabinState, changeRvSpaceState, changeThirtyAmpState, changeFiftyAmpState } from '../../actions/checkinQuestionsActions.js'
+import { changeCabinState,
+ changeRvSpaceState,
+  changeThirtyAmpState,
+   changeFiftyAmpState,
+    changeDailyState,
+     changeWeeklyState,
+      changeMonthlyState,
+       changeAdultNum_0State,
+        changeAdultNum_1State,
+         changeAdultNum_3State,
+         changeChildNum_0State,
+          changeChildNum_1State,
+           changeChildNum_2State,
+            changeChildNum_3State } from '../../actions/checkinQuestionsActions.js'
 
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system'
@@ -18,7 +31,18 @@ import DogDropDown from '../DogDropDown'
     cabin: store.cabinState.cabin,
     rvSpace: store.rvSpaceState.rvSpace,
     thirtyAmp: store.thirtyAmpState.thirtyAmp,
-    fiftyAmp: store.fiftyAmpState.fiftyAmp
+    fiftyAmp: store.fiftyAmpState.fiftyAmp,
+    daily: store.dailyState.daily,
+    weekly: store.weeklyState.weekly,
+    monthly: store.monthlyState.monthly,
+    adultNum_0: store.adultNum_0State.adultNum_0,
+    adultNum_1: store.adultNum_1State.adultNum_1,
+    adultNum_2: store.adultNum_2State.adultNum_2,
+    adultNum_3: store.adultNum_3State.adultNum_3,
+    childNum_0: store.childNum_0State.childNum_0,
+    childNum_1: store.childNum_1State.childNum_1,
+    childNum_2: store.childNum_2State.childNum_2,
+    childNum_3: store.childNum_3State.childNum_3,
   };
 })
 
@@ -29,21 +53,6 @@ export default class CheckinQuestions extends React.Component {
 
 		this.state = {
 			hellNo: true,
-			// cabin: false,
-			// rvSpace: false,
-			// thirtyAmp: false,
-			// fiftyAmp: false,
-			daily: false,
-			weekly: false,
-			monthly: false,
-			adultNum_0: false,
-			adultNum_1: false,
-			adultNum_2: false,
-			adultNum_3: false,
-			childNum_0: false,
-			childNum_1: false,
-			childNum_2: false,
-			childNum_3: false,
 			petNo: false,
 			petYes: false,
 			petNumNone: false,
@@ -71,14 +80,14 @@ export default class CheckinQuestions extends React.Component {
 		this.dailyState = this.dailyState.bind(this);
 		this.weeklyState = this.weeklyState.bind(this);
 		this.monthlyState = this.monthlyState.bind(this);
-		this.adultNum_0 = this.adultNum_0.bind(this);
-		this.adultNum_1 = this.adultNum_1.bind(this);
-		this.adultNum_2 = this.adultNum_2.bind(this);
-		this.adultNum_3 = this.adultNum_3.bind(this);
-		this.childNum_0 = this.childNum_0.bind(this);
-		this.childNum_1 = this.childNum_1.bind(this);
-		this.childNum_2 = this.childNum_2.bind(this);
-		this.childNum_3 = this.childNum_3.bind(this);
+		this.adultNum_0State = this.adultNum_0State.bind(this);
+		this.adultNum_1State = this.adultNum_1State.bind(this);
+		this.adultNum_2State = this.adultNum_2State.bind(this);
+		this.adultNum_3State = this.adultNum_3State.bind(this);
+		this.childNum_0State = this.childNum_0State.bind(this);
+		this.childNum_1State = this.childNum_1State.bind(this);
+		this.childNum_2State = this.childNum_2State.bind(this);
+		this.childNum_3State = this.childNum_3State.bind(this);
 		this.petNoState = this. petNoState.bind(this);
 		this.petYesState = this.petYesState.bind(this);
 		this.petNum_1State = this.petNum_1State.bind(this);
@@ -111,140 +120,127 @@ export default class CheckinQuestions extends React.Component {
 	}
 
 	dailyState(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({weekly: true});
-			this.setState({monthly: true});
-		}else{
-			this.setState({daily: false});
-			this.setState({weekly: false});
-			this.setState({monthly: false});
-		}
+		this.props.dispatch(changeDailyState(event, isInputChecked))
 	}
 
 	weeklyState(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({daily: true});
-			this.setState({monthly: true});
-		}else{
-			this.setState({weekly: false});
-			this.setState({daily: false});
-			this.setState({monthly: false});
-		}
+		this.props.dispatch(changeWeeklyState(event, isInputChecked))
 	}
 
 	monthlyState (event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({daily: true});
-			this.setState({weekly: true});
-		}else{
-			this.setState({monthly: false});
-			this.setState({daily: false});
-			this.setState({weekly: false});
-		}
+		this.props.dispatch(changeMonthlyState(event, isInputChecked))
 	}
 
-	adultNum_0(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({adultNum_1: true});
-			this.setState({adultNum_2: true});
-			this.setState({adultNum_3: true});
-		}else{
-			this.setState({adultNum_0: false});
-			this.setState({adultNum_1: false});
-			this.setState({adultNum_2: false});
-			this.setState({adultNum_3: false});
-		}	
+	adultNum_0State(event, isInputChecked) {
+		this.props.dispatch(changeAdultNum_0State(event, isInputChecked))
+		// if(isInputChecked){
+		// 	this.setState({adultNum_1: true});
+		// 	this.setState({adultNum_2: true});
+		// 	this.setState({adultNum_3: true});
+		// }else{
+		// 	this.setState({adultNum_0: false});
+		// 	this.setState({adultNum_1: false});
+		// 	this.setState({adultNum_2: false});
+		// 	this.setState({adultNum_3: false});
+		// }	
 	}
 
-	adultNum_1(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({adultNum_0: true});
-			this.setState({adultNum_2: true});
-			this.setState({adultNum_3: true});
-		}else{
-			this.setState({adultNum_0: false});
-			this.setState({adultNum_1: false});
-			this.setState({adultNum_2: false});
-			this.setState({adultNum_3: false});
-		}	
+	adultNum_1State(event, isInputChecked) {
+		this.props.dispatch(changeAdultNum_1State(event, isInputChecked))
+		// if(isInputChecked){
+		// 	this.setState({adultNum_0: true});
+		// 	this.setState({adultNum_2: true});
+		// 	this.setState({adultNum_3: true});
+		// }else{
+		// 	this.setState({adultNum_0: false});
+		// 	this.setState({adultNum_1: false});
+		// 	this.setState({adultNum_2: false});
+		// 	this.setState({adultNum_3: false});
+		// }	
 	}
 
-	adultNum_2(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({adultNum_0: true});
-			this.setState({adultNum_1: true});
-			this.setState({adultNum_3: true});
-		}else{
-			this.setState({adultNum_0: false});
-			this.setState({adultNum_1: false});
-			this.setState({adultNum_2: false});
-			this.setState({adultNum_3: false});
-		}	
+	adultNum_2State(event, isInputChecked) {
+		this.props.dispatch(changeAdultNum_2State(event, isInputChecked))
+		// if(isInputChecked){
+		// 	this.setState({adultNum_0: true});
+		// 	this.setState({adultNum_1: true});
+		// 	this.setState({adultNum_3: true});
+		// }else{
+		// 	this.setState({adultNum_0: false});
+		// 	this.setState({adultNum_1: false});
+		// 	this.setState({adultNum_2: false});
+		// 	this.setState({adultNum_3: false});
+		// }	
 	}
 
-	adultNum_3(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({adultNum_0: true});
-			this.setState({adultNum_1: true});
-			this.setState({adultNum_2: true});
-		}else{
-			this.setState({adultNum_0: false});
-			this.setState({adultNum_1: false});
-			this.setState({adultNum_2: false});
-			this.setState({adultNum_3: false});
-		}	
+	adultNum_3State(event, isInputChecked) {
+		this.props.dispatch(changeAdultNum_3State(event, isInputChecked))
+		// if(isInputChecked){
+		// 	this.setState({adultNum_0: true});
+		// 	this.setState({adultNum_1: true});
+		// 	this.setState({adultNum_2: true});
+		// }else{
+		// 	this.setState({adultNum_0: false});
+		// 	this.setState({adultNum_1: false});
+		// 	this.setState({adultNum_2: false});
+		// 	this.setState({adultNum_3: false});
+		// }	
 	}
 
-	childNum_0(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({childNum_1: true});
-			this.setState({childNum_2: true});
-			this.setState({childNum_3: true});
-		}else{
-			this.setState({childNum_0: false});
-			this.setState({childNum_1: false});
-			this.setState({childNum_2: false});
-			this.setState({childNum_3: false});
-		}	
+	childNum_0State(event, isInputChecked) {
+		this.props.dispatch(changeChildNum_0State(event, isInputChecked))
+		// if(isInputChecked){
+		// 	this.setState({childNum_1: true});
+		// 	this.setState({childNum_2: true});
+		// 	this.setState({childNum_3: true});
+		// }else{
+		// 	this.setState({childNum_0: false});
+		// 	this.setState({childNum_1: false});
+		// 	this.setState({childNum_2: false});
+		// 	this.setState({childNum_3: false});
+		// }	
 	}
 
-	childNum_1(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({childNum_0: true});
-			this.setState({childNum_2: true});
-			this.setState({childNum_3: true});
-		}else{
-			this.setState({childNum_0: false});
-			this.setState({childNum_1: false});
-			this.setState({childNum_2: false});
-			this.setState({childNum_3: false});
-		}	
+	childNum_1State(event, isInputChecked) {
+		this.props.dispatch(changeChildNum_1State(event, isInputChecked))
+		// if(isInputChecked){
+		// 	this.setState({childNum_0: true});
+		// 	this.setState({childNum_2: true});
+		// 	this.setState({childNum_3: true});
+		// }else{
+		// 	this.setState({childNum_0: false});
+		// 	this.setState({childNum_1: false});
+		// 	this.setState({childNum_2: false});
+		// 	this.setState({childNum_3: false});
+		// }	
 	}
 
-	childNum_2(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({childNum_0: true});
-			this.setState({childNum_1: true});
-			this.setState({childNum_3: true});
-		}else{
-			this.setState({childNum_0: false});
-			this.setState({childNum_1: false});
-			this.setState({childNum_2: false});
-			this.setState({childNum_3: false});
-		}	
+	childNum_2State(event, isInputChecked) {
+		this.props.dispatch(changeChildNum_2State(event, isInputChecked))
+		// if(isInputChecked){
+		// 	this.setState({childNum_0: true});
+		// 	this.setState({childNum_1: true});
+		// 	this.setState({childNum_3: true});
+		// }else{
+		// 	this.setState({childNum_0: false});
+		// 	this.setState({childNum_1: false});
+		// 	this.setState({childNum_2: false});
+		// 	this.setState({childNum_3: false});
+		// }	
 	}
 
-	childNum_3(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({childNum_0: true});
-			this.setState({childNum_1: true});
-			this.setState({childNum_2: true});
-		}else{
-			this.setState({childNum_0: false});
-			this.setState({childNum_1: false});
-			this.setState({childNum_2: false});
-			this.setState({childNum_3: false});
-		}	
+	childNum_3State(event, isInputChecked) {
+		this.props.dispatch(changeChildNum_3State(event, isInputChecked))
+		// if(isInputChecked){
+		// 	this.setState({childNum_0: true});
+		// 	this.setState({childNum_1: true});
+		// 	this.setState({childNum_2: true});
+		// }else{
+		// 	this.setState({childNum_0: false});
+		// 	this.setState({childNum_1: false});
+		// 	this.setState({childNum_2: false});
+		// 	this.setState({childNum_3: false});
+		// }	
 	}
 	
 	petNoState(event, isInputChecked) {
@@ -471,42 +467,42 @@ export default class CheckinQuestions extends React.Component {
 					<h3> How many additional adults, other than you, are in your group? </h3>
 						<Checkbox
 						  label="0"
-						  disabled={this.state.adultNum_0}
+						  disabled={this.props.adultNum_0}
 						  onClick={this.adultNum_0}
 						/>
 						<Checkbox
 						  label="1"
-						  disabled={this.state.adultNum_1}
+						  disabled={this.props.adultNum_1}
 						  onClick={this.adultNum_1}
 						/>
 						<Checkbox
-						  disabled={this.state.adultNum_2}
+						  disabled={this.props.adultNum_2}
 						  label="2"
 						  onClick={this.adultNum_2}
 						/>
 						<Checkbox
-						  disabled={this.state.adultNum_3}
+						  disabled={this.props.adultNum_3}
 						  label="3"
 						  onClick={this.adultNum_3}
 						/>
 					<h3> How many children are in your group? </h3>
 						<Checkbox
 						  label="0"
-						  disabled={this.state.childNum_0}
+						  disabled={this.props.childNum_0}
 						  onClick={this.childNum_0}
 						/>
 						<Checkbox
-						  disabled={this.state.childNum_1}
+						  disabled={this.props.childNum_1}
 						  label="1"
 						  onClick={this.childNum_1}
 						/>
 						<Checkbox
-						  disabled={this.state.childNum_2}
+						  disabled={this.props.childNum_2}
 						  label="2"
 						  onClick={this.childNum_2}
 						/>
 						<Checkbox
-						  disabled={this.state.childNum_3}
+						  disabled={this.props.childNum_3}
 						  label="3"
 						  onClick={this.childNum_3}
 						/>

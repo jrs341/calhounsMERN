@@ -25,3 +25,80 @@ export function changeCabinState(event, isInputChecked) {
       payload: isInputChecked
     }
   }
+
+  export function changeDailyState(event, isInputChecked) {
+    return {
+      type: 'DAILY',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeWeeklyState(event, isInputChecked) {
+    return {
+      type: 'WEEKLY',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeMonthlyState(event, isInputChecked) {
+    return {
+      type: 'MONTHLY',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeAdultNum_0State(event, isInputChecked) {
+    return {
+      type: 'ADULT0',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeAdultNum_1State(event, isInputChecked) {
+    return {
+      type: 'ADULT1',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeAdultNum_2State(event, isInputChecked) {
+    return {
+      type: 'ADULT2',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeAdultNum_3State(event, isInputChecked) {
+    return {
+      type: 'ADULT3',
+      payload: isInputChecked
+    }
+  }
+  
+  export function changeChildNum_0State(event, isInputChecked) {
+    return {
+      type: 'CHILD0',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeChildNum_1State(event, isInputChecked) {
+    return {
+      type: 'CHILD1',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeChildNum_2State(event, isInputChecked) {
+    return {
+      type: 'CHILD2',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeChildNum_3State(event, isInputChecked) {
+    return {
+      type: 'CHILD3',
+      payload: isInputChecked
+    }
+  }

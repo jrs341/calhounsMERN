@@ -24,6 +24,12 @@ const submitButton = {
 
 var postRoute = '';
 
+@connect((store) => {
+  return {
+    cabin: store.cabinState.cabin
+  };
+})
+
 export default class Checkin extends React.Component {
 
   constructor() {
@@ -201,7 +207,7 @@ export default class Checkin extends React.Component {
         <Col md={8} offset={{ md: 2 }}>
           <Card>
             <CardTitle
-              title={this.state.process}
+              title={this.props.cabin}
               subtitle={this.state.searchResultInfo}
             />
             <CardText>

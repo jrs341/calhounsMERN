@@ -1,5 +1,8 @@
 import React from 'react'
 import { connect } from "react-redux"
+
+import { changeCabinState, changeRvSpaceState, changeThirtyAmpState, changeFiftyAmpState } from '../../actions/checkinQuestionsActions.js'
+
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system'
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
@@ -10,6 +13,15 @@ import RaisedButton from 'material-ui/RaisedButton'
 import RangedDatePicker from '../RangedDatePicker'
 import DogDropDown from '../DogDropDown'
 
+@connect((store) => {
+  return {
+    cabin: store.cabinState.cabin,
+    rvSpace: store.rvSpaceState.rvSpace,
+    thirtyAmp: store.thirtyAmpState.thirtyAmp,
+    fiftyAmp: store.fiftyAmpState.fiftyAmp
+  };
+})
+
 export default class CheckinQuestions extends React.Component {
 
 	constructor() {
@@ -17,10 +29,10 @@ export default class CheckinQuestions extends React.Component {
 
 		this.state = {
 			hellNo: true,
-			cabin: false,
-			rvSpace: false,
-			thirtyAmp: false,
-			fiftyAmp: false,
+			// cabin: false,
+			// rvSpace: false,
+			// thirtyAmp: false,
+			// fiftyAmp: false,
 			daily: false,
 			weekly: false,
 			monthly: false,
@@ -52,7 +64,7 @@ export default class CheckinQuestions extends React.Component {
 			checkin: ''
 		}
 
-		this.CabinState = this.CabinState.bind(this);
+		this.cabinState = this.cabinState.bind(this);
 		this.rvSpaceState = this.rvSpaceState.bind(this);
 		this.thirtyAmpState = this.thirtyAmpState.bind(this);
 		this.fiftyAmpState = this.fiftyAmpState.bind(this);
@@ -82,46 +94,20 @@ export default class CheckinQuestions extends React.Component {
 		this.chooseRvSpaceState = this. chooseRvSpaceState.bind(this);
 	}
 
-	CabinState(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({rvSpace: true});
-			this.setState({petYes: true});
-			this.setState({thirtyAmp: true});
-			this.setState({fiftyAmp: true});
-		}else{
-			this.setState({cabin: false});
-			this.setState({rvSpace: false});
-			this.setState({petYes: false});
-			this.setState({thirtyAmp: false});
-			this.setState({fiftyAmp: false});
-		}
+	cabinState(event, isInputChecked) {
+		this.props.dispatch(changeCabinState(event, isInputChecked))
 	}
 
 	rvSpaceState(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({cabin: true});
-		}else{
-			this.setState({rvSpace: false});
-			this.setState({cabin: false});
-		}
+		this.props.dispatch(changeRvSpaceState(event, isInputChecked))
 	}
 
 	thirtyAmpState(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({fiftyAmp: true});
-		}else{
-			this.setState({thirtyAmp: false});
-			this.setState({fiftyAmp: false});
-		}
+		this.props.dispatch(changeThirtyAmpState(event, isInputChecked))
 	}
 
 	fiftyAmpState(event, isInputChecked) {
-		if(isInputChecked){
-			this.setState({thirtyAmp: true});
-		}else{
-			this.setState({thirtyAmp: false});
-			this.setState({fiftyAmp: false});
-		}
+		this.props.dispatch(changeFiftyAmpState(event, isInputChecked))
 	}
 
 	dailyState(event, isInputChecked) {
@@ -444,39 +430,39 @@ export default class CheckinQuestions extends React.Component {
 	            	<h3> Are you checking in for a Cabin or RV space </h3>
 		                <Checkbox
 					      label="Cabin"
-					      disabled={this.state.cabin}
-					      onCheck={this.CabinState}
+					      disabled={this.props.cabin}
+					      onCheck={this.cabinState}
 					    />
 					    <Checkbox
 					      label="RV Space"
-					      disabled={this.state.rvSpace}
+					      disabled={this.props.rvSpace}
 					      onCheck={this.rvSpaceState}
 					    />
 					<h3> What size plug does your RV use? </h3>
 		                <Checkbox
 					      label="30 AMP"
-					      disabled={this.state.thirtyAmp}
+					      disabled={this.props.thirtyAmp}
 					      onCheck={this.thirtyAmpState}
 					    />
 					    <Checkbox
 					      label="50 AMP"
-					      disabled={this.state.fiftyAmp}
+					      disabled={this.props.fiftyAmp}
 					      onCheck={this.fiftyAmpState}
 					    />
 					<h3> Please choose a rate </h3>
 						<Checkbox
 					      label="Daily"
-					      disabled={this.state.daily}
+					      disabled={this.props.daily}
 					      onCheck={this.dailyState}
 					    />
 					    <Checkbox
 					      label="Weekly"
-					      disabled={this.state.weekly}
+					      disabled={this.props.weekly}
 					      onCheck={this.weeklyState}
 					    />
 					    <Checkbox
 					      label="Monthly"
-					      disabled={this.state.monthly}
+					      disabled={this.props.monthly}
 					      onCheck={this.monthlyState}
 					    />
 					<h3> Please select an arrival date. </h3>

@@ -64,6 +64,8 @@ export default class Checkin extends React.Component {
     {displayName: 'Vehicle 2 License Plate Number', dataName: 'vehicle_2_license'},
     {displayName: 'Vehicle 2 License Plate State', dataName: 'vehicle_2_state'},
     {displayName: 'Vehicle 2 Year', dataName: 'vehicle_2_year'},
+    {displayName: 'Meter', dataName: 'meter'},
+    {displayName: 'Meter Reading'}
     ];
     
     this.state = {
@@ -71,7 +73,8 @@ export default class Checkin extends React.Component {
       searchEmailInput: '',
       searchResponse: {},
       searchResultInfo: 'Please enter your email address to search our records for your information or fill out the new customer form.',
-      postRoute: '/submitCustomer'
+      postRoute: '/submitCustomer',
+      meter: ''
     }
 
     this.updateSearchEmailInput = this.updateSearchEmailInput.bind(this);
@@ -79,7 +82,6 @@ export default class Checkin extends React.Component {
     this.searchEmail = this.searchEmail.bind(this);
     this.updateSearchResultInfo = this.updateSearchResultInfo.bind(this);
     this.updateFormRow = this.updateFormRow.bind(this);
-    this.submitNewCustomer = this.submitNewCustomer.bind(this);
     this.openForm = this.openForm.bind(this);
   }
 
@@ -130,10 +132,6 @@ export default class Checkin extends React.Component {
     });
   }
 
-  submitNewCustomer() {
-    console.log(this.state.searchResponse);
-  }
-
   openForm() {
 
     var formInfo = this.state.searchResponse;
@@ -178,7 +176,15 @@ export default class Checkin extends React.Component {
         reading: formInfo.reading,
 
       }).then(function(response){ 
-      console.log('saved');
+        console.log('saved');
+        console.log(formInfo.meter);
+        // axios({
+        //   type: 'GET',
+        //   url: '/lastMeterReading/' + formInfo.meter
+        // }).then((response)=> {
+        //   console.log(response.data);
+
+        // });
     });
     
     var formInfo = this.state.searchResponse;

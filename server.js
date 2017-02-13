@@ -53,8 +53,12 @@ app.get(`/`, function(req, res) {
 //   res.send(index.html);
 // });
 app.get("/AMP", function(req, res) {
-  res.sendFile(amp.html)
+  res.sendFile(amp.html);
 });
+
+app.get("/paymentForm", function(req, res) {
+  res.sendFile(paymentForm.html);
+})
 
 app.get("/constactUs", function(req, res) {
   res.send(contactUs.html);
@@ -93,22 +97,22 @@ app.get("/searchCustomer/:email", function(req, res){
   });
 });
 
-app.get("/getCustomerBillingInfo", function(req, res){
-  Customer.find({meter: all not null} {given_name: 1, family_name: 1, email: 1, meter: 1, checkin: 1}, function(error, doc) {
-    if (error) {
-      res.send(error);
-      console.log(error);
-    }
-    else {
-      res.send(doc);
-      console.log(doc);
-    }
-  });
-});
+// app.get("/getCustomerBillingInfo", function(req, res){
+//   Customer.find({meter: all not null} {given_name: 1, family_name: 1, email: 1, meter: 1, checkin: 1}, function(error, doc) {
+//     if (error) {
+//       res.send(error);
+//       console.log(error);
+//     }
+//     else {
+//       res.send(doc);
+//       console.log(doc);
+//     }
+//   });
+// });
 
-app.get("/getCustomerKwhUsage", function(req, res){
-  Customer.find({meter: all not null} {reading: 1 .sort('created_date').limit(2)})
-})
+// app.get("/getCustomerKwhUsage", function(req, res){
+//   Customer.find({meter: all not null} {reading: 1 .sort('created_date').limit(2)})
+// })
 
 app.post("/submitCustomer", function(req, res) {
  // check our req.body against our user model
@@ -212,6 +216,19 @@ app.get("/meter", function(req, res) {
     }
   });
 });
+// {meter: 1, reading: 1},
+// app.get("/lastMeterReading/:meter", function(req, res) {
+//   console.log(req.body);
+//   MeterReadings.findOne({"meter": req.params.meter},{reading: 1,meter: 1}, function(error, doc) {
+//     if (error) {
+//       res.send(error);
+//     }
+//     else {
+//       res.send(doc);
+//     }
+//   });
+// });
+
 
 // Connection to PORT
 app.listen(PORT, function() {

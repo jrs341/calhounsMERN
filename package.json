@@ -2,10 +2,14 @@
   "name": "calhouns_mern",
   "version": "1.0.0",
   "description": "using the mern stack to develop a website for my business",
+  "engines": {
+    "node": "6.9.4",
+    "npm": "3.10.10"
+  },
   "main": "public/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
+    "start": "node server.js",
     "dev": "webpack -w",
     "build": "webpack --config webpack.config.js"
   },

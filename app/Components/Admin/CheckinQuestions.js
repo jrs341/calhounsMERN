@@ -3,18 +3,25 @@ import { connect } from "react-redux"
 
 import { changeCabinState,
  changeRvSpaceState,
-  changeThirtyAmpState,
-   changeFiftyAmpState,
-    changeDailyState,
-     changeWeeklyState,
-      changeMonthlyState,
-       changeAdultNum_0State,
-        changeAdultNum_1State,
-         changeAdultNum_3State,
-         changeChildNum_0State,
-          changeChildNum_1State,
-           changeChildNum_2State,
-            changeChildNum_3State } from '../../actions/checkinQuestionsActions.js'
+ changeThirtyAmpState,
+ changeFiftyAmpState,
+ changeDailyState,
+ changeWeeklyState,
+ changeMonthlyState,
+ changeAdultNum_0State,
+ changeAdultNum_1State,
+ changeAdultNum_2State,
+ changeAdultNum_3State,
+ changeChildNum_0State,
+ changeChildNum_1State,
+ changeChildNum_2State,
+ changeChildNum_3State,
+ changePetYesState,
+ changePetNoState,
+ changePetNum_1State,
+ changePetNum_2State,
+ changePetNumMoreState
+ } from '../../actions/checkinQuestionsActions.js'
 
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system'
@@ -43,6 +50,11 @@ import DogDropDown from '../DogDropDown'
     childNum_1: store.childNum_1State.childNum_1,
     childNum_2: store.childNum_2State.childNum_2,
     childNum_3: store.childNum_3State.childNum_3,
+    petNo: store.petNoState.petNo,
+    petYes: store.petYesState.petYes,
+    petNum_1: store.petNum_1State.petNum_1,
+    petNum_2: store.petNum_2State.petNum_2,
+    petNumMore: store.petNumMoreState.petNumMore
   };
 })
 
@@ -53,12 +65,10 @@ export default class CheckinQuestions extends React.Component {
 
 		this.state = {
 			hellNo: true,
-			petNo: false,
-			petYes: false,
-			petNumNone: false,
-			petNum_1: true,
-			petNum_2: true,
-			petNumMore: true,
+			// petNumNone: false,
+			// petNum_1: true,
+			// petNum_2: true,
+			// petNumMore: true,
 			dogNo: true,
 			dogYes: true,
 			dogDropDown: true,
@@ -133,188 +143,55 @@ export default class CheckinQuestions extends React.Component {
 
 	adultNum_0State(event, isInputChecked) {
 		this.props.dispatch(changeAdultNum_0State(event, isInputChecked))
-		// if(isInputChecked){
-		// 	this.setState({adultNum_1: true});
-		// 	this.setState({adultNum_2: true});
-		// 	this.setState({adultNum_3: true});
-		// }else{
-		// 	this.setState({adultNum_0: false});
-		// 	this.setState({adultNum_1: false});
-		// 	this.setState({adultNum_2: false});
-		// 	this.setState({adultNum_3: false});
-		// }	
 	}
 
 	adultNum_1State(event, isInputChecked) {
 		this.props.dispatch(changeAdultNum_1State(event, isInputChecked))
-		// if(isInputChecked){
-		// 	this.setState({adultNum_0: true});
-		// 	this.setState({adultNum_2: true});
-		// 	this.setState({adultNum_3: true});
-		// }else{
-		// 	this.setState({adultNum_0: false});
-		// 	this.setState({adultNum_1: false});
-		// 	this.setState({adultNum_2: false});
-		// 	this.setState({adultNum_3: false});
-		// }	
 	}
 
 	adultNum_2State(event, isInputChecked) {
 		this.props.dispatch(changeAdultNum_2State(event, isInputChecked))
-		// if(isInputChecked){
-		// 	this.setState({adultNum_0: true});
-		// 	this.setState({adultNum_1: true});
-		// 	this.setState({adultNum_3: true});
-		// }else{
-		// 	this.setState({adultNum_0: false});
-		// 	this.setState({adultNum_1: false});
-		// 	this.setState({adultNum_2: false});
-		// 	this.setState({adultNum_3: false});
-		// }	
 	}
 
 	adultNum_3State(event, isInputChecked) {
 		this.props.dispatch(changeAdultNum_3State(event, isInputChecked))
-		// if(isInputChecked){
-		// 	this.setState({adultNum_0: true});
-		// 	this.setState({adultNum_1: true});
-		// 	this.setState({adultNum_2: true});
-		// }else{
-		// 	this.setState({adultNum_0: false});
-		// 	this.setState({adultNum_1: false});
-		// 	this.setState({adultNum_2: false});
-		// 	this.setState({adultNum_3: false});
-		// }	
 	}
 
 	childNum_0State(event, isInputChecked) {
 		this.props.dispatch(changeChildNum_0State(event, isInputChecked))
-		// if(isInputChecked){
-		// 	this.setState({childNum_1: true});
-		// 	this.setState({childNum_2: true});
-		// 	this.setState({childNum_3: true});
-		// }else{
-		// 	this.setState({childNum_0: false});
-		// 	this.setState({childNum_1: false});
-		// 	this.setState({childNum_2: false});
-		// 	this.setState({childNum_3: false});
-		// }	
 	}
 
 	childNum_1State(event, isInputChecked) {
 		this.props.dispatch(changeChildNum_1State(event, isInputChecked))
-		// if(isInputChecked){
-		// 	this.setState({childNum_0: true});
-		// 	this.setState({childNum_2: true});
-		// 	this.setState({childNum_3: true});
-		// }else{
-		// 	this.setState({childNum_0: false});
-		// 	this.setState({childNum_1: false});
-		// 	this.setState({childNum_2: false});
-		// 	this.setState({childNum_3: false});
-		// }	
 	}
 
 	childNum_2State(event, isInputChecked) {
 		this.props.dispatch(changeChildNum_2State(event, isInputChecked))
-		// if(isInputChecked){
-		// 	this.setState({childNum_0: true});
-		// 	this.setState({childNum_1: true});
-		// 	this.setState({childNum_3: true});
-		// }else{
-		// 	this.setState({childNum_0: false});
-		// 	this.setState({childNum_1: false});
-		// 	this.setState({childNum_2: false});
-		// 	this.setState({childNum_3: false});
-		// }	
 	}
 
 	childNum_3State(event, isInputChecked) {
 		this.props.dispatch(changeChildNum_3State(event, isInputChecked))
-		// if(isInputChecked){
-		// 	this.setState({childNum_0: true});
-		// 	this.setState({childNum_1: true});
-		// 	this.setState({childNum_2: true});
-		// }else{
-		// 	this.setState({childNum_0: false});
-		// 	this.setState({childNum_1: false});
-		// 	this.setState({childNum_2: false});
-		// 	this.setState({childNum_3: false});
-		// }	
 	}
 	
 	petNoState(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({petYes: true});
-		}else{
-			if(!this.state.cabin) {
-				this.setState({petYes: true});
-				this.setState({chooseCabin: true});
-			}else{
-				this.setState({petYes: false});
-			}
-		}
+		this.props.dispatch(changePetNoState(event, isInputChecked))
 	}
 
 	petYesState(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({petNo: true});
-			this.setState({petNum_1: false});
-			this.setState({petNum_2: false});
-			this.setState({petNumMore: false});
-			this.setState({dogNo: false});
-			this.setState({dogYes: false});
-			this.setState({chooseCabin: true});
-		}else{
-			this.setState({petNo: false});
-			this.setState({petNum_1: true});
-			this.setState({petNum_2: true});
-			this.setState({petNumMore: true});
-			this.setState({dogNo: true});
-			this.setState({dogYes: true});
-		}
+		this.props.dispatch(changePetYesState(event, isInputChecked))
 	}
 
 	petNum_1State(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({petNum_2: true});
-			this.setState({petNumMore: true});
-			this.setState({petYes: true});
-		}else{
-			this.setState({petNum_2: false});
-			this.setState({petNumMore: false});
-			this.setState({petYes: false});
-		}
+		this.props.dispatch(changePetNum_1State(event, isInputChecked))
 	}
 
 	petNum_2State(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({petNum_1: true});
-			this.setState({petNumMore: true});
-			this.setState({petYes: true});
-		}else{
-			this.setState({petNum_1: false});
-			this.setState({petNumMore: false});
-			this.setState({petYes: false});
-		}
+		this.props.dispatch(changePetNum_2State(event, isInputChecked))
 	}
 
 	petNumMoreState(event, isInputChecked){
-		if(isInputChecked){
-			this.setState({hellNo: true});
-			this.setState({petNum_1: true});
-			this.setState({petNum_2: true});
-			this.setState({dogNo: true});
-			this.setState({dogYes: true});
-			this.setState({petYes: true});
+		this.props.dispatch(changePetNumMoreState(event, isInputChecked))
 			alert('It is policy at Calhoun\'s Riverside RV Retreat to limit the number of pets to a maximum of 2 per RV space');
-		}else{
-			this.setState({petNum_1: false});
-			this.setState({petNum_2: false});
-			this.setState({dogNo: false});
-			this.setState({dogYes: false});
-			this.setState({petYes: false});
-		}
 	}
 
 	dogNoState(event, isInputChecked) {
@@ -461,76 +338,74 @@ export default class CheckinQuestions extends React.Component {
 					      disabled={this.props.monthly}
 					      onCheck={this.monthlyState}
 					    />
-					<h3> Please select an arrival date. </h3>
-						<RangedDatePicker
-						/>
+					
 					<h3> How many additional adults, other than you, are in your group? </h3>
 						<Checkbox
 						  label="0"
 						  disabled={this.props.adultNum_0}
-						  onClick={this.adultNum_0}
+						  onCheck={this.adultNum_0State}
 						/>
 						<Checkbox
 						  label="1"
 						  disabled={this.props.adultNum_1}
-						  onClick={this.adultNum_1}
+						  onCheck={this.adultNum_1State}
 						/>
 						<Checkbox
 						  disabled={this.props.adultNum_2}
 						  label="2"
-						  onClick={this.adultNum_2}
+						  onCheck={this.adultNum_2State}
 						/>
 						<Checkbox
 						  disabled={this.props.adultNum_3}
 						  label="3"
-						  onClick={this.adultNum_3}
+						  onCheck={this.adultNum_3State}
 						/>
 					<h3> How many children are in your group? </h3>
 						<Checkbox
 						  label="0"
 						  disabled={this.props.childNum_0}
-						  onClick={this.childNum_0}
+						  onCheck={this.childNum_0State}
 						/>
 						<Checkbox
 						  disabled={this.props.childNum_1}
 						  label="1"
-						  onClick={this.childNum_1}
+						  onCheck={this.childNum_1State}
 						/>
 						<Checkbox
 						  disabled={this.props.childNum_2}
 						  label="2"
-						  onClick={this.childNum_2}
+						  onCheck={this.childNum_2State}
 						/>
 						<Checkbox
 						  disabled={this.props.childNum_3}
 						  label="3"
-						  onClick={this.childNum_3}
+						  onCheck={this.childNum_3State}
 						/>
 					<h3> Will you have any pets staying with you? </h3>
 						<Checkbox
 					      label="No"
-					      disabled={this.state.petNo}
+					      disabled={this.props.petNo}
 					      onCheck={this.petNoState}
 					    />
 					    <Checkbox
 					      label="Yes"
-					      disabled={this.state.petYes}
+					      disabled={this.props.petYes}
 					      onCheck={this.petYesState}
 					    />
 					<h3> How many pets will be staying with you? </h3>
 						<Checkbox
 						  label="1"
-						  disabled={this.state.petNum_1}
+						  disabled={this.props.petNum_1}
 						  onCheck={this.petNum_1State}
 						/>
 						<Checkbox
 						  label="2"
-						  disabled={this.state.petNum_2}
+						  disabled={this.props.petNum_2}
 						  onCheck={this.petNum_2State}
 						/>
 						<Checkbox
 						  label="More than 2"
-						  disabled={this.state.petNumMore}
+						  disabled={this.props.petNumMore}
 						  onCheck={this.petNumMoreState}
 						/>
 					<h3> Are any of the pets a dog or dogs? </h3>
@@ -587,6 +462,9 @@ export default class CheckinQuestions extends React.Component {
 						  label="Yes"
 						  disabled={this.state.trailerNumYes}
 						  onCheck={this.trailerNumYes}
+						/>
+					<h3> Please select an arrival date. </h3>
+						<RangedDatePicker
 						/>
 					<h3> Please select an available RV space</h3>
 						<Checkbox

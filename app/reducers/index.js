@@ -15,6 +15,11 @@ import childNum_0State from "./checkinQuestionsReducer.js"
 import childNum_1State from "./checkinQuestionsReducer.js"
 import childNum_2State from "./checkinQuestionsReducer.js"
 import childNum_3State from "./checkinQuestionsReducer.js"
+import petNoState from "./checkinQuestionsReducer.js"
+import petYesState from "./checkinQuestionsReducer.js"
+import petNum_1State from "./checkinQuestionsReducer.js"
+import petNum_2State from "./checkinQuestionsReducer.js"
+import petNumMoreState from "./checkinQuestionsReducer.js"
 
 export default combineReducers({
   cabinState,
@@ -28,4 +33,13 @@ export default combineReducers({
   adultNum_1State,
   adultNum_2State,
   adultNum_3State,
+  childNum_0State,
+  childNum_1State,
+  childNum_2State,
+  childNum_3State,
+  petNoState,
+  petYesState,
+  petNum_1State,
+  petNum_2State,
+  petNumMoreState
 })

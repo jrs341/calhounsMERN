@@ -102,3 +102,38 @@ export function changeCabinState(event, isInputChecked) {
       payload: isInputChecked
     }
   }
+
+  export function changePetNoState(event, isInputChecked) {
+    return {
+      type: 'PET_NO',
+      payload: isInputChecked
+    }
+  }
+
+  export function changePetYesState(event, isInputChecked) {
+    return {
+      type: 'PET_YES',
+      payload: isInputChecked
+    }
+  }
+
+  export function changePetNum_1State(event, isInputChecked) {
+    return {
+      type: 'PET_NUM_1',
+      payload: isInputChecked
+    }
+  }
+
+  export function changePetNum_2State(event, isInputChecked) {
+    return {
+      type: 'PET_NUM_2',
+      payload: isInputChecked
+    }
+  }
+
+  export function changePetNumMoreState(event, isInputChecked) {
+    return {
+      type: 'PET_NUM_MORE',
+      payload: isInputChecked
+    }
+  }

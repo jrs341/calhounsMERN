@@ -84,6 +84,8 @@ app.get("/checkout", function(req, res) {
   res.send(checkout.html);
 });
 
+// =====================Customer Collection CRUD Operations=====================
+
 app.get("/searchCustomer/:email", function(req, res){
     Customer.findOne({"email": req.params.email}, function(error, doc) {
     if (error) {
@@ -139,6 +141,8 @@ app.post("/updateCustomer", function(req, res) {
   });
 });
 
+// =====================Employee Collection CRUD Operations=====================
+
 app.post("/submitEmployee", function(req, res) {
  // check our req.body against our user model
   var employee = new Employee(req.body);
@@ -152,30 +156,9 @@ app.post("/submitEmployee", function(req, res) {
   });
 });
 
-// this route will insert the mongo ID into the meter reading
-app.post("/addCustomerToMeter", function(req, res) {
-  console.log(req.body.customer);
-  MeterReadings.findOneAndUpdate({meter:req.body.meter}, {customer: req.body.customer }, {upsert: true}, function(error, doc) {
-    if (error) {
-      res.send(error);
-    }
-    else {
-      res.send(doc);
-    }
-  });
-});
+// =====================Meter Collection CRUD Operations=====================
 
-app.post("/removeCustomerFromMeter", function(req, res) {
-  console.log(req.body.customer);
-  MeterReadings.findOneAndUpdate({customer:req.body.customer}, {customer: "null" }, {upsert: true}, function(error, doc) {
-    if (error) {
-      res.send(error);
-    }
-    else {
-      res.send(doc);
-    }
-  });
-});
+      // ==========================Meter Document Create=====================
 
 app.post("/newMeter", function(req, res) {
 
@@ -192,6 +175,105 @@ app.post("/newMeter", function(req, res) {
   })
 });
 
+      // ==========================Meter Document Read=====================
+
+app.get("/meter", function(req, res) {
+  MeterReadings.find({}, {meter: 1, reading: 1}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+app.get("/availableCabins", function(req, res) {
+  MeterReadings.find({meter: /^Cabin/, $and:[{ customer: null}]}, function(error, doc){
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// This route will be for monthly reservation requests
+app.get("/available30Amp", function(req, res) {
+  MeterReadings.find({meter: {$nin: ['A-1','A-2']}, $and: [{customer: null},{amp: '30'}]}, function(error, doc){
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// This route will be for daily and weekly reservation requests
+app.get("/available30AmpDailyWeekly", function(req, res) {
+  MeterReadings.find({amp: "30" , $and:[{ customer: null},{amp: "30"}]}, function(error, doc){
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// This route will be for monthly reservation requests
+app.get("/available50Amp", function(req, res) {
+  MeterReadings.find({meter: {$nin: ['A-1','A-2']}, $and: [{customer: null},{amp: '50'}]}, function(error, doc){
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// This route will be for daily and weekly reservation requests
+app.get("/available50AmpDailyWeekly", function(req, res) {
+  MeterReadings.find({amp: "50", $and:[{customer: null}]}, function(error, doc){
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// This route will be for future daily and weekly requests
+app.get("/availableDailyWeekly", function(req, res) {
+  MeterReadings.find({$or: [{amp: '30'}]}, function(error, doc){
+    if(error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+      // ==========================Meter Document Update=====================
+
+// this route will insert the mongo ID into the meter reading
+app.post("/addCustomerToMeter", function(req, res) {
+  console.log(req.body.customer);
+  MeterReadings.findOneAndUpdate({meter:req.body.meter}, {customer: req.body.customer }, {upsert: true}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
 app.post("/submitAllMeterReadings", function(req, res) {
   console.log(req.body._id);
   console.log(req.body.meter);
@@ -206,8 +288,13 @@ app.post("/submitAllMeterReadings", function(req, res) {
   });
 });
 
-app.get("/meter", function(req, res) {
-  MeterReadings.find({}, {meter: 1, reading: 1}, function(error, doc) {
+
+      // ==========================Meter Document Delete=====================
+
+
+app.post("/removeCustomerFromMeter", function(req, res) {
+  console.log(req.body.customer);
+  MeterReadings.findOneAndUpdate({customer:req.body.customer}, {customer: "null" }, {upsert: true}, function(error, doc) {
     if (error) {
       res.send(error);
     }
@@ -216,6 +303,12 @@ app.get("/meter", function(req, res) {
     }
   });
 });
+
+
+
+
+
+
 // {meter: 1, reading: 1},
 // app.get("/lastMeterReading/:meter", function(req, res) {
 //   console.log(req.body);
@@ -228,8 +321,9 @@ app.get("/meter", function(req, res) {
 //     }
 //   });
 // });
-
-
+// db.getCollection('meterreadings').find({meter: /^Cabin/, $and:[{ customer: null}]})
+// db.getCollection('meterreadings').find({customer: null})
+// db.getCollection('meterreadings').updateOne({meter: 'B'}, {$set: {customer: 'billy'}})
 // Connection to PORT
 app.listen(PORT, function() {
   console.log(`Listening On Port: ${PORT}`);

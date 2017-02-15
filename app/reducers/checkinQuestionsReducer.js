@@ -35,7 +35,24 @@ export default function reducer(state={
     petYesStatic: false,
     petNum_1: true,
     petNum_2: true,
-    petNumMore: true
+    petNumMore: true,
+    dogNo: true,
+    dogNoStatic: false,
+    dogYes: true,
+    dogYesStatic: false,
+    dogBreedNo: true,
+    dogBreedYes: true,
+    vehicleNumOk: true,
+    vehicleNumMore: true,
+    trailerNumNo: true,
+    trailerNumYes: true,
+    checkInDate: true,
+    checkInDateStatic: 0,
+    checkOutDate: true,
+    checkOutDateStatic: 0,
+    chosenCabin: '',
+    chosen30AmpRvSpace: '',
+    chosen50AmpRvSpace: ''
   }, action) {
 
     switch (action.type) {
@@ -564,16 +581,22 @@ export default function reducer(state={
             childNum_0: true,
             childNum_1: true,
             childNum_2: true,
-            childNum_3: true
+            childNum_3: true,
+            vehicleNumOk: false,
+            vehicleNumMore: false
           }
         } else {
-          return {...state, petNo: false,
-            petNoStatic: false,
-            petYes: false,
-            childNum_0: false,
-            childNum_1: false,
-            childNum_2: false,
-            childNum_3: false
+          if(state.cabinStatic){
+            return {...state, petNo: false,
+              petNoStatic: false,
+              vehicleNumOk: true,
+              vehicleNumMore: true
+            }
+          } else {
+            return {...state, petNo: false,
+              petNoStatic: false,
+              petYes: false,
+            }
           }
         };
       case 'PET_YES':
@@ -590,17 +613,18 @@ export default function reducer(state={
             petNumMore: false
           }
         } else {
-          return {...state, petYes: false,
-            petYesStatic: false,
-            petNo: false,
-            childNum_0: false,
-            childNum_1: false,
-            childNum_2: false,
-            childNum_3: false,
-            petNum_1: true,
-            petNum_2: true,
-            petNumMore: true
-          }
+            if(state.cabinStatic){
+              return {...state, petNo: false
+              }
+            } else {
+              return {...state, petYes: false,
+                petYesStatic: false,
+                petNo: false,
+                petNum_1: true,
+                petNum_2: true,
+                petNumMore: true
+              }
+            }
         };
       case 'PET_NUM_1':
         if(action.payload) {
@@ -609,15 +633,17 @@ export default function reducer(state={
             petNum_2: true,
             petNumMore: true,
             petYes: true,
-            petNo: true 
+            petNo: true,
+            dogNo: false,
+            dogYes: false
           }
         } else {
           return {...state, petNum_1: false,
             petNum_1Static: false,
             petNum_2: false,
             petNumMore: false,
-            petYes: false,
-            petNo: false
+            dogNo: true,
+            dogYes: true
           }
         };
       case 'PET_NUM_2':
@@ -627,15 +653,17 @@ export default function reducer(state={
             petNum_1: true,
             petNumMore: true,
             petYes: true,
-            petNo: true 
+            petNo: true,
+            dogNo: false,
+            dogYes: false 
           }
         } else {
           return {...state, petNum_2: false,
             petNum_2Static: false,
             petNumMore: false,
             petNum_1: false,
-            petYes: false,
-            petNo: false
+            dogNo: true,
+            dogYes: true
           }
         };
       case 'PET_NUM_MORE':
@@ -653,9 +681,157 @@ export default function reducer(state={
             petNumMore: false,
             petNum_1: false,
             petNum_2: false,
-            petYes: false,
-            petNo: false
           }
+        };
+      case 'DOG_NO':
+        if(action.payload) {
+          return {...state, dogNo: false,
+            dogNoStatic: true,
+            dogYes: true,
+            petNum_1: true,
+            petNum_2: true,
+            petNumMore: true,
+            vehicleNumOk: false,
+            vehicleNumMore: true
+          }
+        } else {
+          return {...state, dogNo: false,
+            dogNoStatic: false,
+            dogYes: false,
+            vehicleNumOk: true,
+            vehicleNumMore: true
+          }
+        };
+      case 'DOG_YES':
+        if(action.payload) {
+          return {...state, dogYes: false,
+            dogYesStatic: true,
+            dogNo: true,
+            dogBreedNo: false,
+            dogBreedYes: false,
+            petNum_1: true,
+            petNum_2: true,
+            petNumMore: true
+          }
+        } else {
+          return {...state, dogYes: false,
+            dogYesStatic: false,
+            dogNo: false,
+            dogBreedNo: false,
+            dogBreedYes: false
+          }
+        };
+      case 'DOG_BREED_NO':
+        if (action.payload) {
+          return {...state, dogBreedNo: false,
+            dogNo: true,
+            dogYes: true,
+            dogBreedYes: true,
+            vehicleNumOk: false,
+            vehicleNumMore: false
+            }
+        } else {
+          return {...state, dogBreedNo: false,
+            dogBreedYes: false,
+            vehicleNumOk: true,
+            vehicleNumMore: true
+            }
+        }
+      case 'DOG_BREED_YES':
+        if (action.payload) {
+          return {...state, dogBreedYes: false,
+            dogNo: true,
+            dogYes: true,
+            dogBreedNo: true
+            }
+        } else {
+          return {...state, dogBreedYes: false,
+            dogBreedNo: false
+            }
+        }
+      case 'VEHICLE_NUM_OK':
+        if (action.payload) {
+          return {...state, vehicleNumOk: false,
+            vehicleNumMore: true,
+            petNo: true,
+            trailerNumNo: false,
+            trailerNumYes: false
+            }
+        } else {
+          return {...state, vehicleNumOk: false,
+            vehicleNumMore: false,
+            trailerNumNo: true,
+            trailerNumYes: true
+            }
+        }
+      case 'VEHICLE_NUM_MORE':
+        if (action.payload) {
+          return {...state, vehicleNumMore: false,
+            vehicleNumOk: true,
+            petNo: true
+            }
+        } else {
+          return {...state, vehicleNumMore: false,
+            vehicleNumOk: false
+            }
+        }
+      case 'TRAILER_NUM_NO':
+        if (action.payload) {
+          return {...state, trailerNumNo: false,
+            trailerNumYes: true,
+            vehicleNumOk: true,
+            vehicleNumMore: true,
+            checkInDate: false 
+            }
+        } else {
+          return {...state, trailerNumYes: false,
+            trailerNumNo: false,
+            checkInDate: true
+          }
+        };
+      case 'TRAILER_NUM_YES':
+        if (action.payload) {
+          return {...state, trailerNumYes: false,
+            trailerNumNo: true,
+            vehicleNumOk: true,
+            vehicleNumMore: true 
+            }
+        } else {
+          return {...state, trailerNumNo: false,
+            trailerNumYes: false
+          }
+        };
+      case 'CHECK_IN_DATE':
+        if (action.payload) {
+          return {...state, checkInDate: false,
+            checkInDateStatic: action.payload,
+            trailerNumYes: true,
+            trailerNumNo: true
+          }  
+        } else {
+            return {...state, checkInDate: true
+            } 
+        }; 
+      case 'CHECK_OUT_DATE':
+        if (action.payload) {
+          return {...state, checkOutDate: false,
+            checkOutDateStatic: action.payload,  
+          }  
+        } else {
+            return {...state, checkOutDate: true
+            } 
+        };
+      case 'CHOSEN_CABIN':
+        if (action.payload) {
+          return {...state, chosenCabin: action.payload }
+        };
+      case 'CHOSEN_30AMP':
+        if (action.payload) {
+          return {...state, chosen30AmpRvSpace: action.payload}
+        };
+      case 'CHOSEN_50AMP':
+        if (action.payload) {
+          return {...state, chosen50AmpRvSpace: action.payload}
         };
       default:
         return state;

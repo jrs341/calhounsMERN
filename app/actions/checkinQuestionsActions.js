@@ -137,3 +137,79 @@ export function changeCabinState(event, isInputChecked) {
       payload: isInputChecked
     }
   }
+
+  export function changeDogNoState(event, isInputChecked) {
+    return {
+      type: 'DOG_NO',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeDogYesState(event, isInputChecked) {
+    return {
+      type: 'DOG_YES',
+      payload: isInputChecked
+    }
+  }
+  export function changeDogBreedNoState(event, isInputChecked) {
+    return {
+      type: 'DOG_BREED_NO',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeDogBreedYesState(event, isInputChecked) {
+    return {
+      type: 'DOG_BREED_YES',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeVehicleNumOkState(event, isInputChecked) {
+    return {
+      type: 'VEHICLE_NUM_OK',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeVehicleNumMoreState(event, isInputChecked) {
+    return {
+      type: 'VEHICLE_NUM_MORE',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeTrailerNumNoState(event, isInputChecked) {
+    return {
+      type: 'TRAILER_NUM_NO',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeTrailerNumYesState(event, isInputChecked) {
+    return {
+      type: 'TRAILER_NUM_YES',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeCheckInDateState(empty, date) {
+    return {
+      type: 'CHECK_IN_DATE',
+      payload: date
+    }
+  }
+
+  export function changeCheckOutDateState(empty, date) {
+    return {
+      type: 'CHECK_OUT_DATE',
+      payload: date
+    }
+  }
+
+  export function changeChosenCabinState(event, isInputChecked) {
+    return {
+      type: 'CHOSEN_CABIN',
+      payload: event
+    }
+  }

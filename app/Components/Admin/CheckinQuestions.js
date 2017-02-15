@@ -20,7 +20,18 @@ import { changeCabinState,
  changePetNoState,
  changePetNum_1State,
  changePetNum_2State,
- changePetNumMoreState
+ changePetNumMoreState,
+ changeDogYesState,
+ changeDogNoState,
+ changeDogBreedNoState,
+ changeDogBreedYesState,
+ changeVehicleNumOkState,
+ changeVehicleNumMoreState,
+ changeTrailerNumNoState,
+ changeTrailerNumYesState,
+ changeChosenCabinState,
+ changeChosen30AmpRvSpaceState,
+ changeChosen50AmpRvSpaceState
  } from '../../actions/checkinQuestionsActions.js'
 
 import { Link } from 'react-router'
@@ -31,7 +42,6 @@ import axios from 'axios'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 import RangedDatePicker from '../RangedDatePicker'
-import DogDropDown from '../DogDropDown'
 
 @connect((store) => {
   return {
@@ -42,6 +52,7 @@ import DogDropDown from '../DogDropDown'
     daily: store.dailyState.daily,
     weekly: store.weeklyState.weekly,
     monthly: store.monthlyState.monthly,
+    monthlyStatic: store.monthlyStaticState.monthlyStatic,
     adultNum_0: store.adultNum_0State.adultNum_0,
     adultNum_1: store.adultNum_1State.adultNum_1,
     adultNum_2: store.adultNum_2State.adultNum_2,
@@ -54,7 +65,18 @@ import DogDropDown from '../DogDropDown'
     petYes: store.petYesState.petYes,
     petNum_1: store.petNum_1State.petNum_1,
     petNum_2: store.petNum_2State.petNum_2,
-    petNumMore: store.petNumMoreState.petNumMore
+    petNumMore: store.petNumMoreState.petNumMore,
+    dogNo: store.dogNoState.dogNo,
+    dogYes: store.dogYesState.dogYes,
+    dogBreedNo: store.dogBreedNoState.dogBreedNo,
+    dogBreedYes: store.dogBreedYesState.dogBreedYes,
+    vehicleNumOk: store.vehicleNumOkState.vehicleNumOk,
+    vehicleNumMore: store.vehicleNumMoreState.vehicleNumMore,
+    trailerNumNo: store.trailerNumNoState.trailerNumNo,
+    trailerNumYes: store.trailerNumYesState.trailerNumYes,
+    chosenCabin: store.chosenCabinState.chosenCabin,
+    chosen30AmpRvSpace: store.chosen30AmpRvSpaceState.chosen30AmpRvSpace,
+    chosen50AmpRvSpace: store.chosen50AmpRvSpaceState.chosen50AmpRvSpace
   };
 })
 
@@ -64,22 +86,11 @@ export default class CheckinQuestions extends React.Component {
 		super()
 
 		this.state = {
-			hellNo: true,
-			// petNumNone: false,
-			// petNum_1: true,
-			// petNum_2: true,
-			// petNumMore: true,
-			dogNo: true,
-			dogYes: true,
-			dogDropDown: true,
-			breed_1: true,
-			breed_2: true,
-			vehicleNumOk: false,
-			vehicleNumMore: false,
-			trailerNumNo: true,
-			trailerNumYes: true,
 			chooseRvSpace: true,
 			chooseCabin: true,
+			availableCabins: [],
+			available30AmpSpaces: [],
+			available50AmpSpaces: [],
 			checkin: ''
 		}
 
@@ -105,15 +116,149 @@ export default class CheckinQuestions extends React.Component {
 		this.petNumMoreState = this.petNumMoreState.bind(this);
 		this.dogNoState = this.dogNoState.bind(this);
 		this.dogYesState = this.dogYesState.bind(this);
-		this.vehicleNumOk = this.vehicleNumOk.bind(this);
-		this.vehicleNumMore = this.vehicleNumMore.bind(this);
-		this.trailerNumNo = this.trailerNumNo.bind(this);
-		this.trailerNumYes = this.trailerNumYes.bind(this);
-		this.chooseCabinState = this.chooseCabinState.bind(this);
-		this.chooseRvSpaceState = this. chooseRvSpaceState.bind(this);
+		this.dogBreedNoState = this.dogBreedNoState.bind(this);
+		this.dogBreedYesState = this.dogBreedYesState.bind(this);
+		this.vehicleNumOkState = this.vehicleNumOkState.bind(this);
+		this.vehicleNumMoreState = this.vehicleNumMoreState.bind(this);
+		this.trailerNumNoState = this.trailerNumNoState.bind(this);
+		this.trailerNumYesState = this.trailerNumYesState.bind(this);
+		this.chosenCabinState = this.chosenCabinState.bind(this);
+		this.getAvailableCabins = this.getAvailableCabins.bind(this);
+		this.getAvailable30AmpRvSpaces = this.getAvailable30AmpRvSpaces.bind(this);
+		this.getAvailable50AmpRvSpaces = this.getAvailable50AmpRvSpaces.bind(this);
 	}
 
+ getAvailableCabins() {
+    return axios({
+      type: 'GET',
+      url: '/availableCabins/'
+    }).then((response) => {
+      if (response.data == "") {
+        console.log('error!');
+      } else {
+        this.updateAvailableCabins(response.data);
+        }
+    });
+  }
+
+  formRowCabins(fieldInfo, index) {
+    return (
+      <Checkbox
+        label={fieldInfo.meter}
+      	name={fieldInfo.meter}
+      	key={fieldInfo.meter}
+        onCheck={this.chosenCabinState}>
+      </Checkbox>
+      );
+  }
+
+  chosenCabinState(event, isInputChecked){
+  	console.log(event.target.name);
+  	this.props.dispatch(changeChosenCabinState(event.target.name, isInputChecked))
+  }
+
+  updateAvailableCabins(availableCabinsResponse) {
+    this.setState({availableCabins: availableCabinsResponse});
+    console.log(this.state.availableCabins);
+  }
+
+  getAvailable30AmpRvSpaces() {
+  	if (this.props.monthlyStatic){
+	    return axios({
+	      type: 'GET',
+	      url: '/available30Amp/'
+	    }).then((response) => {
+	      if (response.data == "") {
+	        console.log('error!');
+	      } else {
+	        this.updateAvailable30AmpRvSpaces(response.data);
+	        }
+	    });
+	} else {
+		return axios({
+	      type: 'GET',
+	      url: '/available30AmpDailyWeekly/'
+	    }).then((response) => {
+	      if (response.data == "") {
+	        console.log('error!');
+	      } else {
+	        this.updateAvailable30AmpRvSpaces(response.data);
+	        }
+	    });
+	}
+  }
+
+  formRow30AmpRvSpaces(fieldInfo, index) {
+    return (
+      <Checkbox
+        label={fieldInfo.meter}
+      	name={fieldInfo.meter}
+      	key={fieldInfo.meter}
+        onCheck={this.chosen30AmpRvSpaceState}>
+      </Checkbox>
+      );
+  }
+
+  chosen30AmpRvSpaceState(event, isInputChecked){
+  	console.log(event.target.name);
+  	this.props.dispatch(changeChosen30AmpRvSpaceState(event.target.name, isInputChecked))
+  }
+
+  updateAvailable30AmpRvSpaces(available30AmpSpacesResponse) {
+    this.setState({available30AmpSpaces: available30AmpSpacesResponse});
+    console.log(this.state.available30AmpSpaces);
+  }
+
+  getAvailable50AmpRvSpaces() {
+  	console.log(this.props.monthlyStatic);
+  	if (this.props.monthlyStatic) {
+	    return axios({
+	      type: 'GET',
+	      url: '/available50Amp/'
+	    }).then((response) => {
+	      if (response.data == "") {
+	        console.log('error!');
+	      } else {
+	        this.updateAvailable50AmpRvSpaces(response.data);
+	        }
+	    });
+	} else {
+		return axios({
+	      type: 'GET',
+	      url: '/available50AmpDailyWeekly/'
+	    }).then((response) => {
+	      if (response.data == "") {
+	        console.log('error!');
+	      } else {
+	        this.updateAvailable50AmpRvSpaces(response.data);
+	        }
+	    });
+	}
+  }
+
+  formRow50AmpRvSpaces(fieldInfo, index) {
+    return (
+      <Checkbox
+        label={fieldInfo.meter}
+      	name={fieldInfo.meter}
+      	key={fieldInfo.meter}
+        onCheck={this.chosen50AmpRvSpaceState}>
+      </Checkbox>
+      );
+  }
+
+  chosen50AmpRvSpaceState(event, isInputChecked){
+  	console.log(event.target.name);
+  	this.props.dispatch(changeChosen50AmpRvSpaceState(event.target.name, isInputChecked))
+  }
+
+  updateAvailable50AmpRvSpaces(available50AmpSpacesResponse) {
+    this.setState({available50AmpSpaces: available50AmpSpacesResponse});
+    console.log(this.state.available50AmpSpaces);
+  }
+
 	cabinState(event, isInputChecked) {
+		this.getAvailableCabins();
 		this.props.dispatch(changeCabinState(event, isInputChecked))
 	}
 
@@ -130,18 +275,24 @@ export default class CheckinQuestions extends React.Component {
 	}
 
 	dailyState(event, isInputChecked) {
-		this.props.dispatch(changeDailyState(event, isInputChecked))
+		this.props.dispatch(changeDailyState(event, isInputChecked));
+		this.getAvailable30AmpRvSpaces();
+		this.getAvailable50AmpRvSpaces();
 	}
 
 	weeklyState(event, isInputChecked) {
-		this.props.dispatch(changeWeeklyState(event, isInputChecked))
+		this.props.dispatch(changeWeeklyState(event, isInputChecked));
+		this.getAvailable30AmpRvSpaces();
+		this.getAvailable50AmpRvSpaces();
 	}
 
 	monthlyState (event, isInputChecked) {
-		this.props.dispatch(changeMonthlyState(event, isInputChecked))
+		this.props.dispatch(changeMonthlyState(event, isInputChecked));
 	}
 
 	adultNum_0State(event, isInputChecked) {
+		this.getAvailable30AmpRvSpaces();
+		this.getAvailable50AmpRvSpaces();
 		this.props.dispatch(changeAdultNum_0State(event, isInputChecked))
 	}
 
@@ -195,78 +346,37 @@ export default class CheckinQuestions extends React.Component {
 	}
 
 	dogNoState(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({dogYes: true});
-		}else{
-			this.setState({dogYes: false});
-		}
+		this.props.dispatch(changeDogNoState(event, isInputChecked))
 	}
 
 	dogYesState(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({dogNo: true});
-			this.setState({dogDropDown: false});
-			this.setState({breed_1: false});
-			this.setState({breed_2: false});
-		}else{
-			this.setState({dogYes: false});
-			this.setState({dogNo: false});
-			this.setState({dogDropDown: true});
-			this.setState({breed_1: true});
-			this.setState({breed_2: true});
-		}
+		this.props.dispatch(changeDogYesState(event, isInputChecked))
 	}
 
-	vehicleNumMore(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({vehicleNumOk: true});
+	dogBreedNoState(event, isInputChecked) {
+		this.props.dispatch(changeDogBreedNoState(event, isInputChecked))
+	}
+
+	dogBreedYesState(event, isInputChecked) {
+		this.props.dispatch(changeDogBreedYesState(event, isInputChecked))
+	}
+
+	vehicleNumOkState(event, isInputChecked) {
+		this.props.dispatch(changeVehicleNumOkState(event, isInputChecked))
+	}
+
+	vehicleNumMoreState(event, isInputChecked) {
+		this.props.dispatch(changeVehicleNumMoreState(event, isInputChecked))
 			alert('Please call Calhoun\'s at 361 550 7536 to discuss parking options. It is a policy at Calhoun\'s to only allow two vehicles per site.');
-		}else{
-			this.setState({vehicleNumMore: false});
-			this.setState({vehicleNumOk: false});
-		}
 	}
 
-	vehicleNumOk(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({vehicleNumMore: true});
-			this.setState({trailerNumNo: false});
-			this.setState({trailerNumYes: false});
-		}else{
-			this.setState({vehicleNumOk: false});
-			this.setState({vehicleNumMore: false});
-			this.setState({trailerNumNo: true});
-			this.setState({trailerNumYes: true});
-		}
+	trailerNumNoState(event, isInputChecked) {
+		this.props.dispatch(changeTrailerNumNoState(event, isInputChecked))
 	}
 
-	trailerNumNo(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({trailerNumYes: true});
-			this.setState({checkin: 'checkin'});
-			this.setState({hellNo: false});
-				if(this.state.cabin){
-					this.setState({chooseRvSpace: false});
-				}else{
-					this.setState({chooseCabin: false});
-				}
-		}else{
-			this.setState({trailerNumYes: false});
-			this.setState({checkin: ''});
-			this.setState({hellNo: true});
-			this.setState({chooseCabin: true});
-			this.setState({chooseRvSpace: true});
-		}
-	}
-
-	trailerNumYes(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({trailerNumNo: true});
+	trailerNumYesState(event, isInputChecked) {
+		this.props.dispatch(changeTrailerNumYesState(event, isInputChecked))
 			alert('Please call Calhoun\'s at 361 550 7536 to discuss parking options. It is a policy at Calhoun\'s for trailers to be parked in designated areas.');
-		}else{
-			this.setState({trailerNumNo: false});
-			this.setState({trailerNumYes: false});
-		}
 	}
 
 	chooseCabinState(event, isInputChecked) {
@@ -411,73 +521,76 @@ export default class CheckinQuestions extends React.Component {
 					<h3> Are any of the pets a dog or dogs? </h3>
 						<Checkbox
 					      label="No"
-					      disabled={this.state.dogNo}
+					      disabled={this.props.dogNo}
 					      onCheck={this.dogNoState}
 					    />
 					    <Checkbox
 					      label="Yes"
-					      disabled={this.state.dogYes}
+					      disabled={this.props.dogYes}
 					      onCheck={this.dogYesState}
 					    />
-					<h3> Is the dog or any of the dogs mixed or full bred with any of the following breeds? If not please select none of the above from the menu. </h3>
-						<DogDropDown
-						disabled={this.state.dogDropDown}
-						/>
-					<h3> If not please enter the breed of your dog or dogs in the fields below</h3>
-						<TextField
-						  disabled={this.state.breed_1}
-					      hintText="Breed of Dog 1"
-					      floatingLabelText="Breed of Dog 1"
-					      floatingLabelFixed={true}
-					    /><br />
-					    <TextField
-					      disabled={this.state.breed_2}
-					      hintText="Breed of Dog 2"
-					      floatingLabelText="Breed of Dog 2"
-					      floatingLabelFixed={true}
-					    /><br />
+					<h3> Is the dog or any of the dogs mixed or full bred with any of the following breeds? </h3>
+						<ul>
+							<li>Pit Bull Terriers </li>
+							<li>Staffordshire Terriers </li>
+							<li>Rottweilers  </li>
+							<li>German Shepherds  </li>
+							<li>Presa Canarios  </li>
+							<li>Chows Chows  </li>
+							<li>Doberman Pinschers  </li>
+							<li>Akitas  </li>
+							<li>Wolf-hybrids  </li>
+							<li>Mastiffs  </li>
+							<li>Cane Corsos  </li>
+							<li>Alaskan Malamutes  </li>
+							<li>Siberian Huskies  </li>
+						</ul>
+						<Checkbox
+					      label="No"
+					      disabled={this.props.dogBreedNo}
+					      onCheck={this.dogBreedNoState}
+					    />
+					    <Checkbox
+					      label="Yes"
+					      disabled={this.props.dogBreedYes}
+					      onCheck={this.dogBreedYesState}
+					    />
 					<h3> How many vehicles will you have with you to include motorcycles? </h3>
 						<Checkbox
 						  label="1"
-						  disabled={this.state.vehicleNumOk}
-						  onCheck={this.vehicleNumOk}
+						  disabled={this.props.vehicleNumOk}
+						  onCheck={this.vehicleNumOkState}
 						/>
 						<Checkbox
 						  label="2"
-						  disabled={this.state.vehicleNumOk}
-						  onCheck={this.vehicleNumOk}
+						  disabled={this.props.vehicleNumOk}
+						  onCheck={this.vehicleNumOkState}
 						/>
 						<Checkbox
 						  label="More than 2"
-						  disabled={this.state.vehicleNumMore}
-						  onCheck={this.vehicleNumMore}
+						  disabled={this.props.vehicleNumMore}
+						  onCheck={this.vehicleNumMoreState}
 						/>
 					<h3> Will you have additional vehicles, ex. boats, trailers, etc...</h3>
 						<Checkbox
 						  label="No"
-						  disabled={this.state.trailerNumNo}
-						  onCheck={this.trailerNumNo}
+						  disabled={this.props.trailerNumNo}
+						  onCheck={this.trailerNumNoState}
 						/>
 						<Checkbox
 						  label="Yes"
-						  disabled={this.state.trailerNumYes}
-						  onCheck={this.trailerNumYes}
+						  disabled={this.props.trailerNumYes}
+						  onCheck={this.trailerNumYesState}
 						/>
 					<h3> Please select an arrival date. </h3>
 						<RangedDatePicker
 						/>
-					<h3> Please select an available RV space</h3>
-						<Checkbox
-						  label="RV Space"
-						  disabled={this.state.chooseRvSpace}
-						  onCheck={this.chooseRvSpaceState}
-						/>
+					<h3> Please select an available 30AMP RV space</h3>
+						{this.state.available30AmpSpaces.map((fieldInfo, index) => this.formRow30AmpRvSpaces(fieldInfo, index))}
+					<h3> Please select an available 50AMP RV space</h3>
+						{this.state.available50AmpSpaces.map((fieldInfo, index) => this.formRow50AmpRvSpaces(fieldInfo, index))}
 					<h3> Please select an available Cabin</h3>
-						<Checkbox
-						  label="Cabin"
-						  disabled={this.state.chooseCabin}
-						  onCheck={this.chooseCabinState}
-						/>
+						{this.state.availableCabins.map((fieldInfo, index) => this.formRowCabins(fieldInfo, index))}
 	            </CardText>
 	            <CardActions>
 	            <Link to={this.state.checkin}>

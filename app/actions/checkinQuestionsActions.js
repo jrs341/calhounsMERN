@@ -165,9 +165,23 @@ export function changeCabinState(event, isInputChecked) {
     }
   }
 
-  export function changeVehicleNumOkState(event, isInputChecked) {
+  export function changeVehicleNum_0State(event, isInputChecked) {
     return {
-      type: 'VEHICLE_NUM_OK',
+      type: 'VEHICLE_NUM_0',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeVehicleNum_1State(event, isInputChecked) {
+    return {
+      type: 'VEHICLE_NUM_1',
+      payload: isInputChecked
+    }
+  }
+
+  export function changeVehicleNum_2State(event, isInputChecked) {
+    return {
+      type: 'VEHICLE_NUM_2',
       payload: isInputChecked
     }
   }
@@ -213,3 +227,11 @@ export function changeCabinState(event, isInputChecked) {
       payload: event
     }
   }
+
+  export function changeChosenRvSpaceState(event, isInputChecked) {
+    return {
+      type: 'CHOSEN_RV_SPACE',
+      payload: event
+    }
+  }
+

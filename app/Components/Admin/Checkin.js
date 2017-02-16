@@ -26,50 +26,75 @@ var postRoute = '';
 
 @connect((store) => {
   return {
-    cabin: store.cabinState.cabin
+    cabin: store.cabinStaticState.cabinStatic,
+    rvSpace: store.rvSpaceStaticState.rvSpaceStatic,
+    thirtyAmp: store.thirtyAmpStaticState.thirtyAmpStatic,
+    fiftyAmp: store.fiftyAmpStaticState.fiftyAmpStatic,
+    daily: store.dailyStaticState.dailyStatic,
+    weekly: store.weeklyStaticState.weeklyStatic,
+    monthly: store.monthlyStaticState.monthlyStatic,
+    adultNum_0: store.adultNum_0StaticState.adultNum_0Static,
+    adultNum_1: store.adultNum_1StaticState.adultNum_1Static,
+    adultNum_2: store.adultNum_2StaticState.adultNum_2Static,
+    adultNum_3: store.adultNum_3StaticState.adultNum_3Static,
+    childNum_0: store.childNum_0StaticState.childNum_0Static,
+    childNum_1: store.childNum_1StaticState.childNum_1Static,
+    childNum_2: store.childNum_2StaticState.childNum_2Static,
+    childNum_3: store.childNum_3StaticState.childNum_3Static,
+    petNo: store.petNoStaticState.petNoStatic,
+    petYes: store.petYesStaticState.petYesStatic,
+    dogNo: store.dogNoStaticState.dogNoStatic,
+    dogYes: store.dogYesStaticState.dogYesStatic,
+    vehicleNum_0: store.vehicleNum_0StaticState.vehicleNum_0Static,
+    vehicleNum_1: store.vehicleNum_1StaticState.vehicleNum_1Static,
+    vehicleNum_2: store.vehicleNum_2StaticState.vehicleNum_2Static,
+    checkInDate: store.checkInDateStaticState.checkInDateStatic,
+    checkOutDate: store.checkOutDateStaticState.checkOutDateStatic,
+    chosenCabin: store.chosenCabinState.chosenCabin,
+    chosenRvSpace: store.chosenRvSpaceState.chosenRvSpace
   };
 })
 
 export default class Checkin extends React.Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.inputFieldInfo = [
-    {displayName: 'First Name', dataName: 'given_name'}, 
-    {displayName: 'Last Name', dataName: 'family_name'}, 
-    {displayName: 'Phone Number', dataName: 'phone_number'}, 
-    {displayName: 'Email Address', dataName: 'email'}, 
-    {displayName: 'Address Line 1', dataName: 'address_line_1'}, 
-    {displayName: 'City', dataName: 'locality'}, 
-    {displayName: 'State', dataName: 'administrative_district_level_1'}, 
-    {displayName: 'Postal Code', dataName: 'postal_code'}, 
-    {displayName: 'Country', dataName: 'country'},
-    {displayName: 'Drivers License Number', dataName: 'drivers_license_num'},
-    {displayName: 'Drivers License State', dataName: 'drivers_license_state'},
-    {displayName: 'Addition Occupant 1', dataName: 'additional_occupant_1'},
-    {displayName: 'Additiona Occupant 1 Age', dataName: 'additional_occupant_1_age'},
-    {displayName: 'Addition Occupant 2', dataName: 'additional_occupant_2'},
-    {displayName: 'Additiona Occupant 2 Age', dataName: 'additional_occupant_2_age'},
-    {displayName: 'Addition Occupant 3', dataName: 'additional_occupant_3'},
-    {displayName: 'Additiona Occupant 3 Age', dataName: 'additional_occupant_3_age'},
-    {displayName: 'Addition Occupant 4', dataName: 'additional_occupant_4'},
-    {displayName: 'Additiona Occupant 4 Age', dataName: 'additional_occupant_4_age'},
-    {displayName: 'Number of Pets', dataName: 'pets_number_of'},
-    {displayName: 'Type of Pets', dataName: 'pets_type'},
-    {displayName: 'Breed of Dog', dataName: 'pets_breed'},
-    {displayName: 'RV Type', dataName: 'unit_type'},
-    {displayName: 'RV License Plate Number', dataName: 'unit_license'},
-    {displayName: 'RV License Plate State', dataName: 'unit_state'},
-    {displayName: 'RV Year', dataName: 'unit_year'},
-    {displayName: 'RV Length', dataName: 'unit_length'},
-    {displayName: 'Vehicle 1 Type', dataName: 'vehicle_1_type'},
-    {displayName: 'Vehicle 1 License Plate Number', dataName: 'vehicle_1_license'},
-    {displayName: 'Vehicle 1 License Plate State', dataName: 'vehicle_1_state'},
-    {displayName: 'Vehicle 1 Year', dataName: 'vehicle_1_year'},
-    {displayName: 'Vehicle 2 Type', dataName: 'vehicle_2_type'},
-    {displayName: 'Vehicle 2 License Plate Number', dataName: 'vehicle_2_license'},
-    {displayName: 'Vehicle 2 License Plate State', dataName: 'vehicle_2_state'},
-    {displayName: 'Vehicle 2 Year', dataName: 'vehicle_2_year'}
+    {displayName: 'First Name', dataName: 'given_name', state: true}, 
+    {displayName: 'Last Name', dataName: 'family_name', state: true}, 
+    {displayName: 'Phone Number', dataName: 'phone_number', state: true}, 
+    {displayName: 'Email Address', dataName: 'email', state: true}, 
+    {displayName: 'Address Line 1', dataName: 'address_line_1', state: true}, 
+    {displayName: 'City', dataName: 'locality', state: true}, 
+    {displayName: 'State', dataName: 'administrative_district_level_1', state: true}, 
+    {displayName: 'Postal Code', dataName: 'postal_code', state: true}, 
+    {displayName: 'Country', dataName: 'country', state: false},
+    {displayName: 'Drivers License Number', dataName: 'drivers_license_num', state: true},
+    {displayName: 'Drivers License State', dataName: 'drivers_license_state', state: true},
+    {displayName: 'Additional Occupant 1', dataName: 'additional_occupant_1', state: this.props.adultNum_1},
+    {displayName: 'Additional Occupant 1 Age', dataName: 'additional_occupant_1_age', state: this.props.adultNum_1},
+    {displayName: 'Additional Occupant 2', dataName: 'additional_occupant_2', state: this.props.adultNum_2},
+    {displayName: 'Additional Occupant 2 Age', dataName: 'additional_occupant_2_age', state: this.props.adultNum_2},
+    {displayName: 'Additional Occupant 3', dataName: 'additional_occupant_3',state: this.props.adultNum_3},
+    {displayName: 'Additional Occupant 3 Age', dataName: 'additional_occupant_3_age', state: this.props.adultNum_3},
+    {displayName: 'Children Name or Names', dataName: 'additional_occupant_4',state: this.props.childNum_1},
+    {displayName: 'Children Age or Ages', dataName: 'additional_occupant_4_age', state: this.props.childNum_1},
+    {displayName: 'Number of Pets', dataName: 'pets_number_of', state: this.props.petYes},
+    {displayName: 'Type of Pets', dataName: 'pets_type', state: this.props.petYes},
+    {displayName: 'Breed of Dog', dataName: 'pets_breed', state: this.props.dogYes},
+    {displayName: 'RV Type', dataName: 'unit_type', state: this.props.rvSpace},
+    {displayName: 'RV License Plate Number', dataName: 'unit_license', state: this.props.rvSpace},
+    {displayName: 'RV License Plate State', dataName: 'unit_state', state: this.props.rvSpace},
+    {displayName: 'RV Year', dataName: 'unit_year', state: this.props.rvSpace},
+    {displayName: 'RV Length', dataName: 'unit_length', state: this.props.rvSpace},
+    {displayName: 'Vehicle 1 Type', dataName: 'vehicle_1_type', state: true},
+    {displayName: 'Vehicle 1 License Plate Number', dataName: 'vehicle_1_license', state: this.props.vehicleNum_1},
+    {displayName: 'Vehicle 1 License Plate State', dataName: 'vehicle_1_state', state: this.props.vehicleNum_1},
+    {displayName: 'Vehicle 1 Year', dataName: 'vehicle_1_year', state: this.props.vehicleNum_1},
+    {displayName: 'Vehicle 2 Type', dataName: 'vehicle_2_type', state: this.props.vehicleNum_2},
+    {displayName: 'Vehicle 2 License Plate Number', dataName: 'vehicle_2_license', state: this.props.vehicleNum_2},
+    {displayName: 'Vehicle 2 License Plate State', dataName: 'vehicle_2_state', state: this.props.vehicleNum_2},
+    {displayName: 'Vehicle 2 Year', dataName: 'vehicle_2_year', state: this.props.vehicleNum_2}
     // {displayName: 'Meter', dataName: 'meter'},
     // {displayName: 'Meter Reading'}
     ];
@@ -91,17 +116,40 @@ export default class Checkin extends React.Component {
     this.openForm = this.openForm.bind(this);
   }
 
+  componentWillMount() {
+    // console.log(this.props.cabin);
+    // console.log(this.props.rvSpace);
+    // console.log(this.props.chosenCabin);
+    // console.log(this.props.chosenRvSpace);
+    // console.log(this.props.adultNum_1);
+  }
+
   formRow(fieldInfo) {
-    return (
-      <TextField
-        name={fieldInfo.dataName}
-        key={fieldInfo.dataName}
-        value={this.state.searchResponse[fieldInfo.dataName]}
-        hintText={fieldInfo.displayName}
-        floatingLabelText={fieldInfo.displayName}
-        onChange={this.updateFormRow}>
-      </TextField>
-      );
+    if (fieldInfo.state) {
+      return (
+        <TextField
+          name={fieldInfo.dataName}
+          key={fieldInfo.dataName}
+          errorText='Required'
+          value={this.state.searchResponse[fieldInfo.dataName]}
+          hintText={fieldInfo.displayName}
+          floatingLabelText={fieldInfo.displayName}
+          onChange={this.updateFormRow}>
+        </TextField>
+        );
+    }
+    // } else {
+    //   return (
+    //   <TextField
+    //       name={fieldInfo.dataName}
+    //       key={fieldInfo.dataName}
+    //       value={this.state.searchResponse[fieldInfo.dataName]}
+    //       hintText={fieldInfo.displayName}
+    //       floatingLabelText={fieldInfo.displayName}
+    //       onChange={this.updateFormRow}>
+    //     </TextField>
+    //     );
+    // }
   }
 
   updateSearchEmailInput(event, newInput) {

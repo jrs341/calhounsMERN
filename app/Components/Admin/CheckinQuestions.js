@@ -25,13 +25,14 @@ import { changeCabinState,
  changeDogNoState,
  changeDogBreedNoState,
  changeDogBreedYesState,
- changeVehicleNumOkState,
+ changeVehicleNum_0State,
+ changeVehicleNum_1State,
+ changeVehicleNum_2State,
  changeVehicleNumMoreState,
  changeTrailerNumNoState,
  changeTrailerNumYesState,
  changeChosenCabinState,
- changeChosen30AmpRvSpaceState,
- changeChosen50AmpRvSpaceState
+ changeChosenRvSpaceState
  } from '../../actions/checkinQuestionsActions.js'
 
 import { Link } from 'react-router'
@@ -70,13 +71,14 @@ import RangedDatePicker from '../RangedDatePicker'
     dogYes: store.dogYesState.dogYes,
     dogBreedNo: store.dogBreedNoState.dogBreedNo,
     dogBreedYes: store.dogBreedYesState.dogBreedYes,
-    vehicleNumOk: store.vehicleNumOkState.vehicleNumOk,
+    vehicleNum_0: store.vehicleNum_0State.vehicleNum_0,
+    vehicleNum_1: store.vehicleNum_1State.vehicleNum_1,
+    vehicleNum_2: store.vehicleNum_2State.vehicleNum_2,
     vehicleNumMore: store.vehicleNumMoreState.vehicleNumMore,
     trailerNumNo: store.trailerNumNoState.trailerNumNo,
     trailerNumYes: store.trailerNumYesState.trailerNumYes,
     chosenCabin: store.chosenCabinState.chosenCabin,
-    chosen30AmpRvSpace: store.chosen30AmpRvSpaceState.chosen30AmpRvSpace,
-    chosen50AmpRvSpace: store.chosen50AmpRvSpaceState.chosen50AmpRvSpace
+    chosenRvSpace: store.chosenRvSpaceState.chosenRvSpace
   };
 })
 
@@ -86,8 +88,8 @@ export default class CheckinQuestions extends React.Component {
 		super()
 
 		this.state = {
-			chooseRvSpace: true,
-			chooseCabin: true,
+			monthly: false,
+			button: true,
 			availableCabins: [],
 			available30AmpSpaces: [],
 			available50AmpSpaces: [],
@@ -118,11 +120,14 @@ export default class CheckinQuestions extends React.Component {
 		this.dogYesState = this.dogYesState.bind(this);
 		this.dogBreedNoState = this.dogBreedNoState.bind(this);
 		this.dogBreedYesState = this.dogBreedYesState.bind(this);
-		this.vehicleNumOkState = this.vehicleNumOkState.bind(this);
+		this.vehicleNum_0State = this.vehicleNum_0State.bind(this);
+		this.vehicleNum_1State = this.vehicleNum_1State.bind(this);
+		this.vehicleNum_2State = this.vehicleNum_2State.bind(this);
 		this.vehicleNumMoreState = this.vehicleNumMoreState.bind(this);
 		this.trailerNumNoState = this.trailerNumNoState.bind(this);
 		this.trailerNumYesState = this.trailerNumYesState.bind(this);
 		this.chosenCabinState = this.chosenCabinState.bind(this);
+		this.chosenRvSpaceState = this.chosenRvSpaceState.bind(this);
 		this.getAvailableCabins = this.getAvailableCabins.bind(this);
 		this.getAvailable30AmpRvSpaces = this.getAvailable30AmpRvSpaces.bind(this);
 		this.getAvailable50AmpRvSpaces = this.getAvailable50AmpRvSpaces.bind(this);
@@ -154,12 +159,18 @@ export default class CheckinQuestions extends React.Component {
 
   chosenCabinState(event, isInputChecked){
   	console.log(event.target.name);
-  	this.props.dispatch(changeChosenCabinState(event.target.name, isInputChecked))
+  	this.props.dispatch(changeChosenCabinState(event.target.name, isInputChecked));
+  	if(isInputChecked) {
+		this.setState({checkin: 'checkin'});
+		this.setState({button: false});
+	} else {
+		this.setState({checkin: ''});
+		this.setState({button: true});
+	}
   }
 
   updateAvailableCabins(availableCabinsResponse) {
     this.setState({availableCabins: availableCabinsResponse});
-    console.log(this.state.availableCabins);
   }
 
   getAvailable30AmpRvSpaces() {
@@ -194,14 +205,9 @@ export default class CheckinQuestions extends React.Component {
         label={fieldInfo.meter}
       	name={fieldInfo.meter}
       	key={fieldInfo.meter}
-        onCheck={this.chosen30AmpRvSpaceState}>
+        onCheck={this.chosenRvSpaceState}>
       </Checkbox>
       );
-  }
-
-  chosen30AmpRvSpaceState(event, isInputChecked){
-  	console.log(event.target.name);
-  	this.props.dispatch(changeChosen30AmpRvSpaceState(event.target.name, isInputChecked))
   }
 
   updateAvailable30AmpRvSpaces(available30AmpSpacesResponse) {
@@ -242,14 +248,21 @@ export default class CheckinQuestions extends React.Component {
         label={fieldInfo.meter}
       	name={fieldInfo.meter}
       	key={fieldInfo.meter}
-        onCheck={this.chosen50AmpRvSpaceState}>
+        onCheck={this.chosenRvSpaceState}>
       </Checkbox>
       );
   }
 
-  chosen50AmpRvSpaceState(event, isInputChecked){
+  chosenRvSpaceState(event, isInputChecked){
   	console.log(event.target.name);
-  	this.props.dispatch(changeChosen50AmpRvSpaceState(event.target.name, isInputChecked))
+  	this.props.dispatch(changeChosenRvSpaceState(event.target.name, isInputChecked));
+  	if(isInputChecked) {
+		this.setState({checkin: 'checkin'});
+		this.setState({button: false});
+	} else {
+		this.setState({checkin: ''});
+		this.setState({button: true});
+	}
   }
 
   updateAvailable50AmpRvSpaces(available50AmpSpacesResponse) {
@@ -267,32 +280,31 @@ export default class CheckinQuestions extends React.Component {
 	}
 
 	thirtyAmpState(event, isInputChecked) {
-		this.props.dispatch(changeThirtyAmpState(event, isInputChecked))
+		this.props.dispatch(changeThirtyAmpState(event, isInputChecked));
+		this.getAvailable30AmpRvSpaces();
+		this.getAvailable50AmpRvSpaces();
 	}
 
 	fiftyAmpState(event, isInputChecked) {
-		this.props.dispatch(changeFiftyAmpState(event, isInputChecked))
+		this.props.dispatch(changeFiftyAmpState(event, isInputChecked));
+		this.getAvailable30AmpRvSpaces();
+		this.getAvailable50AmpRvSpaces();
 	}
 
 	dailyState(event, isInputChecked) {
 		this.props.dispatch(changeDailyState(event, isInputChecked));
-		this.getAvailable30AmpRvSpaces();
-		this.getAvailable50AmpRvSpaces();
 	}
 
 	weeklyState(event, isInputChecked) {
 		this.props.dispatch(changeWeeklyState(event, isInputChecked));
-		this.getAvailable30AmpRvSpaces();
-		this.getAvailable50AmpRvSpaces();
 	}
 
 	monthlyState (event, isInputChecked) {
+		this.setState({monthly: true});
 		this.props.dispatch(changeMonthlyState(event, isInputChecked));
 	}
 
 	adultNum_0State(event, isInputChecked) {
-		this.getAvailable30AmpRvSpaces();
-		this.getAvailable50AmpRvSpaces();
 		this.props.dispatch(changeAdultNum_0State(event, isInputChecked))
 	}
 
@@ -361,8 +373,16 @@ export default class CheckinQuestions extends React.Component {
 		this.props.dispatch(changeDogBreedYesState(event, isInputChecked))
 	}
 
-	vehicleNumOkState(event, isInputChecked) {
-		this.props.dispatch(changeVehicleNumOkState(event, isInputChecked))
+	vehicleNum_0State(event, isInputChecked) {
+		this.props.dispatch(changeVehicleNum_0State(event, isInputChecked))
+	}
+
+	vehicleNum_1State(event, isInputChecked) {
+		this.props.dispatch(changeVehicleNum_1State(event, isInputChecked))
+	}
+
+	vehicleNum_2State(event, isInputChecked) {
+		this.props.dispatch(changeVehicleNum_2State(event, isInputChecked))
 	}
 
 	vehicleNumMoreState(event, isInputChecked) {
@@ -379,25 +399,25 @@ export default class CheckinQuestions extends React.Component {
 			alert('Please call Calhoun\'s at 361 550 7536 to discuss parking options. It is a policy at Calhoun\'s for trailers to be parked in designated areas.');
 	}
 
-	chooseCabinState(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({checkin: 'checkin'});
-			this.setState({hellNo: false});
-		}else{
-			this.setState({checkin: ''});
-			this.setState({hellNo: true});
-		}
-	}
+	// chooseCabinState(event, isInputChecked) {
+	// 	if(isInputChecked) {
+	// 		this.setState({checkin: 'checkin'});
+	// 		this.setState({hellNo: false});
+	// 	}else{
+	// 		this.setState({checkin: ''});
+	// 		this.setState({hellNo: true});
+	// 	}
+	// }
 
-	chooseRvSpaceState(event, isInputChecked) {
-		if(isInputChecked) {
-			this.setState({checkin: 'checkin'});
-			this.setState({hellNo: false});
-		}else{
-			this.setState({checkin: ''});
-			this.setState({hellNo: true});
-		}
-	}
+	// chooseRvSpaceState(event, isInputChecked) {
+	// 	if(isInputChecked) {
+	// 		this.setState({checkin: 'checkin'});
+	// 		this.setState({hellNo: false});
+	// 	}else{
+	// 		this.setState({checkin: ''});
+	// 		this.setState({hellNo: true});
+	// 	}
+	// }
 
 	render() {
 		return(
@@ -421,17 +441,7 @@ export default class CheckinQuestions extends React.Component {
 					      disabled={this.props.rvSpace}
 					      onCheck={this.rvSpaceState}
 					    />
-					<h3> What size plug does your RV use? </h3>
-		                <Checkbox
-					      label="30 AMP"
-					      disabled={this.props.thirtyAmp}
-					      onCheck={this.thirtyAmpState}
-					    />
-					    <Checkbox
-					      label="50 AMP"
-					      disabled={this.props.fiftyAmp}
-					      onCheck={this.fiftyAmpState}
-					    />
+
 					<h3> Please choose a rate </h3>
 						<Checkbox
 					      label="Daily"
@@ -447,6 +457,18 @@ export default class CheckinQuestions extends React.Component {
 					      label="Monthly"
 					      disabled={this.props.monthly}
 					      onCheck={this.monthlyState}
+					    />
+
+					<h3> What size plug does your RV use? </h3>
+		                <Checkbox
+					      label="30 AMP"
+					      disabled={this.props.thirtyAmp}
+					      onCheck={this.thirtyAmpState}
+					    />
+					    <Checkbox
+					      label="50 AMP"
+					      disabled={this.props.fiftyAmp}
+					      onCheck={this.fiftyAmpState}
 					    />
 					
 					<h3> How many additional adults, other than you, are in your group? </h3>
@@ -557,14 +579,19 @@ export default class CheckinQuestions extends React.Component {
 					    />
 					<h3> How many vehicles will you have with you to include motorcycles? </h3>
 						<Checkbox
+						  label="0"
+						  disabled={this.props.vehicleNum_0}
+						  onCheck={this.vehicleNum_0State}
+						/>
+						<Checkbox
 						  label="1"
-						  disabled={this.props.vehicleNumOk}
-						  onCheck={this.vehicleNumOkState}
+						  disabled={this.props.vehicleNum_1}
+						  onCheck={this.vehicleNum_1State}
 						/>
 						<Checkbox
 						  label="2"
-						  disabled={this.props.vehicleNumOk}
-						  onCheck={this.vehicleNumOkState}
+						  disabled={this.props.vehicleNum_2}
+						  onCheck={this.vehicleNum_2State}
 						/>
 						<Checkbox
 						  label="More than 2"
@@ -595,7 +622,7 @@ export default class CheckinQuestions extends React.Component {
 	            <CardActions>
 	            <Link to={this.state.checkin}>
 	            <RaisedButton
-	            	  disabled={this.state.hellNo}
+	            	  disabled={this.state.button}
 	                  label="Next"
 	                  primary={true}
 	                /> 

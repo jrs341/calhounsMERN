@@ -42,7 +42,12 @@ export default function reducer(state={
     dogYesStatic: false,
     dogBreedNo: true,
     dogBreedYes: true,
-    vehicleNumOk: true,
+    vehicleNum_0: true,
+    vehicleNum_0Static: false,
+    vehicleNum_1: true,
+    vehicleNum_1Static: false,
+    vehicleNum_2: true,
+    vehicleNum_2Static: false,
     vehicleNumMore: true,
     trailerNumNo: true,
     trailerNumYes: true,
@@ -50,9 +55,8 @@ export default function reducer(state={
     checkInDateStatic: 0,
     checkOutDate: true,
     checkOutDateStatic: 0,
-    chosenCabin: '',
-    chosen30AmpRvSpace: '',
-    chosen50AmpRvSpace: ''
+    chosenCabin: 'none',
+    chosenRvSpace: 'none'
   }, action) {
 
     switch (action.type) {
@@ -83,15 +87,17 @@ export default function reducer(state={
             return {...state, rvSpace: false,
               rvSpaceStatic: true,
               cabin: true,
-              thirtyAmp: false,
-              fiftyAmp: false,
+              daily: false,
+              weekly: false,
+              monthly: false
             }
         } else {
             return {...state, cabin: false,
               rvSpaceStatic: false,
               rvSpace: false,
-              thirtyAmp: true,
-              fiftyAmp: true,
+              daily: true,
+              weekly: true,
+              monthly: true
             }
         };
       case 'THIRTY_AMP':
@@ -100,17 +106,17 @@ export default function reducer(state={
               thirtyAmpStatic: true,
               fiftyAmp: true,
               rvSpace: true,
-              daily: false,
-              weekly: false,
-              monthly: false
+              daily: true,
+              weekly: true,
+              monthly: true
             }
         } else {
             return {...state, thirtyAmp: false,
               thirtyAmpStatic: false,
               fiftyAmp: false,
-              daily: true,
-              weekly: true,
-              monthly: true
+              // daily: false,
+              // weekly: false,
+              // monthly: false
             }
         };
       case 'FIFTY_AMP':
@@ -119,17 +125,17 @@ export default function reducer(state={
               fiftyAmpStatic: true,
               thirtyAmp: true,
               rvSpace: true,
-              daily: false,
-              weekly: false,
-              monthly: false
+              daily: true,
+              weekly: true,
+              monthly: true
               }
           } else {
               return {...state, fiftyAmp: false,
                 fiftyAmpStatic: false,
                 thirtyAmp: false,
-                daily: true,
-                weekly: true,
-                monthly: true
+                // daily: false,
+                // weekly: false,
+                // monthly: false
               }
           };
       case 'DAILY':
@@ -149,8 +155,8 @@ export default function reducer(state={
                 dailyStatic: true,
                 weekly: true,
                 monthly: true,
-                thirtyAmp: true,
-                fiftyAmp: true,
+                thirtyAmp: false,
+                fiftyAmp: false,
                 adultNum_0: false,
                 adultNum_1: false,
                 adultNum_2: false,
@@ -161,6 +167,8 @@ export default function reducer(state={
                 dailyStatic: false,
                 weekly: false,
                 monthly: false,
+                thirtyAmp: true,
+                fiftyAmp: true,
                 adultNum_0: true,
                 adultNum_1: true,
                 adultNum_2: true,
@@ -184,8 +192,8 @@ export default function reducer(state={
                 weeklyStatic: true,
                 daily: true,
                 monthly: true,
-                thirtyAmp: true,
-                fiftyAmp: true,
+                thirtyAmp: false,
+                fiftyAmp: false,
                 adultNum_0: false,
                 adultNum_1: false,
                 adultNum_2: false,
@@ -196,6 +204,8 @@ export default function reducer(state={
                 weeklyStatic: false,
                 daily: false,
                 monthly: false,
+                thirtyAmp: true,
+                fiftyAmp: true,
                 adultNum_0: true,
                 adultNum_1: true,
                 adultNum_2: true,
@@ -219,8 +229,8 @@ export default function reducer(state={
                 monthlyStatic: true,
                 daily: true,
                 weekly: true,
-                thirtyAmp: true,
-                fiftyAmp: true,
+                thirtyAmp: false,
+                fiftyAmp: false,
                 adultNum_0: false,
                 adultNum_1: false,
                 adultNum_2: false,
@@ -231,6 +241,8 @@ export default function reducer(state={
                 monthlyStatic: false,
                 daily: false,
                 weekly: false,
+                thirtyAmp: true,
+                fiftyAmp: true,
                 adultNum_0: true,
                 adultNum_1: true,
                 adultNum_2: true,
@@ -262,9 +274,8 @@ export default function reducer(state={
               childNum_1: false,
               childNum_2: false,
               childNum_3: false,
-              daily: true,
-              weekly: true,
-              monthly: true
+              thirtyAmp: true,
+              fiftyAmp: true
             }
         } else {
             if (state.cabinStatic) {
@@ -295,6 +306,7 @@ export default function reducer(state={
         if(action.payload && state.cabinStatic) {
           return {...state, adultNum_1: false,
             adultNum_1Static: true,
+            adultNum_0Static: true,
             adultNum_0: true,
             adultNum_2: true,
             adultNum_3: true,
@@ -309,6 +321,7 @@ export default function reducer(state={
         } else if (action.payload && state.rvSpaceStatic) {
             return {...state, adultNum_1: false,
               adultNum_1Static: true,
+              adultNum_0Static: true,
               adultNum_0: true,
               adultNum_2: true,
               adultNum_3: true,
@@ -316,14 +329,14 @@ export default function reducer(state={
               childNum_1: false,
               childNum_2: false,
               childNum_3: false,
-              daily: true,
-              weekly: true,
-              monthly: true
+              thirtyAmp: true,
+              fiftyAmp: true
             }
         } else {
             if (state.cabinStatic) {
               return {...state, adultNum_1: false,
                 adultNum_1Static: false,
+                adultNum_0Static: false,
                 adultNum_0: false,
                 adultNum_2: true,
                 adultNum_3: true,
@@ -335,6 +348,7 @@ export default function reducer(state={
             } else {
                 return {...state, adultNum_1: false,
                   adultNum_1Static: false,
+                  adultNum_0Static: false,
                   adultNum_0: false,
                   adultNum_2: false,
                   adultNum_3: false,
@@ -348,24 +362,27 @@ export default function reducer(state={
       case 'ADULT2':
         if(action.payload) {
           return {...state, adultNum_2: false,
+            adultNum_0Static: true,
+            adultNum_1Static: true,
             adultNum_2Static: true,
             adultNum_0: true,
             adultNum_1: true,
-            adultNum_2: true,
+            adultNum_3: true,
             childNum_0: false,
             childNum_1: false,
             childNum_2: false,
             childNum_3: false,
-            daily: true,
-            weekly: true,
-            monthly: true
+            thirtyAmp: true,
+            fiftyAmp: true
           }
         } else {
           return {...state, adultNum_2: false,
+            adultNum_0Static: false,
+            adultNum_1Static: false,
             adultNum_2Static: false,
             adultNum_0: false,
             adultNum_1: false,
-            adultNum_2: false,
+            adultNum_3: false,
             childNum_0: true,
             childNum_1: true,
             childNum_2: true,
@@ -376,6 +393,9 @@ export default function reducer(state={
         if(action.payload) {
           return {...state, adultNum_3: false,
             adultNum_3Static: true,
+            adultNum_0Static: true,
+            adultNum_1Static: true,
+            adultNum_2Static: true,
             adultNum_0: true,
             adultNum_1: true,
             adultNum_2: true,
@@ -383,13 +403,15 @@ export default function reducer(state={
             childNum_1: false,
             childNum_2: false,
             childNum_3: false,
-            daily: true,
-            weekly: true,
-            monthly: true
+            thirtyAmp: true,
+            fiftyAmp: true
           }
         } else {
           return {...state, adultNum_3: false,
             adultNum_3Static: false,
+            adultNum_0Static: false,
+            adultNum_1Static: false,
+            adultNum_2Static: false,
             adultNum_0: false,
             adultNum_1: false,
             adultNum_2: false,
@@ -505,6 +527,7 @@ export default function reducer(state={
       case 'CHILD2':
         if(action.payload && state.cabinStatic) {
           return {...state, childNum_2: false,
+            childNum_1Static: true,
             childNum_2Static: true,
             childNum_0: true,
             childNum_1: true,
@@ -517,6 +540,7 @@ export default function reducer(state={
           }
         } else if (action.payload && state.rvSpaceStatic) {
             return {...state, childNum_2: false,
+              childNum_1Static: true,
               childNum_2Static: true,
               childNum_0: true,
               childNum_1: true,
@@ -531,6 +555,7 @@ export default function reducer(state={
         } else {
             if (state.cabinStatic && state.adultNum_0Static) {
               return {...state, childNum_2: false,
+                  childNum_1Static: false,
                   childNum_2Static: false,
                   childNum_0: false,
                   childNum_1: false,
@@ -540,6 +565,7 @@ export default function reducer(state={
                 }
             } else {
                 return {...state, childNum_2: false,
+                  childNum_1Static: false,
                   childNum_2Static: false,
                   childNum_0: false,
                   childNum_1: false,
@@ -552,6 +578,8 @@ export default function reducer(state={
       case 'CHILD3':
         if(action.payload && state.rvSpaceStatic) {
           return {...state, childNum_3: false,
+            childNum_1Static: true,
+            childNum_2Static: true,
             childNum_3Static: true,
             childNum_0: true,
             childNum_1: true,
@@ -565,6 +593,8 @@ export default function reducer(state={
           }
         } else {
           return {...state, childNum_3: false,
+            childNum_1Static: false,
+            childNum_2Static: false,
             childNum_3Static: false,
             childNum_0: false,
             childNum_1: false,
@@ -582,14 +612,18 @@ export default function reducer(state={
             childNum_1: true,
             childNum_2: true,
             childNum_3: true,
-            vehicleNumOk: false,
+            vehicleNum_0: false,
+            vehicleNum_1: false,
+            vehicleNum_2: false,
             vehicleNumMore: false
           }
         } else {
           if(state.cabinStatic){
             return {...state, petNo: false,
               petNoStatic: false,
-              vehicleNumOk: true,
+              vehicleNum_0: true,
+              vehicleNum_1: true,
+              vehicleNum_2: true,
               vehicleNumMore: true
             }
           } else {
@@ -727,13 +761,17 @@ export default function reducer(state={
             dogNo: true,
             dogYes: true,
             dogBreedYes: true,
-            vehicleNumOk: false,
+            vehicleNum_0: false,
+            vehicleNum_1: false,
+            vehicleNum_2: false,
             vehicleNumMore: false
             }
         } else {
           return {...state, dogBreedNo: false,
             dogBreedYes: false,
-            vehicleNumOk: true,
+            vehicleNum_0: true,
+            vehicleNum_1: true,
+            vehicleNum_2: true,
             vehicleNumMore: true
             }
         }
@@ -749,16 +787,66 @@ export default function reducer(state={
             dogBreedNo: false
             }
         }
-      case 'VEHICLE_NUM_OK':
+      case 'VEHICLE_NUM_0':
         if (action.payload) {
-          return {...state, vehicleNumOk: false,
+          return {...state, vehicleNum_0: false,
+            vehicleNum_0Static: true,
+            vehicleNum_1: true,
+            vehicleNum_2: true,
             vehicleNumMore: true,
             petNo: true,
             trailerNumNo: false,
             trailerNumYes: false
             }
         } else {
-          return {...state, vehicleNumOk: false,
+          return {...state, vehicleNum_0: false,
+            vehicleNum_0Static: false,
+            vehicleNum_1: false,
+            vehicleNum_2: false,
+            vehicleNumMore: false,
+            trailerNumNo: true,
+            trailerNumYes: true
+            }
+        }
+      case 'VEHICLE_NUM_1':
+        if (action.payload) {
+          return {...state, vehicleNum_1: false,
+            vehicleNum_1Static: true,
+            vehicleNum_0: true,
+            vehicleNum_2: true,
+            vehicleNumMore: true,
+            petNo: true,
+            trailerNumNo: false,
+            trailerNumYes: false
+            }
+        } else {
+          return {...state, vehicleNum_1: false,
+            vehicleNum_1Static: false,
+            vehicleNum_0: false,
+            vehicleNum_2: false,
+            vehicleNumMore: false,
+            trailerNumNo: true,
+            trailerNumYes: true
+            }
+        }
+      case 'VEHICLE_NUM_2':
+        if (action.payload) {
+          return {...state, vehicleNum_2: false,
+            vehicleNum_1Static: true,
+            vehicleNum_2Static: true,
+            vehicleNum_0: true,
+            vehicleNum_1: true,
+            vehicleNumMore: true,
+            petNo: true,
+            trailerNumNo: false,
+            trailerNumYes: false
+            }
+        } else {
+          return {...state, vehicleNum_2: false,
+            vehicleNum_1Static: false,
+            vehicleNum_2Static: false,
+            vehicleNum_0: false,
+            vehicleNum_1: false,
             vehicleNumMore: false,
             trailerNumNo: true,
             trailerNumYes: true
@@ -767,12 +855,16 @@ export default function reducer(state={
       case 'VEHICLE_NUM_MORE':
         if (action.payload) {
           return {...state, vehicleNumMore: false,
-            vehicleNumOk: true,
+            vehicleNum_0: true,
+            vehicleNum_1: true,
+            vehicleNum_2: true,
             petNo: true
             }
         } else {
           return {...state, vehicleNumMore: false,
-            vehicleNumOk: false
+            vehicleNum_0: false,
+            vehicleNum_1: false,
+            vehicleNum_2: false,
             }
         }
       case 'TRAILER_NUM_NO':
@@ -805,11 +897,13 @@ export default function reducer(state={
         if (action.payload) {
           return {...state, checkInDate: false,
             checkInDateStatic: action.payload,
+            checkOutDate: false,
             trailerNumYes: true,
             trailerNumNo: true
           }  
         } else {
-            return {...state, checkInDate: true
+            return {...state, checkInDate: true,
+              checkOutDate: true
             } 
         }; 
       case 'CHECK_OUT_DATE':
@@ -825,13 +919,9 @@ export default function reducer(state={
         if (action.payload) {
           return {...state, chosenCabin: action.payload }
         };
-      case 'CHOSEN_30AMP':
+      case 'CHOSEN_RV_SPACE':
         if (action.payload) {
           return {...state, chosen30AmpRvSpace: action.payload}
-        };
-      case 'CHOSEN_50AMP':
-        if (action.payload) {
-          return {...state, chosen50AmpRvSpace: action.payload}
         };
       default:
         return state;

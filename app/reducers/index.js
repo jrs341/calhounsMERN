@@ -38,18 +38,27 @@ import petNum_1State from "./checkinQuestionsReducer.js"
 import petNum_2State from "./checkinQuestionsReducer.js"
 import petNumMoreState from "./checkinQuestionsReducer.js"
 import dogNoState from "./checkinQuestionsReducer.js"
+import dogNoStaticState from "./checkinQuestionsReducer.js"
 import dogYesState from "./checkinQuestionsReducer.js"
+import dogYesStaticState from "./checkinQuestionsReducer.js"
 import dogBreedNoState from "./checkinQuestionsReducer.js"
 import dogBreedYesState from "./checkinQuestionsReducer.js"
-import vehicleNumOkState from "./checkinQuestionsReducer.js"
+import vehicleNum_0State from "./checkinQuestionsReducer.js"
+import vehicleNum_0StaticState from "./checkinQuestionsReducer.js"
+import vehicleNum_1State from "./checkinQuestionsReducer.js"
+import vehicleNum_1StaticState from "./checkinQuestionsReducer.js"
+import vehicleNum_2State from "./checkinQuestionsReducer.js"
+import vehicleNum_2StaticState from "./checkinQuestionsReducer.js"
 import vehicleNumMoreState from "./checkinQuestionsReducer.js"
 import trailerNumNoState from "./checkinQuestionsReducer.js"
 import trailerNumYesState from "./checkinQuestionsReducer.js"
 import checkInDateState from "./checkinQuestionsReducer.js"
+import checkInDateStaticState from "./checkinQuestionsReducer.js"
 import checkOutDateState from "./checkinQuestionsReducer.js"
+import checkOutDateStaticState from "./checkinQuestionsReducer.js"
 import chosenCabinState from "./checkinQuestionsReducer.js"
-import chosen30AmpRvSpaceState from "./checkinQuestionsReducer.js"
-import chosen50AmpRvSpaceState from "./checkinQuestionsReducer.js"
+import chosenRvSpaceState from "./checkinQuestionsReducer.js"
+// import chosen50AmpRvSpaceState from "./checkinQuestionsReducer.js"
 
 export default combineReducers({
   cabinState,
@@ -90,16 +99,24 @@ export default combineReducers({
   petNum_2State,
   petNumMoreState,
   dogNoState,
+  dogNoStaticState,
   dogYesState,
+  dogYesStaticState,
   dogBreedNoState,
   dogBreedYesState,
-  vehicleNumOkState,
+  vehicleNum_0State,
+  vehicleNum_0StaticState,
+  vehicleNum_1State,
+  vehicleNum_1StaticState,
+  vehicleNum_2State,
+  vehicleNum_2StaticState,
   vehicleNumMoreState,
   trailerNumNoState,
   trailerNumYesState,
   checkInDateState,
+  checkInDateStaticState,
   checkOutDateState,
+  checkOutDateStaticState,
   chosenCabinState,
-  chosen30AmpRvSpaceState,
-  chosen50AmpRvSpaceState
+  chosenRvSpaceState
 })

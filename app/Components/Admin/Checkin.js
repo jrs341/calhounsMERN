@@ -124,16 +124,23 @@ export default class Checkin extends React.Component {
   componentWillMount(props) {
     if (this.props.chosenCabin != 'none') {
       this.setState({meter: this.props.chosenCabin});
+      return axios({
+          type: 'GET',
+          url: '/lastMeterReading/' + this.props.chosenCabin
+        }).then((response)=> {
+          // console.log(response.data[0].reading[response.data[0].reading.length-1].reading);
+          this.setState({meterReading: response.data[0].reading[response.data[0].reading.length-1].reading});
+        });
     } else {
       this.setState({meter: this.props.chosenRvSpace});
-    }
-    return axios({
+      return axios({
           type: 'GET',
           url: '/lastMeterReading/' + this.props.chosenRvSpace
         }).then((response)=> {
           // console.log(response.data[0].reading[response.data[0].reading.length-1].reading);
           this.setState({meterReading: response.data[0].reading[response.data[0].reading.length-1].reading});
         });
+      }
   }
 
   formRow(fieldInfo) {
@@ -211,6 +218,9 @@ export default class Checkin extends React.Component {
     var daily = '';
     var weekly = '';
     var monthly = '';
+    var checkInDate = this.props.checkInDate;
+    var checkOutDate = this.props.checkOutDate;
+    var rate;
 
     if (this.props.chosenCabin != 'none'){
       KWH_rate = '.15';
@@ -240,18 +250,21 @@ export default class Checkin extends React.Component {
 
     if (this.props.daily) {
       daily = 'X';
+      rate = 'daily';
     } else {
       daily = '';
     };
 
     if (this.props.weekly) {
       weekly = 'X';
+      rate = 'weekly';
     } else {
       weekly = '';
     };
 
     if (this.props.monthly) {
       monthly = 'X';
+      rate = 'monthly';
     } else {
       monthly = '';
     };
@@ -296,7 +309,8 @@ export default class Checkin extends React.Component {
         meter: this.state.meter,
         reading:[{reading: this.state.meterReading}],
         checkin: this.props.checkInDate,
-        checkout: this.props.checkOutDate
+        checkout: this.props.checkOutDate,
+        rate: rate
       }).then(function(response){ 
         console.log('saved');
         axios.post('/addCustomerToMeter',
@@ -308,7 +322,7 @@ export default class Checkin extends React.Component {
         });
     });
 
-    var url = "https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId="+ formId +"&Tennant_UserName="+ formInfo.given_name + "&Tennant_Email="+ formInfo.email + "&given_name="+ formInfo.given_name +"&family_name="+formInfo.family_name+"&address_line_1="+ formInfo.address_line_1+"&phone_number="+ formInfo.phone_number+"&phone_number_alt="+formInfo.phone_number_alt+"&locality="+formInfo.locality+"&administrative_district_level_1="+formInfo.administrative_district_level_1+"&postal_code="+formInfo.postal_code+"&country="+formInfo.country+"&drivers_license_num="+formInfo.drivers_license_num+"&drivers_license_state="+formInfo.drivers_license_state+"&additional_occupant_1="+formInfo.additional_occupant_1+"&additional_occupant_2="+formInfo.additional_occupant_2+"&additional_occupant_3="+formInfo.additional_occupant_3+"&additional_occupant_4="+formInfo.additional_occupant_4+"&additional_occupant_1_age="+formInfo.additional_occupant_1_age+"&additional_occupant_2_age="+formInfo.additional_occupant_2_age+"&additional_occupant_3_age="+formInfo.additional_occupant_3_age+"&additional_occupant_4_age="+formInfo.additional_occupant_4_age+"&pets_number_of="+formInfo.pets_number_of+"&pets_type="+formInfo.pets_type+"&pets_breed="+formInfo.pets_breed+"&unit_type="+formInfo.unit_type+"&unit_license="+formInfo.unit_license+"&unit_state="+formInfo.unit_state+"&unit_year="+formInfo.unit_year+"&unit_length="+formInfo.unit_length+"&vehicle_1_type="+formInfo.vehicle_1_type+"&vehicle_2_type="+formInfo.vehicle_2_type+"&vehicle_1_license="+formInfo.vehicle_1_license+"&vehicle_2_license="+formInfo.vehicle_2_license+"&vehicle_1_state="+formInfo.vehicle_1_state+"&vehicle_2_state="+formInfo.vehicle_2_state+"&vehicle_1_year="+formInfo.vehicle_1_year+"&vehicle_2_year="+formInfo.vehicle_2_year+"&daily="+daily+"&weekly="+weekly+"&monthly="+monthly+"&thirtyAmp="+thirtyAmp+"&fiftyAmp="+fiftyAmp+"&KWH_rate="+KWH_rate+"&reading="+reading+"&meter="+meter;
+    var url = "https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId="+ formId +"&Tennant_UserName="+ formInfo.given_name + "&Tennant_Email="+ formInfo.email + "&given_name="+ formInfo.given_name +"&family_name="+formInfo.family_name+"&address_line_1="+ formInfo.address_line_1+"&phone_number="+ formInfo.phone_number+"&phone_number_alt="+formInfo.phone_number_alt+"&locality="+formInfo.locality+"&administrative_district_level_1="+formInfo.administrative_district_level_1+"&postal_code="+formInfo.postal_code+"&country="+formInfo.country+"&drivers_license_num="+formInfo.drivers_license_num+"&drivers_license_state="+formInfo.drivers_license_state+"&additional_occupant_1="+formInfo.additional_occupant_1+"&additional_occupant_2="+formInfo.additional_occupant_2+"&additional_occupant_3="+formInfo.additional_occupant_3+"&additional_occupant_4="+formInfo.additional_occupant_4+"&additional_occupant_1_age="+formInfo.additional_occupant_1_age+"&additional_occupant_2_age="+formInfo.additional_occupant_2_age+"&additional_occupant_3_age="+formInfo.additional_occupant_3_age+"&additional_occupant_4_age="+formInfo.additional_occupant_4_age+"&pets_number_of="+formInfo.pets_number_of+"&pets_type="+formInfo.pets_type+"&pets_breed="+formInfo.pets_breed+"&unit_type="+formInfo.unit_type+"&unit_license="+formInfo.unit_license+"&unit_state="+formInfo.unit_state+"&unit_year="+formInfo.unit_year+"&unit_length="+formInfo.unit_length+"&vehicle_1_type="+formInfo.vehicle_1_type+"&vehicle_2_type="+formInfo.vehicle_2_type+"&vehicle_1_license="+formInfo.vehicle_1_license+"&vehicle_2_license="+formInfo.vehicle_2_license+"&vehicle_1_state="+formInfo.vehicle_1_state+"&vehicle_2_state="+formInfo.vehicle_2_state+"&vehicle_1_year="+formInfo.vehicle_1_year+"&vehicle_2_year="+formInfo.vehicle_2_year+"&daily="+daily+"&weekly="+weekly+"&monthly="+monthly+"&thirtyAmp="+thirtyAmp+"&fiftyAmp="+fiftyAmp+"&KWH_rate="+KWH_rate+"&reading="+reading+"&meter="+meter+"&checkin="+checkInDate+"&checkout="+checkOutDate;
 
     var win = window.open(url, '_blank');
     win.focus();

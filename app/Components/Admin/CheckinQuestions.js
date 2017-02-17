@@ -88,6 +88,8 @@ export default class CheckinQuestions extends React.Component {
 		super()
 
 		this.state = {
+			daily: false,
+			weekly: false,
 			monthly: false,
 			button: true,
 			availableCabins: [],
@@ -292,10 +294,12 @@ export default class CheckinQuestions extends React.Component {
 	}
 
 	dailyState(event, isInputChecked) {
+		this.setState({daily: true})
 		this.props.dispatch(changeDailyState(event, isInputChecked));
 	}
 
 	weeklyState(event, isInputChecked) {
+		this.setState({weekly: true});
 		this.props.dispatch(changeWeeklyState(event, isInputChecked));
 	}
 

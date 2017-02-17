@@ -90,31 +90,38 @@ app.get("/searchCustomer/:email", function(req, res){
     Customer.findOne({"email": req.params.email}, function(error, doc) {
     if (error) {
       res.send(error);
-      console.log(error);
     }
     else {
       res.send(doc);
-      console.log(doc);
     }
   });
 });
 
-// app.get("/getCustomerBillingInfo", function(req, res){
-//   Customer.find({meter: all not null} {given_name: 1, family_name: 1, email: 1, meter: 1, checkin: 1}, function(error, doc) {
-//     if (error) {
-//       res.send(error);
-//       console.log(error);
-//     }
-//     else {
-//       res.send(doc);
-//       console.log(doc);
-//     }
-//   });
-// });
+app.get("/checkOutByCustomerEmail/:searchInput", function(req, res){
+    console.log(req.params.searchInput);
+    Customer.findOne({email: req.params.searchInput},{meter: 1, reading: 1}, function(error, doc) {
+    if (error) {
+      console.log(error);
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
 
-// app.get("/getCustomerKwhUsage", function(req, res){
-//   Customer.find({meter: all not null} {reading: 1 .sort('created_date').limit(2)})
-// })
+app.get("/checkOutByMeter/:searchInput", function(req, res){
+    console.log(req.params.searchInput);
+    Customer.findOne({meter: req.params.searchInput},{meter: 1, reading: 1}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
 
 app.post("/submitCustomer", function(req, res) {
  // check our req.body against our user model
@@ -124,7 +131,6 @@ app.post("/submitCustomer", function(req, res) {
       res.send(error);
     }
     else {
-      console.log(req.body);
       res.send(doc);
     }
   });

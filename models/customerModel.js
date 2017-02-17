@@ -180,6 +180,10 @@ var CustomerSchema = new Schema({
     trim: true,
     default: 'null'
   },
+  rate: {
+    type: String,
+    trim: true
+  }
   checkin: {
     type: String,
     trim: true

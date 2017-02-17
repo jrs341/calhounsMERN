@@ -11,6 +11,7 @@ import MonthlyBilling from '../Components/Admin/MonthlyBilling'
 import CheckinQuestions from '../Components/Admin/CheckinQuestions'
 import Checkin from '../Components/Admin/Checkin'
 import Checkout from '../Components/Admin/Checkout'
+import Payment from '../pages/Payment'
 
 module.exports = (
   <Router history={browserHistory}>
@@ -21,6 +22,7 @@ module.exports = (
         <Route path="checkinQuestions" component={CheckinQuestions}/>
       	<Route path="checkin" component={Checkin} />
       	<Route path="checkout" component={Checkout} />
+        <Route path="payment" component={Payment} />
       	<Route path="updateMeters" component={UpdateAllMeters} />
         <Route path="monthlyBilling" component={MonthlyBilling} />
       <IndexRoute component={HomePage} />

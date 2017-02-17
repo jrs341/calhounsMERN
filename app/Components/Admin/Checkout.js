@@ -21,14 +21,22 @@ export default class Checkout extends React.Component {
       searchResultInfo: '',
       finalBill: false,
       searchInput: '',
-      finalMeterReading: ''
+      firstName: '',
+      lastName: '',
+      email: '',
+      meter: '',
+      previousMeterReading: '',
+      finalMeterReading: '',
+      finalKWHtotal: ''
     }
 
     this.updateSearchResultInfo = this.updateSearchResultInfo.bind(this);
     this.updateSearchInput = this.updateSearchInput.bind(this);
+    this.updateCustomerInfo = this.updateCustomerInfo.bind(this);
     this.updateFinalMeterReading = this.updateFinalMeterReading.bind(this);
     this.searchEmail = this.searchEmail.bind(this);
     this.searchMeter = this.searchMeter.bind(this);
+    this.updateFinalKWHtotal = this.updateFinalKWHtotal.bind(this);
   }
 
   updateSearchResultInfo(searchResultInfo) {
@@ -39,8 +47,39 @@ export default class Checkout extends React.Component {
     this.setState({searchInput: newInput});
   }
 
-  updateFinalMeterReading(event, newInput) {
+  updateCustomerInfo(response){
+    this.setState({firstName: response.data.given_name});
+    this.setState({lastName: response.data.family_name});
+    this.setState({meter: response.data.meter});
+    this.setState({previousMeterReading: response.data.reading[response.data.reading.length-1].reading});
+    this.setState({email: response.data.email});
+  }
+
+  updateFinalKWHtotal(event, newInput) {
     this.setState({finalMeterReading: newInput});
+    this.setState({finalKWHtotal: newInput});
+  }
+
+  updateFinalMeterReading(event, newInput) {
+    axios.post('/submitFinalMeterReading',
+    {
+      meter: this.state.meter,
+      reading: this.state.finalMeterReading
+    }).then(function(response) {
+      console.log('Saved Final');
+    });
+    axios.post('/removeCustomerFromMeter', 
+    {
+      meter: this.state.meter
+    }).then(function(response) {
+      console.log('Customer Removed from Meter');
+    });
+    axios.post('/removeMeterFromCustomer',
+    {
+      email: this.state.email
+    }).then(function(response) {
+      console.log('Meter Removed from Customer');
+    })
   }
 
   searchEmail() {
@@ -51,6 +90,8 @@ export default class Checkout extends React.Component {
       if (response.data == "") {
         this.updateSearchResultInfo('Sorry we did not find that email in out records, please try a different email or enter the meter ID');
       } else {
+        console.log(response.data);
+        this.updateCustomerInfo(response);
         this.updateSearchResultInfo('Enter the final meter reading to continue');
       }
     });
@@ -64,6 +105,8 @@ export default class Checkout extends React.Component {
       if (response.data == "") {
         this.updateSearchResultInfo('Sorry we did not find that meter ID in out records, please try a searching with your email address');
       } else {
+        console.log(response.data);
+        this.updateCustomerInfo(response);
         this.updateSearchResultInfo('Enter the final meter reading to continue');
       }
     });
@@ -88,23 +131,38 @@ export default class Checkout extends React.Component {
               />
               <RaisedButton
                 style= {submitButton}
-                label="Submit Email"
+                label="Search Email"
                 primary={true}
                 onClick={this.searchEmail}
               /> 
               <RaisedButton
                 style={submitButton}
-                label="Submit Meter"
+                label="Search Meter"
                 primary={true}
                 onClick={this.searchMeter}
               /> 
+
+              <h3> {this.state.firstName} </h3>
+              <h3> {this.state.lastName} </h3>
+              <h3> {this.state.meter} </h3>
+              <h3> {this.state.previousMeterReading} </h3>
+              <h3> {this.state.finalKWHtotal-this.state.previousMeterReading } </h3>
+
               <TextField
                 id='finalMeterReading'
                 type='text'
                 hintText='Enter final meter reading'
                 floatingLabelText='Enter final meter reading'
-                onChange={this.updateFinalMeterReading}
+                onChange={this.updateFinalKWHtotal}
               />
+              <Link to='payment'>
+              <RaisedButton
+                style={submitButton}
+                label="Submit Final Meter Reading"
+                primary={true}
+                // onClick={this.updateFinalMeterReading}
+              /> 
+              </Link>
               
             </CardText>
             <CardActions>

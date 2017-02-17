@@ -99,7 +99,7 @@ app.get("/searchCustomer/:email", function(req, res){
 
 app.get("/checkOutByCustomerEmail/:searchInput", function(req, res){
     console.log(req.params.searchInput);
-    Customer.findOne({email: req.params.searchInput},{meter: 1, reading: 1}, function(error, doc) {
+    Customer.findOne({email: req.params.searchInput},{meter: 1, reading: 1, given_name: 1, family_name: 1, email: 1}, function(error, doc) {
     if (error) {
       console.log(error);
       res.send(error);
@@ -112,7 +112,7 @@ app.get("/checkOutByCustomerEmail/:searchInput", function(req, res){
 
 app.get("/checkOutByMeter/:searchInput", function(req, res){
     console.log(req.params.searchInput);
-    Customer.findOne({meter: req.params.searchInput},{meter: 1, reading: 1}, function(error, doc) {
+    Customer.findOne({meter: req.params.searchInput},{meter: 1, reading: 1, given_name: 1, family_name: 1, email: 1}, function(error, doc) {
     if (error) {
       res.send(error);
     }
@@ -122,6 +122,16 @@ app.get("/checkOutByMeter/:searchInput", function(req, res){
   });
 });
 
+app.post('/removeMeterFromCustomer', function(req, res) {
+  Customer.findOneAndUpdate({email: req.body.email}, {$unset: {meter: ''}}, function(error, doc) {
+     if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
 
 app.post("/submitCustomer", function(req, res) {
  // check our req.body against our user model
@@ -309,13 +319,10 @@ app.post("/submitAllMeterReadings", function(req, res) {
   });
 });
 
-
-      // ==========================Meter Document Delete=====================
-
-
-app.post("/removeCustomerFromMeter", function(req, res) {
-  console.log(req.body.customer);
-  MeterReadings.findOneAndUpdate({customer:req.body.customer}, {customer: "null" }, {upsert: true}, function(error, doc) {
+app.post("/submitFinalMeterReading", function(req, res) {
+  console.log(req.body.meter);
+  console.log(req.body.reading);
+  MeterReadings.findOneAndUpdate({meter:req.body.meter}, { $push: {reading: { reading: req.body.reading } }},{safe: true}, function(error, doc) {
     if (error) {
       res.send(error);
     }
@@ -326,22 +333,20 @@ app.post("/removeCustomerFromMeter", function(req, res) {
 });
 
 
+      // ==========================Meter Document Delete=====================
+// {customer:req.body.customer}, {customer: "null" }, {upsert: true}
+// .updateOne({meter: 'F'}, {$unset: {customer: ''}})
+app.post("/removeCustomerFromMeter", function(req, res) {
+  MeterReadings.findOneAndUpdate({meter: req.body.meter}, {$unset: {customer: ''}}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
 
-
-
-
-// {meter: 1, reading: 1},
-// app.get("/lastMeterReading/:meter", function(req, res) {
-//   console.log(req.body);
-//   MeterReadings.findOne({"meter": req.params.meter},{reading: 1,meter: 1}, function(error, doc) {
-//     if (error) {
-//       res.send(error);
-//     }
-//     else {
-//       res.send(doc);
-//     }
-//   });
-// });
 // db.getCollection('customers').updateOne({email: 'billybob@me.com'}, {$unset: {meter: '',checkin: '',checkout: '', reading: ''}})
 // db.getCollection('meterreadings').updateOne({meter: 'F'}, {$unset: {customer: ''}})
 // db.getCollection('meterreadings').find({meter: /^Cabin/, $and:[{ customer: null}]})

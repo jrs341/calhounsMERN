@@ -183,7 +183,7 @@ var CustomerSchema = new Schema({
   rate: {
     type: String,
     trim: true
-  }
+  },
   checkin: {
     type: String,
     trim: true

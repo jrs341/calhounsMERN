@@ -248,8 +248,22 @@ app.get("/available50AmpDailyWeekly", function(req, res) {
 });
 
 // This route will be for future daily and weekly requests
-app.get("/availableDailyWeekly", function(req, res) {
-  MeterReadings.find({$or: [{amp: '30'}]}, function(error, doc){
+// app.get("/availableDailyWeekly", function(req, res) {
+//   MeterReadings.find({$or: [{amp: '30'}]}, function(error, doc){
+//     if(error) {
+//       res.send(error);
+//     }
+//     else {
+//       res.send(doc);
+//     }
+//   });
+// });
+// var lastReading = function(meter) {
+//     return MeterReadings.find({meter: meter});
+//   };
+// MeterReadings.find({meter: req.params.meter}
+app.get("/lastMeterReading/:meter", function(req, res) {
+  MeterReadings.find({meter: req.params.meter}, function(error, doc){
     if(error) {
       res.send(error);
     }
@@ -259,12 +273,13 @@ app.get("/availableDailyWeekly", function(req, res) {
   });
 });
 
+
       // ==========================Meter Document Update=====================
 
 // this route will insert the mongo ID into the meter reading
 app.post("/addCustomerToMeter", function(req, res) {
-  console.log(req.body.customer);
-  MeterReadings.findOneAndUpdate({meter:req.body.meter}, {customer: req.body.customer }, {upsert: true}, function(error, doc) {
+  console.log(req.body.email);
+  MeterReadings.findOneAndUpdate({meter:req.body.meter}, {customer: req.body.email }, {upsert: true}, function(error, doc) {
     if (error) {
       res.send(error);
     }
@@ -321,6 +336,8 @@ app.post("/removeCustomerFromMeter", function(req, res) {
 //     }
 //   });
 // });
+// db.getCollection('customers').updateOne({email: 'billybob@me.com'}, {$unset: {meter: '',checkin: '',checkout: '', reading: ''}})
+// db.getCollection('meterreadings').updateOne({meter: 'F'}, {$unset: {customer: ''}})
 // db.getCollection('meterreadings').find({meter: /^Cabin/, $and:[{ customer: null}]})
 // db.getCollection('meterreadings').find({customer: null})
 // db.getCollection('meterreadings').updateOne({meter: 'B'}, {$set: {customer: 'billy'}})

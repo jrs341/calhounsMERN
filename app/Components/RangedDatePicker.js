@@ -38,16 +38,16 @@ export default class RangedDatePicker extends React.Component {
     const maxDate = new Date();
     const maxArrivalDate = new Date();
     minDate.setFullYear(minDate.getFullYear() - 1);
-    minDate.setHours(0, 0, 0, 0);
+    minDate.setHours(8, 0);
     maxDate.setFullYear(maxDate.getFullYear() + 1);
 
     if (this.props.cabinStatic) {
     maxArrivalDate.setDate(maxDate.getDate() + 5);
-    maxDate.setHours(0, 0, 0, 0);
+    maxDate.setHours(2, 0);
     }
     else {
       maxArrivalDate.setDate(maxDate.getDate() + 7);
-    maxDate.setHours(0, 0, 0, 0);
+    maxDate.setHours(2, 0);
     }
 
     this.state = {

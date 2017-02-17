@@ -921,7 +921,7 @@ export default function reducer(state={
         };
       case 'CHOSEN_RV_SPACE':
         if (action.payload) {
-          return {...state, chosen30AmpRvSpace: action.payload}
+          return {...state, chosenRvSpace: action.payload}
         };
       default:
         return state;

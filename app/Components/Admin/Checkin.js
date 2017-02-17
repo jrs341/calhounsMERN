@@ -22,7 +22,9 @@ const submitButton = {
   width: 200
 }
 
-var postRoute = '';
+var postRoute = '/submitCustomer';
+
+var foundCustomer = false;
 
 @connect((store) => {
   return {
@@ -95,8 +97,10 @@ export default class Checkin extends React.Component {
     {displayName: 'Vehicle 2 License Plate Number', dataName: 'vehicle_2_license', state: this.props.vehicleNum_2},
     {displayName: 'Vehicle 2 License Plate State', dataName: 'vehicle_2_state', state: this.props.vehicleNum_2},
     {displayName: 'Vehicle 2 Year', dataName: 'vehicle_2_year', state: this.props.vehicleNum_2}
-    // {displayName: 'Meter', dataName: 'meter'},
-    // {displayName: 'Meter Reading'}
+    // {displayName: 'Meter', dataName: 'meter', state: false},
+    // {displayName: 'Meter Reading', dataName: 'meterReading', state: false},
+    // {displayName: 'Checkin Date', dataName: 'checkInDate', state: false},
+    // {displayName: 'Checkout Date', dataName: 'checkOutDate', state: false},
     ];
     
     this.state = {
@@ -105,7 +109,8 @@ export default class Checkin extends React.Component {
       searchResponse: {},
       searchResultInfo: 'Please enter your email address to search our records for your information or fill out the new customer form.',
       postRoute: '/submitCustomer',
-      meter: ''
+      meter:'',
+      meterReading: ''
     }
 
     this.updateSearchEmailInput = this.updateSearchEmailInput.bind(this);
@@ -116,16 +121,34 @@ export default class Checkin extends React.Component {
     this.openForm = this.openForm.bind(this);
   }
 
-  componentWillMount() {
-    // console.log(this.props.cabin);
-    // console.log(this.props.rvSpace);
-    // console.log(this.props.chosenCabin);
-    // console.log(this.props.chosenRvSpace);
-    // console.log(this.props.adultNum_1);
+  componentWillMount(props) {
+    if (this.props.chosenCabin != 'none') {
+      this.setState({meter: this.props.chosenCabin});
+    } else {
+      this.setState({meter: this.props.chosenRvSpace});
+    }
+    return axios({
+          type: 'GET',
+          url: '/lastMeterReading/' + this.props.chosenRvSpace
+        }).then((response)=> {
+          // console.log(response.data[0].reading[response.data[0].reading.length-1].reading);
+          this.setState({meterReading: response.data[0].reading[response.data[0].reading.length-1].reading});
+        });
   }
 
   formRow(fieldInfo) {
-    if (fieldInfo.state) {
+    if (foundCustomer) {
+      return (
+        <TextField
+          name={fieldInfo.dataName}
+          key={fieldInfo.dataName}
+          value={this.state.searchResponse[fieldInfo.dataName]}
+          hintText={fieldInfo.displayName}
+          floatingLabelText={fieldInfo.displayName}
+          onChange={this.updateFormRow}>
+        </TextField>
+        );
+    } else if (fieldInfo.state) {
       return (
         <TextField
           name={fieldInfo.dataName}
@@ -138,18 +161,6 @@ export default class Checkin extends React.Component {
         </TextField>
         );
     }
-    // } else {
-    //   return (
-    //   <TextField
-    //       name={fieldInfo.dataName}
-    //       key={fieldInfo.dataName}
-    //       value={this.state.searchResponse[fieldInfo.dataName]}
-    //       hintText={fieldInfo.displayName}
-    //       floatingLabelText={fieldInfo.displayName}
-    //       onChange={this.updateFormRow}>
-    //     </TextField>
-    //     );
-    // }
   }
 
   updateSearchEmailInput(event, newInput) {
@@ -181,15 +192,70 @@ export default class Checkin extends React.Component {
       } else {
         this.updateSearchResponse(response.data);
         console.log(response.data);
+        foundCustomer = true;
         this.updateSearchResultInfo('Please verfiy all of your information is still correct.');
         postRoute = '/updateCustomer';
       }
     });
   }
 
-  openForm() {
-
+  openForm(props) {
+    
+    var KWH_rate = '';
+    var meter = this.state.meter;
+    var reading = this.state.meterReading;
     var formInfo = this.state.searchResponse;
+    var formId;
+    var thirtyAmp = '';
+    var fiftyAmp = '';
+    var daily = '';
+    var weekly = '';
+    var monthly = '';
+
+    if (this.props.chosenCabin != 'none'){
+      KWH_rate = '.15';
+    } else {
+      KWH_rate = '.11';
+    };
+
+    if (this.props.rvSpace) {
+      formId = '302b34c0-b394-4859-8b81-e21e487c7e01';
+    } else if (this.props.rvSpace && this.props.dogYes) {
+      formId = '0';
+    } else if (this.props.cabin && this.props.dogNo){
+      formId = '0';
+    };
+
+    if (this.props.thirtyAmp) {
+      thirtyAmp = 'X';
+    } else {
+      thirtyAmp = '';
+    };
+
+    if (this.props.fiftyAmp) {
+      fiftyAmp = 'X';
+    } else {
+      fiftyAmp = '';
+    };
+
+    if (this.props.daily) {
+      daily = 'X';
+    } else {
+      daily = '';
+    };
+
+    if (this.props.weekly) {
+      weekly = 'X';
+    } else {
+      weekly = '';
+    };
+
+    if (this.props.monthly) {
+      monthly = 'X';
+    } else {
+      monthly = '';
+    };
+
     axios.post(postRoute, 
       {
         _id: formInfo._id,
@@ -227,26 +293,26 @@ export default class Checkin extends React.Component {
         vehicle_2_state: formInfo.vehicle_2_state,
         vehicle_1_year: formInfo.vehicle_1_year,
         vehicle_2_year: formInfo.vehicle_2_year,
-        meter: formInfo.meter,
-        reading: formInfo.reading,
-
+        meter: this.state.meter,
+        reading:[{reading: this.state.meterReading}],
+        checkin: this.props.checkInDate,
+        checkout: this.props.checkOutDate
       }).then(function(response){ 
         console.log('saved');
-        console.log(formInfo.meter);
-        // axios({
-        //   type: 'GET',
-        //   url: '/lastMeterReading/' + formInfo.meter
-        // }).then((response)=> {
-        //   console.log(response.data);
-
-        // });
+        axios.post('/addCustomerToMeter',
+        {
+          meter: meter,
+          email: formInfo.email
+        }).then(function(response){
+          console.log('added to meter');
+        });
     });
-    
-    // var formInfo = this.state.searchResponse;
-    // var url = "https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=302b34c0-b394-4859-8b81-e21e487c7e01&Tennant_UserName="+ formInfo.given_name + "&Tennant_Email="+ formInfo.email + "&given_name="+ formInfo.given_name +"&family_name="+formInfo.family_name+"&address_line_1="+ formInfo.address_line_1+"&phone_number="+ formInfo.phone_number+"&phone_number_alt="+formInfo.phone_number_alt+"&locality="+formInfo.locality+"&administrative_district_level_1="+formInfo.administrative_district_level_1+"&postal_code="+formInfo.postal_code+"&country="+formInfo.country+"&drivers_license_num="+formInfo.drivers_license_num+"&drivers_license_state="+formInfo.drivers_license_state+"&additional_occupant_1="+formInfo.additional_occupant_1+"&additional_occupant_2="+formInfo.additional_occupant_2+"&additional_occupant_3="+formInfo.additional_occupant_3+"&additional_occupant_4="+formInfo.additional_occupant_4+"&additional_occupant_1_age="+formInfo.additional_occupant_1_age+"&additional_occupant_2_age="+formInfo.additional_occupant_2_age+"&additional_occupant_3_age="+formInfo.additional_occupant_3_age+"&additional_occupant_4_age="+formInfo.additional_occupant_4_age+"&pets_number_of="+formInfo.pets_number_of+"&pets_type="+formInfo.pets_type+"&pets_breed="+formInfo.pets_breed+"&unit_type="+formInfo.unit_type+"&unit_license="+formInfo.unit_license+"&unit_state="+formInfo.unit_state+"&unit_year="+formInfo.unit_year+"&unit_length="+formInfo.unit_length+"&vehicle_1_type="+formInfo.vehicle_1_type+"&vehicle_2_type="+formInfo.vehicle_2_type+"&vehicle_1_license="+formInfo.vehicle_1_license+"&vehicle_2_license="+formInfo.vehicle_2_license+"&vehicle_1_state="+formInfo.vehicle_1_state+"&vehicle_2_state="+formInfo.vehicle_2_state+"&vehicle_1_year="+formInfo.vehicle_1_year+"&vehicle_2_year="+formInfo.vehicle_2_year+"&nightly=X&30amp=X";
-    // var win = window.open(url, '_blank');
-    // win.focus();
-  }
+
+    var url = "https://demo.docusign.net/Member/PowerFormSigning.aspx?PowerFormId="+ formId +"&Tennant_UserName="+ formInfo.given_name + "&Tennant_Email="+ formInfo.email + "&given_name="+ formInfo.given_name +"&family_name="+formInfo.family_name+"&address_line_1="+ formInfo.address_line_1+"&phone_number="+ formInfo.phone_number+"&phone_number_alt="+formInfo.phone_number_alt+"&locality="+formInfo.locality+"&administrative_district_level_1="+formInfo.administrative_district_level_1+"&postal_code="+formInfo.postal_code+"&country="+formInfo.country+"&drivers_license_num="+formInfo.drivers_license_num+"&drivers_license_state="+formInfo.drivers_license_state+"&additional_occupant_1="+formInfo.additional_occupant_1+"&additional_occupant_2="+formInfo.additional_occupant_2+"&additional_occupant_3="+formInfo.additional_occupant_3+"&additional_occupant_4="+formInfo.additional_occupant_4+"&additional_occupant_1_age="+formInfo.additional_occupant_1_age+"&additional_occupant_2_age="+formInfo.additional_occupant_2_age+"&additional_occupant_3_age="+formInfo.additional_occupant_3_age+"&additional_occupant_4_age="+formInfo.additional_occupant_4_age+"&pets_number_of="+formInfo.pets_number_of+"&pets_type="+formInfo.pets_type+"&pets_breed="+formInfo.pets_breed+"&unit_type="+formInfo.unit_type+"&unit_license="+formInfo.unit_license+"&unit_state="+formInfo.unit_state+"&unit_year="+formInfo.unit_year+"&unit_length="+formInfo.unit_length+"&vehicle_1_type="+formInfo.vehicle_1_type+"&vehicle_2_type="+formInfo.vehicle_2_type+"&vehicle_1_license="+formInfo.vehicle_1_license+"&vehicle_2_license="+formInfo.vehicle_2_license+"&vehicle_1_state="+formInfo.vehicle_1_state+"&vehicle_2_state="+formInfo.vehicle_2_state+"&vehicle_1_year="+formInfo.vehicle_1_year+"&vehicle_2_year="+formInfo.vehicle_2_year+"&daily="+daily+"&weekly="+weekly+"&monthly="+monthly+"&thirtyAmp="+thirtyAmp+"&fiftyAmp="+fiftyAmp+"&KWH_rate="+KWH_rate+"&reading="+reading+"&meter="+meter;
+
+    var win = window.open(url, '_blank');
+    win.focus();
+  };
 
   render() {
     return (

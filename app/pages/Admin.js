@@ -41,6 +41,13 @@ export default class Admin extends React.Component {
                   primary={true}
                 />
               </Link>
+              <Link to={'addUser'}>
+                <RaisedButton
+                  style={buttonStyle}
+                  label='Add New User'
+                  primary={true}
+                />
+              </Link>
             </CardActions>
           </Card>
         </Col>

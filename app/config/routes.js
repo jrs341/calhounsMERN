@@ -1,6 +1,8 @@
 import React from 'react'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
+import AddUser from '../Components/Admin/AddUser'
+import Login from '../pages/Login'
 import Main from '../pages/Main'
 import HomePage from '../pages/HomePage'
 import ContactUs from '../pages/ContactUs'
@@ -18,11 +20,13 @@ import Payment from '../pages/Payment'
 module.exports = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
+      <Route path="login" component={Login} />
       <Route path="contactUs" component={ContactUs} />
       <Route path="rates" component={Rates} />
       <Route path="reservations" component={Reservations}/>
       <Route path="development" component={Development} />
       <Route path="admin" component={Admin} />
+        <Route path="addUser" component={AddUser} />
         <Route path="checkinQuestions" component={CheckinQuestions}/>
       	<Route path="checkin" component={Checkin} />
       	<Route path="checkout" component={Checkout} />

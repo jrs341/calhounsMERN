@@ -47,7 +47,7 @@ export default class Footer extends React.Component {
 	                  icon = {facebook} 
 					  href="https://www.facebook.com/pages/Calhouns-Riverside-RV-Retreat/442200922652715"
                 	/>
-					<Link to={'admin'}>
+					<Link to={'login'}>
 		                <RaisedButton
 		                  style={logInStyle}
 		                  label="Admin Login"

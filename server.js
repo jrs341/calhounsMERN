@@ -26,8 +26,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Database configuration for mongoose
 // db: calhouns
-// mongoose.connect("mongodb://localhost/calhouns");
-mongoose.connect("mongodb://jrs341:HHCwc3et0@ds145379.mlab.com:45379/calhouns");
+mongoose.connect("mongodb://localhost/calhouns");
+// mongoose.connect("mongodb://jrs341:HHCwc3et0@ds145379.mlab.com:45379/calhouns");
 // Hook mongoose connection to db
 var db = mongoose.connection;
 
@@ -192,6 +192,15 @@ app.post("/submitAllCustomerMeterReadings", function(req, res) {
 });
 
 // =====================Employee Collection CRUD Operations=====================
+app.get("/userName/:userName", function(req, res) {
+  Employee.findOne({username: req.params.userName}, {username: 1, password: 1}, function(error, doc){
+    if(error){
+      res.send(error);
+    } else {
+      res.send(doc);
+    }
+  });
+});
 
 app.post("/submitEmployee", function(req, res) {
  // check our req.body against our user model

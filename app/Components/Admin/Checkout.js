@@ -82,6 +82,7 @@ export default class Checkout extends React.Component {
     })
   }
 
+// currently not used
   searchEmail() {
     return axios({
       type: 'GET',
@@ -129,12 +130,13 @@ export default class Checkout extends React.Component {
                 floatingLabelText='Enter Customer Email or RV Space'
                 onChange={this.updateSearchInput}
               />
-              <RaisedButton
+            {/*not sure if I really need this option*/}
+              {/*<RaisedButton
                 style= {submitButton}
                 label="Search Email"
                 primary={true}
                 onClick={this.searchEmail}
-              /> 
+              />*/} 
               <RaisedButton
                 style={submitButton}
                 label="Search Meter"

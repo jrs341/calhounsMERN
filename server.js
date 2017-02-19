@@ -56,33 +56,33 @@ app.get("/AMP", function(req, res) {
   res.sendFile(amp.html);
 });
 
-app.get("/paymentForm", function(req, res) {
-  res.sendFile(paymentForm.html);
-})
+// app.get("/paymentForm", function(req, res) {
+//   res.sendFile(paymentForm.html);
+// })
 
-app.get("/constactUs", function(req, res) {
-  res.send(contactUs.html);
-});
+// app.get("/constactUs", function(req, res) {
+//   res.send(contactUs.html);
+// });
 
-app.get("/admin", function(req, res) {
-  res.send(admin.html);
-});
+// app.get("/admin", function(req, res) {
+//   res.send(admin.html);
+// });
 
-app.get("/chooseUpdateProcess", function(req, res) {
-  res.send(chooseMeterUpdate.html);
-});
+// app.get("/chooseUpdateProcess", function(req, res) {
+//   res.send(chooseMeterUpdate.html);
+// });
 
-app.get("/checkin", function(req, res) {
-  res.send(checkin.html);
-});
+// app.get("/checkin", function(req, res) {
+//   res.send(checkin.html);
+// });
 
-app.get("/addCustomerToCabinOrSpace", function(req, res) {
-  res.send(addCustomerToCabinOrSpace);
-})
+// app.get("/addCustomerToCabinOrSpace", function(req, res) {
+//   res.send(addCustomerToCabinOrSpace);
+// })
 
-app.get("/checkout", function(req, res) {
-  res.send(checkout.html);
-});
+// app.get("/checkout", function(req, res) {
+//   res.send(checkout.html);
+// });
 
 // =====================Customer Collection CRUD Operations=====================
 
@@ -92,6 +92,16 @@ app.get("/searchCustomer/:email", function(req, res){
       res.send(error);
     }
     else {
+      res.send(doc);
+    }
+  });
+});
+
+app.get("/customerBillingInfo", function(req, res) {
+  Customer.find({meter: /^[A-J]/ }, {given_name: 1, family_name: 1, email: 1, rate: 1, checkin: 1, reading: 1}, function(error, doc){
+    if (error) {
+      res.send(error);
+    } else {
       res.send(doc);
     }
   });
@@ -149,6 +159,29 @@ app.post("/submitCustomer", function(req, res) {
 app.post("/updateCustomer", function(req, res) {
   Customer.findOneAndUpdate({_id: req.body._id},req.body, function(error, doc) {
     if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+app.post("/removeLastEntryFromCustomerReading", function(req, res) {
+  Customer.findOneAndUpdate({meter: req.body.meter}, {$pop: {reading: 1}}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+
+// this route is used in UpdateAllMeter.js to submit and update all meter readings to the customer collection
+app.post("/submitAllCustomerMeterReadings", function(req, res) {
+  Customer.findOneAndUpdate({meter: req.body.meter}, { $push: {reading: { reading: req.body.reading } }},{safe: true}, function(error, doc) {
+    if(error) {
       res.send(error);
     }
     else {
@@ -347,6 +380,17 @@ app.post("/removeCustomerFromMeter", function(req, res) {
   });
 });
 
+app.post("/removeLastEntryFromMeterReading", function(req, res) {
+  MeterReadings.findOneAndUpdate({meter: req.body.meter}, {$pop: {reading: 1}}, function(error, doc) {
+    if (error) {
+      res.send(error);
+    }
+    else {
+      res.send(doc);
+    }
+  });
+});
+// db.getCollection('meterreadings').update({meter: 'A'}, {$pop: {reading: 1}})
 // db.getCollection('customers').updateOne({email: 'billybob@me.com'}, {$unset: {meter: '',checkin: '',checkout: '', reading: ''}})
 // db.getCollection('meterreadings').updateOne({meter: 'F'}, {$unset: {customer: ''}})
 // db.getCollection('meterreadings').find({meter: /^Cabin/, $and:[{ customer: null}]})

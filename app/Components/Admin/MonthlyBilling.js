@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system'
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import axios from 'axios'
-import TextField from 'material-ui/TextField'
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const submitButton = {
@@ -19,101 +19,69 @@ export default class UpdateAllMeters extends React.Component {
       this.state = {
         customerBillingInfo: [],
         instructions: 'Please verify all of the information is correct'
-      }
+      } 
 
-      
+    this.getCustomersBillingInfo = this.getCustomersBillingInfo.bind(this);
+    this.updateCustomerBillingInfo = this.updateCustomerBillingInfo.bind(this);
+    this.tableRow = this.tableRow.bind(this);
     }
-    
-  formRow(fieldInfo, index) {
+
+  tableRow(fieldInfo) {
     return (
-      <TextField
-        name={index.toString()}
-        key={index}
-        hintText={`Meter: ${fieldInfo.meter}`}
-        floatingLabelText={`Meter: ${fieldInfo.meter}`}
-        onBlur={this.updateFormRow}>
-      </TextField>
+      <TableRow>
+        <TableRowColumn>{fieldInfo.given_name}</TableRowColumn>
+        <TableRowColumn>{fieldInfo.family_name}</TableRowColumn>
+        <TableRowColumn>{fieldInfo.email}</TableRowColumn>
+        <TableRowColumn>{fieldInfo.rate}</TableRowColumn>
+        <TableRowColumn>{fieldInfo.checkin}</TableRowColumn>
+        {/*<TableRowColumn>{fieldInfo.reading[fieldInfo.reading.length-1].reading-fieldInfo.reading[fieldInfo.reading.length-2].reading}</TableRowColumn>*/}
+      </TableRow>
       );
   }
 
-  // updateMetersResponse(getRequestResponse) {
-  //   this.setState({getMetersResponse: getRequestResponse});
-  //   // console.log(this.state.getMetersResponse[1].meter);
-  //   console.log(getRequestResponse);
-  // }
-
-  updateFormRow(event, newInput) {
-    var newReading = this.state.getMetersResponse;
-    newReading[event.target.name].reading = Number(event.target.value);
-    this.setState({getMetersResponse: newReading});
-    console.log(newReading[event.target.name]);
+  updateCustomerBillingInfo(getRequestResponse) {
+    this.setState({customerBillingInfo: getRequestResponse});
   }
-
-  // sumbitNewMeterId(event) {
-  //   console.log(event.target.value);
-  //   this.setState({newMeterId: event.target.value});
-  // }
-
-  // sumbitNewMeterReading(event) {
-  //   console.log(event.target.value);
-  //   this.setState({newMeterReading: Number(event.target.value)});
-  // }
 
   // need to get customer name, email, meter, kwhUsage, checkin date,
   getCustomersBillingInfo() {
     return axios({
       type: 'GET',
-      url: '/meter/'
+      url: '/customerBillingInfo/'
     }).then((response) => {
-      if (response.data == "") {
-        console.log('error!');
-      } else {
-        this.updateMetersResponse(response.data);
-        }
+        this.updateCustomerBillingInfo(response.data);
     });
   }
 
-componentDidMount() {
+componentWillMount() {
   this.getCustomersBillingInfo();
 }
-
-// sumbitNewReadings() {
-//   var array = this.state.getMetersResponse;
-//   var arrayLength = this.state.getMetersResponse.length;
-//   for (var i=0; i<arrayLength; i++){
-//         axios.post('/submitAllMeterReadings', 
-//       {
-//         _id: array[i]._id,
-
-//         reading: array[i].reading
-
-//       }).then(function(response){ 
-//       console.log('saved');
-//     });
-//   }
-// }
-
-// sumbitNewMeter() {
-//         axios.post('/newMeter', 
-//       {
-//         meter: this.state.newMeterId,
-
-//       }).then(function(response){ 
-//       console.log('saved');
-//     });
-//   }
 
   render() {
     return (
       <Row>
-        <Col md={8} offset={{ md: 2 }}>
+        <Col md={12}>
           <Card>
             <CardTitle
               title="Monthly Billing Results"
               subtitle={this.state.instructions}
             />
             <CardText>
-              {this.state.customerBillingInfo.map((fieldInfo, index) => this.formRow(fieldInfo, index))}
+            <Table>
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                <TableRow>
+                  <TableHeaderColumn>First Name</TableHeaderColumn>
+                  <TableHeaderColumn>Last Name</TableHeaderColumn>
+                  <TableHeaderColumn>Email</TableHeaderColumn>
+                  <TableHeaderColumn>Rate</TableHeaderColumn>
+                  <TableHeaderColumn>Checkin</TableHeaderColumn>
+                  <TableHeaderColumn>KWH Usage</TableHeaderColumn>
+                </TableRow>
+              </TableHeader>
+              <TableBody displayRowCheckbox={false} stripedRows={true}>
+              {this.state.customerBillingInfo.map((fieldInfo) => this.tableRow(fieldInfo))}
+              </TableBody>
+            </Table>
             </CardText>
             <CardActions>
             <Link to='admin'>

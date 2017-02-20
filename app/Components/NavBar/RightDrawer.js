@@ -38,11 +38,13 @@ export default class RightDrawer extends React.Component {
     	return (
 	      <div>
 	        <FlatButton
+	         
 	          style={flatButtonStyle}
 	          icon={<Menu style={menuButtonStyle} />}
 	          onTouchTap={this.handleToggle}
 	        />
 	        <Drawer 
+	        
 	         docked={false}
           	 width={200}
           	 openSecondary={true}
@@ -50,6 +52,7 @@ export default class RightDrawer extends React.Component {
           	 onRequestChange={(open) => this.setState({open})}
           	>
 	          <AppBar
+	           
 	           iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}
 	           title="Menu" />
 	           	<Link to={'/'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> About </MenuItem></Link>

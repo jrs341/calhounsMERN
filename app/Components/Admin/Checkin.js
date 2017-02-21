@@ -97,10 +97,6 @@ export default class Checkin extends React.Component {
     {displayName: 'Vehicle 2 License Plate Number', dataName: 'vehicle_2_license', state: this.props.vehicleNum_2},
     {displayName: 'Vehicle 2 License Plate State', dataName: 'vehicle_2_state', state: this.props.vehicleNum_2},
     {displayName: 'Vehicle 2 Year', dataName: 'vehicle_2_year', state: this.props.vehicleNum_2}
-    // {displayName: 'Meter', dataName: 'meter', state: false},
-    // {displayName: 'Meter Reading', dataName: 'meterReading', state: false},
-    // {displayName: 'Checkin Date', dataName: 'checkInDate', state: false},
-    // {displayName: 'Checkout Date', dataName: 'checkOutDate', state: false},
     ];
     
     this.state = {

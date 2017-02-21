@@ -37,18 +37,10 @@ export default class RangedDatePicker extends React.Component {
     const minDate = new Date();
     const maxDate = new Date();
     const maxArrivalDate = new Date();
-    minDate.setFullYear(minDate.getFullYear() - 1);
+    minDate.setDate(minDate.getDate());
     minDate.setHours(8, 0);
     maxDate.setFullYear(maxDate.getFullYear() + 1);
-
-    if (this.props.cabinStatic) {
-    maxArrivalDate.setDate(maxDate.getDate() + 5);
-    maxDate.setHours(2, 0);
-    }
-    else {
-      maxArrivalDate.setDate(maxDate.getDate() + 7);
-    maxDate.setHours(2, 0);
-    }
+    maxArrivalDate.setDate(maxDate.getDate() + 7);
 
     this.state = {
       minDate: minDate,
@@ -60,6 +52,7 @@ export default class RangedDatePicker extends React.Component {
 
     this.checkInDateState = this.checkInDateState.bind(this);
     this.checkOutDateState = this.checkOutDateState.bind(this);
+    this.setMaxDate = this.setMaxDate.bind(this);
   }
 
   handleChangeMinDate = (event, date) => {
@@ -80,13 +73,29 @@ export default class RangedDatePicker extends React.Component {
     });
   };
 
+  componentWillMount() {
+    console.log(this.props.cabinStatic);
+  }
+
+  setMaxDate(props) {
+    if (this.props.cabinStatic) {
+      console.log('cabin');
+      this.setState({maxArrivalDate: new Date(this.state.minDate.getFullYear(), this.state.minDate.getMonth(), this.state.minDate.getDate()+5)});
+      console.log(this.state.maxArrivalDate);
+    }
+    else {
+      console.log('rv');
+      this.setState({maxArrivalDate: new Date(this.state.minDate.getFullYear(), this.state.minDate.getMonth(), this.state.minDate.getDate()+10)});
+    }
+  }
+
   checkInDateState(empty, date) {
-    console.log(date.getMonth());
-    this.props.dispatch(changeCheckInDateState(empty, date))
+    this.props.dispatch(changeCheckInDateState(empty, date));
+    this.setState({minDate: new Date(date.getFullYear(), date.getMonth(), date.getDate()+1)});
   };
 
   checkOutDateState(empty, date) {
-    this.props.dispatch(changeCheckOutDateState(empty, date))
+    this.props.dispatch(changeCheckOutDateState(empty, date));
   };
 
   render() {
@@ -98,8 +107,8 @@ export default class RangedDatePicker extends React.Component {
           autoOk={this.state.autoOk}
           minDate={this.state.minDate}
           maxDate={this.state.maxArrivalDate}
+          onShow={this.setMaxDate}
           disableYearSelection={this.state.disableYearSelection}
-          // onTouchTap={this.checkInDate}
           onChange={this.checkInDateState}
         />
         <div style={optionsStyle}>
@@ -108,6 +117,7 @@ export default class RangedDatePicker extends React.Component {
             onChange={this.handleChangeMinDate}
             autoOk={this.state.autoOk}
             floatingLabelText="Checkout"
+            minDate={this.state.minDate}
             // defaultDate={this.state.minDate}
             disableYearSelection={this.state.disableYearSelection}
             // onTouchTap={this.checkOutDate}

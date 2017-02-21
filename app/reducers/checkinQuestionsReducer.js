@@ -67,8 +67,8 @@ export default function reducer(state={
               rvSpace: true,
               thirtyAmp: true,
               fiftyAmp: true,
-              daily: false,
-              weekly: false,
+              daily: true,
+              weekly: true,
               monthly: false
             } 
         } else {
@@ -871,7 +871,9 @@ export default function reducer(state={
         if (action.payload) {
           return {...state, trailerNumNo: false,
             trailerNumYes: true,
-            vehicleNumOk: true,
+            vehicleNum_0: true,
+            vehicleNum_1: true,
+            vehicleNum_2: true,
             vehicleNumMore: true,
             checkInDate: false 
             }

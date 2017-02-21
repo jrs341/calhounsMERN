@@ -162,7 +162,7 @@ export default class Checkout extends React.Component {
                 style={submitButton}
                 label="Submit Final Meter Reading"
                 primary={true}
-                // onClick={this.updateFinalMeterReading}
+                onClick={this.updateFinalMeterReading}
               /> 
               </Link>
               

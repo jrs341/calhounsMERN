@@ -81,6 +81,7 @@ export default class RangedDatePicker extends React.Component {
   };
 
   checkInDateState(empty, date) {
+    console.log(date.getMonth());
     this.props.dispatch(changeCheckInDateState(empty, date))
   };
 

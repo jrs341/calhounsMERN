@@ -17,6 +17,8 @@ const flatButtonStyle = {
 }
 
 const menuButtonStyle = {
+	marginTop: 9,
+	marginRight: -36,
 	height: 30,
 	width: 30,
 	fill: 'white',
@@ -66,6 +68,7 @@ export default class RightDrawer extends React.Component {
 	          	<Link to={'development'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> River Level </MenuItem></Link>
 	          	<Link to={'development'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> Meet Calhoun </MenuItem></Link>
 	          	<Link to={'development'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> Local News </MenuItem></Link>
+	          	<Link to={'login'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> Admin Login</MenuItem></Link>
 	          	<MenuItem href='http://localhost:3000/amp.html#development=1'>AMP Page</MenuItem>
 	        </Drawer>
 	     </div>

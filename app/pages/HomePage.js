@@ -5,8 +5,11 @@ import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 
+// style={{flex: 1, justifyContent: 'center',}}
 const rowStyle = {
-  height: '20em'
+  height: '30em',
+  flex: 1,
+  justifyContent: 'center'
 };
 const indent = {
   textIndent: 30

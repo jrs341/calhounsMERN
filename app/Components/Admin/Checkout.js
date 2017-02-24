@@ -126,8 +126,8 @@ export default class Checkout extends React.Component {
               <TextField
                 id='checkOutSearch'
                 type='text'
-                hintText='Enter Customer Email or RV Space'
-                floatingLabelText='Enter Customer Email or RV Space'
+                hintText='Enter Meter Id'
+                floatingLabelText='Enter Meter Id'
                 onChange={this.updateSearchInput}
               />
             {/*not sure if I really need this option*/}

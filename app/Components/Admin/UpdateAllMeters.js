@@ -236,7 +236,7 @@ sumbitNewMeter() {
               style={submitButton}
               label="Submit"
               primary={true}
-              onClick={this.state.submitFunction}
+              onClick={this.sumbitNewReadings}
               />  
               <Link to='monthlyBilling'>
                <RaisedButton

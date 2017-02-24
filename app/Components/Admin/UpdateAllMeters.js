@@ -59,7 +59,7 @@ export default class UpdateAllMeters extends React.Component {
         name={index.toString()}
         key={index}
         hintText={`Meter: ${fieldInfo.meter}`}
-        // floatingLabelText={`Meter: ${fieldInfo.meter} Last Entry: ${fieldInfo.reading[fieldInfo.reading.length-1].reading}`}
+        floatingLabelText={`Meter: ${fieldInfo.meter} Last Entry: ${fieldInfo.reading[fieldInfo.reading.length-1].reading}`}
         onBlur={this.updateFormRow}>
       </TextField>
       <TextField
@@ -67,7 +67,7 @@ export default class UpdateAllMeters extends React.Component {
         name={fieldInfo.meter}
         key={fieldInfo.meter}
         hintText={`Meter: ${fieldInfo.meter}`}
-        // floatingLabelText={`Meter: ${fieldInfo.meter} Last Entry: ${fieldInfo.reading[fieldInfo.reading.length-1].reading}`}
+        floatingLabelText={`Meter: ${fieldInfo.meter} Last Entry: ${fieldInfo.reading[fieldInfo.reading.length-1].reading}`}
         onBlur={this.metersToRemoveLastReading}>
       </TextField>
       </div>

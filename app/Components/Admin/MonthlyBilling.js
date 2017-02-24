@@ -34,7 +34,7 @@ export default class UpdateAllMeters extends React.Component {
         <TableRowColumn>{fieldInfo.email}</TableRowColumn>
         <TableRowColumn>{fieldInfo.rate}</TableRowColumn>
         <TableRowColumn>{fieldInfo.checkin}</TableRowColumn>
-        {/*<TableRowColumn>{fieldInfo.reading[fieldInfo.reading.length-1].reading-fieldInfo.reading[fieldInfo.reading.length-2].reading}</TableRowColumn>*/}
+        <TableRowColumn>{fieldInfo.reading[fieldInfo.reading.length-1].reading-fieldInfo.reading[fieldInfo.reading.length-2].reading}</TableRowColumn>
       </TableRow>
       );
   }

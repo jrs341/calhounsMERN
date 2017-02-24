@@ -176,6 +176,7 @@ export default class CheckinQuestions extends React.Component {
   }
 
   getAvailable30AmpRvSpaces() {
+  	console.log('30 amp');
   	if (this.props.monthlyStatic){
 	    return axios({
 	      type: 'GET',

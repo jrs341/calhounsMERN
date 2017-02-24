@@ -248,7 +248,7 @@ app.get("/meter", function(req, res) {
 });
 
 app.get("/availableCabins", function(req, res) {
-  MeterReadings.find({meter: /^Cabin/, $and:[{ customer: null}]}, function(error, doc){
+  MeterReadings.find({meter: /^Cabin/, $and:[{ customer: "null"}]}, function(error, doc){
     if (error) {
       res.send(error);
     }
@@ -260,7 +260,7 @@ app.get("/availableCabins", function(req, res) {
 
 // This route will be for monthly reservation requests
 app.get("/available30Amp", function(req, res) {
-  MeterReadings.find({meter: {$nin: ['A-1','A-2']}, $and: [{customer: null},{amp: '30'}]}, function(error, doc){
+  MeterReadings.find({meter: {$nin: ['A-1','A-2']}, $and: [{customer: "null"},{amp: '30'}]}, function(error, doc){
     if (error) {
       res.send(error);
     }
@@ -272,7 +272,7 @@ app.get("/available30Amp", function(req, res) {
 
 // This route will be for daily and weekly reservation requests
 app.get("/available30AmpDailyWeekly", function(req, res) {
-  MeterReadings.find({amp: "30" , $and:[{ customer: null},{amp: "30"}]}, function(error, doc){
+  MeterReadings.find({amp: "30" , $and:[{ customer: "null"},{amp: "30"}]}, function(error, doc){
     if (error) {
       res.send(error);
     }
@@ -284,7 +284,7 @@ app.get("/available30AmpDailyWeekly", function(req, res) {
 
 // This route will be for monthly reservation requests
 app.get("/available50Amp", function(req, res) {
-  MeterReadings.find({meter: {$nin: ['A-1','A-2']}, $and: [{customer: null},{amp: '50'}]}, function(error, doc){
+  MeterReadings.find({meter: {$nin: ['A-1','A-2']}, $and: [{customer: "null"},{amp: '50'}]}, function(error, doc){
     if (error) {
       res.send(error);
     }
@@ -296,7 +296,7 @@ app.get("/available50Amp", function(req, res) {
 
 // This route will be for daily and weekly reservation requests
 app.get("/available50AmpDailyWeekly", function(req, res) {
-  MeterReadings.find({amp: "50", $and:[{customer: null}]}, function(error, doc){
+  MeterReadings.find({amp: "50", $and:[{customer: "null"}]}, function(error, doc){
     if (error) {
       res.send(error);
     }

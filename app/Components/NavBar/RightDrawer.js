@@ -69,7 +69,8 @@ export default class RightDrawer extends React.Component {
 	          	<Link to={'development'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> Meet Calhoun </MenuItem></Link>
 	          	<Link to={'development'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> Local News </MenuItem></Link>
 	          	<Link to={'login'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> Admin Login</MenuItem></Link>
-	          	<MenuItem href='http://localhost:3000/amp.html#development=1'>AMP Page</MenuItem>
+	          	<MenuItem href='amp.html'>AMP Page</MenuItem>
+	          {/*http://localhost:3000/amp.html#development=1*/}
 	        </Drawer>
 	     </div>
 		);

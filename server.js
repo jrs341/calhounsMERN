@@ -53,9 +53,13 @@ app.get(`/`, function(req, res) {
 // app.get("/", function(req, res) {
 //   res.send(index.html);
 // });
-app.get("/AMP", function(req, res) {
-  res.sendFile(amp.html);
+app.get(`/AMP`, function(req, res) {
+  res.sendFile('public/amp.html', {root: __dirname});
 });
+
+// app.get('/AMP', function(req, res) {
+//   res.sendFile(amp.html);
+// });
 
 // app.get("/paymentForm", function(req, res) {
 //   res.sendFile(paymentForm.html);

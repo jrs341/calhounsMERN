@@ -10,20 +10,21 @@ import FlatButton from 'material-ui/FlatButton'
 
 const linkStyle = {
 	textDecoration: 'none'
-}
+};
 
 const flatButtonStyle = {
-	varticalAlign: 'middle'
-}
+	varticalAlign: 'middle',
+	backgroundColor: 'rgb(0, 188, 212)'
+};
 
 const menuButtonStyle = {
-	marginTop: 9,
+	marginTop: 10,
 	marginRight: -36,
 	height: 30,
 	width: 30,
 	fill: 'white',
 	color: 'white'
-}
+};
 
 export default class RightDrawer extends React.Component {
 
@@ -40,13 +41,11 @@ export default class RightDrawer extends React.Component {
     	return (
 	      <div>
 	        <FlatButton
-	         
 	          style={flatButtonStyle}
 	          icon={<Menu style={menuButtonStyle} />}
 	          onTouchTap={this.handleToggle}
 	        />
 	        <Drawer 
-	        
 	         docked={false}
           	 width={200}
           	 openSecondary={true}
@@ -54,7 +53,6 @@ export default class RightDrawer extends React.Component {
           	 onRequestChange={(open) => this.setState({open})}
           	>
 	          <AppBar
-	           
 	           iconElementLeft={<IconButton onTouchTap={this.handleClose}><NavigationClose /></IconButton>}
 	           title="Menu" />
 	           	<Link to={'/'} style={{textDecoration: 'none'}}><MenuItem onTouchTap={this.handleClose}> About </MenuItem></Link>

@@ -14,8 +14,9 @@ import NavBar from '../Components/Navbar/NavBar'
 import Footer from '../Components/Footer/Footer'
 // adjust this style if the size of the nav or footer changes
 const style = {
-  marginTop: 80,
-  marginBottom: 80
+  marginTop: 70,
+  marginBottom: 80,
+  width: '100%'
 };
 
 export default class Main extends React.Component {
@@ -25,9 +26,9 @@ export default class Main extends React.Component {
       <MuiThemeProvider>
         <div>
           <NavBar />
-          <Container style={style}>
+          <div style={style}>
             {this.props.children}
-          </Container>
+          </div>
           <Footer />
         </div>
       </MuiThemeProvider>

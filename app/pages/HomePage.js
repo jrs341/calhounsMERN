@@ -5,19 +5,21 @@ import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
 import Paper from 'material-ui/Paper'
 import RaisedButton from 'material-ui/RaisedButton'
 
-// style={{flex: 1, justifyContent: 'center',}}
 const rowStyle = {
-  height: '30em',
-  flex: 1,
-  justifyContent: 'center'
+  height: '10%',
+  marginRight: -8,
+  marginLeft: -8
 };
 const indent = {
   textIndent: 30
-}
-const picStyle = {
-  width: '100%',
-  height: '100%'
 };
+const picStyle = {
+  width: '100%'
+};
+const content = {
+  marginRight: 0,
+  marginLeft: 0
+}
 const style = {
   textAlign: 'center'
 };
@@ -28,9 +30,9 @@ export default class HomePage extends React.Component {
     return (
       <div>
       <Row style={rowStyle}>
-        <img style={picStyle} src="./css/images/P6191144.jpg"/>
+        <img style={picStyle} src="./css/images/coverImage.jpg"/>
       </Row>
-      <Row>
+      <Row style={content}>
             <h1 style={style} >
             Your Front Row Seat to a Texas Gem, 
             <br>

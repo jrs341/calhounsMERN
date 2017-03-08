@@ -9,8 +9,8 @@ const style = {
 	position: 'fixed',
 	height: 70,
 	top: 0,
-	marginLeft: -7,
-	paddingTop: 3
+	left: 0,
+	paddingTop: 1
 }
 
 export default class NavBar extends React.Component {
@@ -20,8 +20,11 @@ export default class NavBar extends React.Component {
 			<AppBar
 				style = {style}
 				iconElementLeft = {<Link to={'/'}><img style={{marginLeft: 5}} src='./css/images/circleC.png'/></Link>}
+				iconStyleLeft = {{marginLeft: -24}}
 				title = "Calhoun's Riverside RV Retreat"
+				titleStyle = {{fontSize: '3vw'}}
 				iconElementRight = {<RightDrawer />}
+				iconStyleRight = {{marginLeft: 0, marginRight: -24}}
 			/>
 		);
 	}

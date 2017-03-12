@@ -1,8 +1,5 @@
 import React from 'react'
-import { Row, Col } from 'react-grid-system'
 import { Link } from 'react-router'
-import IconButton from 'material-ui/IconButton'
-import FlatButton from 'material-ui/FlatButton'
 import FontAwesome from 'react-fontawesome'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 
@@ -16,21 +13,25 @@ const style = {
 	width: '100%',
 	height: 70,
 	bottom: 0,
-	overflowY: 'hidden',
-	marginLeft: -7
+	left: 0,
+	overflowY: 'hidden'
+};
 
-}
-// paddingLeft: 'auto', paddingRight: 'auto'
-// 
+const socialDiv = {
+	marginLeft: 'auto',
+	marginRight: 'auto',
+	marginTop: 6,
+	width: 188 
+};
+
 export default class Footer extends React.Component {
 	
 	render() {
 		return (
-			<Row style={style}>
-				<Col md={4} offset={{md:4}} style={{paddingTop: 6}}>
-					<div style={{justifyContent: 'center'}}>
+			<div style={style}>
+				<div style={socialDiv}>
 					<FloatingActionButton
-                	  style={{marginRight: 10, marginLeft: 82}}
+                	  style={{marginRight: 10}}
 	                  children={google}
 					  href="https://plus.google.com/+Calhounsriversidervretreat"
                 	/>
@@ -40,20 +41,11 @@ export default class Footer extends React.Component {
 	                 href="https://twitter.com/CalhounsRV"  
                 	/>
                 	<FloatingActionButton
-	                  children = {facebook} 
+	                  children={facebook} 
 					  href="https://www.facebook.com/pages/Calhouns-Riverside-RV-Retreat/442200922652715"
                 	/>
-                	</div>
-                
-					{/*<Link to={'login'}>
-		                <RaisedButton
-		                  style={logInStyle}
-		                  label="Admin Login"
-		                  primary={true}
-		                />
-		          	</Link>*/}
-		        </Col>
-		    </Row>
+                </div>
+        	</div>  
 		);
 	}
 }

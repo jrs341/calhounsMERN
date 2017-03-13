@@ -10,101 +10,110 @@ import Phone from 'material-ui/svg-icons/communication/phone'
 import Email from 'material-ui/svg-icons/communication/email'
 import Clock from 'material-ui/svg-icons/device/access-time'
 
+const iframeContainer = {
+  width: '90%',
+  height: '23em',
+  marginTop: 10,
+  marginLeft: 'auto',
+  marginRight: 'auto'
+};
+
 const iframeStyle = {
   width: '100%',
-  height: 400,
-  frameBorder: '0',
-  scrolling: 'no',
-  marginHeight: 0,
-  marginWidth: 0
+  height: '100%',
+  borderStyle: 'groove',
+  borderRadius: 2
+};
+
+const cardText = {
+  position: 'relative',
+  top: -30
+};
+
+const iconPhone = {
+  position: 'relative',
+  top: 8,
+  left: 0,
+  color: '#87FC70'
+};
+
+const iconEmail = {
+  position: 'relative',
+  top: 8,
+  left: 0,
+  color: '#1AD6FD'
+};
+
+const iconClock = {
+  position: 'relative',
+  top: 15,
+  left: 0,
+  color: 'red'
+};
+
+const iconGPS = {
+  position: 'relative',
+  marginRight: 3,
+  top: 8,
+  left: 0,
+  color: 'red'
+};
+
+const iconLocation = {
+  position: 'relative',
+  marginRight: 3,
+  top: 8,
+  left: 0,
+  color: 'red'
 };
 
 const pStyle = {
-  display: 'inlineBlock',
-  varticalAlign: 'middle'
-}
+  marginLeft: '2em',
+  textIndent: '-2em'
+};
+
+const aStyle = {
+  textDecoration: 'none'
+};
 
 export default class ContactUs extends React.Component {
 
   render() {
     return (
-      <div>
         <Row>
-          <Col>
-            <iframe style={iframeStyle} src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB4s1b2brpC2l4TpMDbtxcx58o7IZqRsSw&q=Calhoun+Riverside+RV+Retreat,Tivoli+TX"></iframe>
-          </Col>
-        </Row>
-        <Row>
-          <Col md={6}>
-            <Card>
+          <Col md={5} offset={{md:1}}>
+            <Card style={{marginTop: 10, height: '23em'}}>
               <CardTitle
-                title="Send Calhoun a Message"
-                subtitle=""
+                  title="Contact Calhoun's"
               />
-              <CardActions>
-                <TextField
-                  hintText="Name"
-                  floatingLabelText="Name"
-                /><br />
-                <TextField
-                  hintText="Phone Number"
-                  floatingLabelText="Phone Number"
-                /><br />
-                <TextField
-                  hintText="Email"
-                  floatingLabelText="Email"
-                /><br />
-                <TextField
-                  hintText="Message Field"
-                  floatingLabelText="Message"
-                  multiLine={true}
-                  rows={5}
-                /><br />
-                <Link href="mailto:calhoun@calhounsrvretreats.com">
-                  <RaisedButton 
-                    label='Submit'
-                    primary={true}
-                    />
-                </Link>
-              </CardActions>
-            </Card>
-          </Col>
-            
-          <Col md={6}>
-            <Card>
-              <CardTitle
-                  title="Contact Calhoun"
-              />
-              <CardText>
-                <p> <Phone />
-                    <abbr title="Phone">P</abbr>: (361) 550-7536</p>
-                <p> <Email />
-                    <abbr title="Email">E</abbr>: <a href="mailto:calhoun@calhounsrvretreats.com">calhoun@calhounsrvretreats.com</a>
+              <CardText style={cardText}>
+                <p> <Phone style={iconPhone} />
+                    {/*<abbr title="Phone"></abbr>*/} <a style={aStyle} href="361-550-7536">361 550 7536</a></p>
+                <p> <Email style={iconEmail} />
+                    {/*<abbr title="Email">E</abbr>:*/} <a style={aStyle} href="mailto:calhoun@calhounsrvretreats.com">calhoun@calhounsrvretreats.com</a>
                 </p>
-                <p> <Clock />
-                    <abbr title="Hours">H</abbr>:<br></br> Monday - Friday: 9:00 AM to 6:00 PM<br></br>
+                <p style={pStyle}> <Clock style={iconClock} />
+                    {/*<abbr title="Hours">H</abbr>:*/} Monday - Friday: 9:00 AM to 6:00 PM<br></br>
                     Saturday - Sunday 9:00 AM to 4:00 PM</p>
-              </CardText>
-            </Card>
-            <Card>
-              <CardTitle
-                  title="Find Calhoun's"
-              />
-              <CardText>
-                <p style={pStyle}> <GpsFixed /><span>GPS Coordinates:</span><br></br>
+                <p style={pStyle}> <GpsFixed style={iconGPS} />
+                    <strong>GPS Coordinates:</strong><br></br>
                     Lat: 28.477294<br></br>
                     Long: -96.861032<br></br>
                 </p>
-                <p> <Location />
-                    Address<br></br>
+                <p style={pStyle}> <Location style={iconLocation}/>
+                    <strong>Address:</strong><br></br>
                     125 Haeber Ln<br></br>
                     Tivoli, TX 77990<br></br>
                 </p>
               </CardText>
             </Card>
           </Col>
-        </Row>
-      </div>
+          <Col md={5}>
+            <div style={iframeContainer}>
+            <iframe style={iframeStyle} src="https://www.google.com/maps/embed/v1/place?key=AIzaSyB4s1b2brpC2l4TpMDbtxcx58o7IZqRsSw&q=Calhoun+Riverside+RV+Retreat,Tivoli+TX"></iframe>
+            </div>
+          </Col> 
+        </Row> 
     );
   }
 }

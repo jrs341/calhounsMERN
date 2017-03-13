@@ -1,8 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router'
-import { Row, Col } from 'react-grid-system'
-import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
-import Paper from 'material-ui/Paper'
+import { Row } from 'react-grid-system'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const rowStyle = {

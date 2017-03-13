@@ -2,14 +2,18 @@ import React from 'react'
 import { Link } from 'react-router'
 import { Row, Col } from 'react-grid-system'
 import { Card, CardTitle, CardText, CardActions } from 'material-ui/Card'
-import Checkbox from 'material-ui/Checkbox'
 import axios from 'axios'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
+const cardStyle = {
+	position: 'relative',
+	top: -25
+};
+
 const submitButton = {
   width: 200
-}
+};
 
 export default class Login extends React.Component {
 
@@ -17,7 +21,7 @@ export default class Login extends React.Component {
 		super()
 
 		this.state = {
-			status: '',
+			status: 'Please enter your username and password',
 			link: '',
 			userName: '',
 			password: '',
@@ -53,17 +57,18 @@ export default class Login extends React.Component {
 		return (
 			<Row>
 				<Col md={8} offset={{ md: 2 }}>
-					<Card>
+					<Card style={{transform: 'translateY(26%)'}}>
 						<CardTitle
-							title='Login'
+							title='Admin Login'
 							subtitle={this.state.status}>
 						</CardTitle>
-						<CardText>
+						<CardText style={cardStyle}>
 						<TextField
+							style={{display: 'block'}}
 			                id='username'
 			                type='text'
-			                hintText='User Name'
-			                floatingLabelText='User Name'
+			                hintText='Username'
+			                floatingLabelText='Username'
 			                onBlur={this.getUserNameAndPassword}
 			            />
 			            <TextField

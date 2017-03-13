@@ -5,6 +5,7 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 const tableRow = {
 
 };
+
 export default class ContactUs extends React.Component {
 
     render() {
@@ -59,7 +60,7 @@ export default class ContactUs extends React.Component {
                 <li> ** Maximum occupancy per cabin is 2 adults</li><br></br>
             </ul>
         </Row>
-    </div>
+        </div>
         );
     }
 }

@@ -55,6 +55,9 @@ export default function reducer(state={
     checkInDateStatic: 0,
     checkOutDate: true,
     checkOutDateStatic: 0,
+    thirtyAmpSpaces: true,
+    fiftyAmpSpaces: true,
+    cabins: true,
     chosenCabin: 'none',
     chosenRvSpace: 'none'
   }, action) {
@@ -901,11 +904,17 @@ export default function reducer(state={
             checkInDateStatic: action.payload,
             checkOutDate: false,
             trailerNumYes: true,
-            trailerNumNo: true
+            trailerNumNo: true,
+            thirtyAmpSpaces: false,
+            fiftyAmpSpaces: false,
+            cabins: false
           }  
         } else {
             return {...state, checkInDate: true,
-              checkOutDate: true
+              checkOutDate: true,
+              thirtyAmpSpaces: false,
+              fiftyAmpSpaces: false,
+              cabins: false
             } 
         }; 
       case 'CHECK_OUT_DATE':
@@ -914,7 +923,10 @@ export default function reducer(state={
             checkOutDateStatic: action.payload,  
           }  
         } else {
-            return {...state, checkOutDate: true
+            return {...state, checkOutDate: true,
+              thirtyAmpSpaces: true,
+              fiftyAmpSpaces: true,
+              cabins: true,
             } 
         };
       case 'CHOSEN_CABIN':

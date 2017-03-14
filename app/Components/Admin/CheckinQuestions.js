@@ -31,6 +31,7 @@ import { changeCabinState,
  changeVehicleNumMoreState,
  changeTrailerNumNoState,
  changeTrailerNumYesState,
+ changeCheckinDateState,
  changeChosenCabinState,
  changeChosenRvSpaceState
  } from '../../actions/checkinQuestionsActions.js'
@@ -78,7 +79,10 @@ import RangedDatePicker from '../RangedDatePicker'
     trailerNumNo: store.trailerNumNoState.trailerNumNo,
     trailerNumYes: store.trailerNumYesState.trailerNumYes,
     chosenCabin: store.chosenCabinState.chosenCabin,
-    chosenRvSpace: store.chosenRvSpaceState.chosenRvSpace
+    chosenRvSpace: store.chosenRvSpaceState.chosenRvSpace,
+    cabins: store.cabinState.cabins,
+    thirtyAmpSpaces: store.cabinState.thirtyAmpSpaces,
+    fiftyAmpSpaces: store.cabinState.fiftyAmpSpaces
   };
 })
 
@@ -151,6 +155,7 @@ export default class CheckinQuestions extends React.Component {
   formRowCabins(fieldInfo, index) {
     return (
       <Checkbox
+        disabled={this.props.cabins}
         label={fieldInfo.meter}
       	name={fieldInfo.meter}
       	key={fieldInfo.meter}
@@ -160,7 +165,7 @@ export default class CheckinQuestions extends React.Component {
   }
 
   chosenCabinState(event, isInputChecked){
-  	console.log(event.target.name);
+  	// console.log(event.target.name);
   	this.props.dispatch(changeChosenCabinState(event.target.name, isInputChecked));
   	if(isInputChecked) {
 		this.setState({checkin: 'checkin'});
@@ -176,7 +181,7 @@ export default class CheckinQuestions extends React.Component {
   }
 
   getAvailable30AmpRvSpaces() {
-  	console.log('30 amp');
+  	// console.log('30 amp');
   	if (this.props.monthlyStatic){
 	    return axios({
 	      type: 'GET',
@@ -205,6 +210,7 @@ export default class CheckinQuestions extends React.Component {
   formRow30AmpRvSpaces(fieldInfo, index) {
     return (
       <Checkbox
+        disabled={this.props.thirtyAmpSpaces}
         label={fieldInfo.meter}
       	name={fieldInfo.meter}
       	key={fieldInfo.meter}
@@ -215,11 +221,11 @@ export default class CheckinQuestions extends React.Component {
 
   updateAvailable30AmpRvSpaces(available30AmpSpacesResponse) {
     this.setState({available30AmpSpaces: available30AmpSpacesResponse});
-    console.log(this.state.available30AmpSpaces);
+    // console.log(this.state.available30AmpSpaces);
   }
 
   getAvailable50AmpRvSpaces() {
-  	console.log(this.props.monthlyStatic);
+  	// console.log(this.props.monthlyStatic);
   	if (this.props.monthlyStatic) {
 	    return axios({
 	      type: 'GET',
@@ -248,6 +254,7 @@ export default class CheckinQuestions extends React.Component {
   formRow50AmpRvSpaces(fieldInfo, index) {
     return (
       <Checkbox
+        disabled={this.props.fiftyAmpSpaces}
         label={fieldInfo.meter}
       	name={fieldInfo.meter}
       	key={fieldInfo.meter}
@@ -257,7 +264,7 @@ export default class CheckinQuestions extends React.Component {
   }
 
   chosenRvSpaceState(event, isInputChecked){
-  	console.log(event.target.name);
+  	// console.log(event.target.name);
   	this.props.dispatch(changeChosenRvSpaceState(event.target.name, isInputChecked));
   	if(isInputChecked) {
 		this.setState({checkin: 'checkin'});
@@ -270,12 +277,15 @@ export default class CheckinQuestions extends React.Component {
 
   updateAvailable50AmpRvSpaces(available50AmpSpacesResponse) {
     this.setState({available50AmpSpaces: available50AmpSpacesResponse});
-    console.log(this.state.available50AmpSpaces);
+    // console.log(this.state.available50AmpSpaces);
   }
 
 	cabinState(event, isInputChecked) {
 		this.getAvailableCabins();
-		this.props.dispatch(changeCabinState(event, isInputChecked))
+		this.props.dispatch(changeCabinState(event, isInputChecked));
+		// console.log(this.props.cabins);
+		// console.log(this.props.thirtyAmpSpaces);
+		// console.log(this.props.fiftyAmpSpaces);
 	}
 
 	rvSpaceState(event, isInputChecked) {
@@ -404,26 +414,7 @@ export default class CheckinQuestions extends React.Component {
 			alert('Please call Calhoun\'s at 361 550 7536 to discuss parking options. It is a policy at Calhoun\'s for trailers to be parked in designated areas.');
 	}
 
-	// chooseCabinState(event, isInputChecked) {
-	// 	if(isInputChecked) {
-	// 		this.setState({checkin: 'checkin'});
-	// 		this.setState({hellNo: false});
-	// 	}else{
-	// 		this.setState({checkin: ''});
-	// 		this.setState({hellNo: true});
-	// 	}
-	// }
-
-	// chooseRvSpaceState(event, isInputChecked) {
-	// 	if(isInputChecked) {
-	// 		this.setState({checkin: 'checkin'});
-	// 		this.setState({hellNo: false});
-	// 	}else{
-	// 		this.setState({checkin: ''});
-	// 		this.setState({hellNo: true});
-	// 	}
-	// }
-
+	
 	render() {
 		return(
 
@@ -431,8 +422,8 @@ export default class CheckinQuestions extends React.Component {
 	        <Col md={8} offset={{ md: 2 }}>
 	          <Card>
 	            <CardTitle
-	              title='title'
-	              subtitle='subtitle'
+	              title='Checkin'
+	              subtitle='Please check the appropriate checkbox'
 	            />
 	            <CardText>
 	            	<h3> Are you checking in for a Cabin or RV space </h3>

@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from "react-redux";
-
 import {
   changeCheckInDateState,
   changeCheckOutDateState
 } from '../actions/checkinQuestionsActions.js';
-
 import DatePicker from 'material-ui/DatePicker';
 import Toggle from 'material-ui/Toggle';
 
@@ -74,23 +72,24 @@ export default class RangedDatePicker extends React.Component {
   };
 
   componentWillMount() {
-    console.log(this.props.cabinStatic);
+    // console.log(this.props.cabinStatic);
   }
 
   setMaxDate(props) {
     if (this.props.cabinStatic) {
-      console.log('cabin');
+      // console.log('cabin');
       this.setState({maxArrivalDate: new Date(this.state.minDate.getFullYear(), this.state.minDate.getMonth(), this.state.minDate.getDate()+5)});
-      console.log(this.state.maxArrivalDate);
+      // console.log(this.state.maxArrivalDate);
     }
     else {
-      console.log('rv');
+      // console.log('rv');
       this.setState({maxArrivalDate: new Date(this.state.minDate.getFullYear(), this.state.minDate.getMonth(), this.state.minDate.getDate()+10)});
     }
   }
 
   checkInDateState(empty, date) {
     this.props.dispatch(changeCheckInDateState(empty, date));
+    // this.props.dispatch(changeAvailableSitesState());
     this.setState({minDate: new Date(date.getFullYear(), date.getMonth(), date.getDate()+1)});
   };
 

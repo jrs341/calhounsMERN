@@ -46,7 +46,7 @@ db.once("open", function() {
 //   res.sendFile('public/index.html', { root: __dirname });
 // });
 
-app.get(`/`, function(req, res) {
+app.get(`*`, function(req, res) {
   res.sendFile('public/index.html', { root: __dirname });
 });
 // index route

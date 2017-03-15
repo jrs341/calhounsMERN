@@ -147,6 +147,7 @@ export default class CheckinQuestions extends React.Component {
       if (response.data == "") {
         console.log('error!');
       } else {
+      	console.log(response.data);
         this.updateAvailableCabins(response.data);
         }
     });

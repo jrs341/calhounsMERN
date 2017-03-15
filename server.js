@@ -46,7 +46,7 @@ db.once("open", function() {
 //   res.sendFile('public/index.html', { root: __dirname });
 // });
 
-app.get(`*`, function(req, res) {
+app.get(`/`, function(req, res) {
   res.sendFile('public/index.html', { root: __dirname });
 });
 // index route
@@ -257,6 +257,7 @@ app.get("/availableCabins", function(req, res) {
       res.send(error);
     }
     else {
+      console.log(doc);
       res.send(doc);
     }
   });

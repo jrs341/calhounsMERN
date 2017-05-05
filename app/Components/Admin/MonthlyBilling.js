@@ -11,7 +11,7 @@ const submitButton = {
   width: 200
 }
 
-export default class UpdateAllMeters extends React.Component {
+export default class MonthlyBilling extends React.Component {
 
     constructor() {
       super()
@@ -29,6 +29,7 @@ export default class UpdateAllMeters extends React.Component {
   tableRow(fieldInfo) {
     return (
       <TableRow>
+        <TableRowColumn>{fieldInfo.meter}</TableRowColumn>
         <TableRowColumn>{fieldInfo.given_name}</TableRowColumn>
         <TableRowColumn>{fieldInfo.family_name}</TableRowColumn>
         <TableRowColumn>{fieldInfo.email}</TableRowColumn>
@@ -49,13 +50,14 @@ export default class UpdateAllMeters extends React.Component {
       type: 'GET',
       url: '/customerBillingInfo/'
     }).then((response) => {
+        console.log(response.data);
         this.updateCustomerBillingInfo(response.data);
     });
   }
 
-componentWillMount() {
-  this.getCustomersBillingInfo();
-}
+  componentWillMount() {
+    this.getCustomersBillingInfo();
+  }
 
   render() {
     return (
@@ -70,6 +72,7 @@ componentWillMount() {
             <Table>
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
+                  <TableHeaderColumn>Meter</TableHeaderColumn>
                   <TableHeaderColumn>First Name</TableHeaderColumn>
                   <TableHeaderColumn>Last Name</TableHeaderColumn>
                   <TableHeaderColumn>Email</TableHeaderColumn>

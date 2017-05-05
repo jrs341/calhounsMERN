@@ -146,7 +146,7 @@ export default class Checkin extends React.Component {
           name={fieldInfo.dataName}
           key={fieldInfo.dataName}
           value={this.state.searchResponse[fieldInfo.dataName]}
-          hintText={fieldInfo.displayName}
+          // hintText={fieldInfo.displayName}
           floatingLabelText={fieldInfo.displayName}
           onChange={this.updateFormRow}>
         </TextField>
@@ -203,7 +203,7 @@ export default class Checkin extends React.Component {
   }
 
   openForm(props) {
-
+    
     var month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     
     var KWH_rate = '';
@@ -217,7 +217,7 @@ export default class Checkin extends React.Component {
     var weekly = '';
     var monthly = '';
     var checkInDate = this.props.checkInDate.getDate() + ' ' + month[this.props.checkInDate.getMonth()] + ' ' + this.props.checkInDate.getFullYear();
-    var checkOutDate = this.props.checkOutDate;
+    var checkOutDate = this.props.checkOutDate.getDate() + ' ' + month[this.props.checkOutDate.getMonth()] + ' ' + this.props.checkOutDate.getFullYear();
     var terminationDate = '1 ' + month[this.props.checkInDate.getMonth()+2] + ' ' + this.props.checkInDate.getFullYear();
     var rate;
     var firstLastDay = new Date();
@@ -252,12 +252,15 @@ export default class Checkin extends React.Component {
       KWH_rate = '.11';
     };
 
-    if (this.props.rvSpace) {
+    if (this.props.thirtyAmp || this.props.fiftyAmp) {
+      
       demo = 'demo';
       formId = '302b34c0-b394-4859-8b81-e21e487c7e01';
     } else if (this.props.rvSpace && this.props.dogYes) {
+      
       formId = '0';
-    } else if (this.props.cabin){
+    } else {
+      
       demo = 'demo-app';
       formId = '94517d84-a879-408b-8c3f-c4c25729e7ae';
     };
@@ -347,8 +350,8 @@ export default class Checkin extends React.Component {
           console.log('added to meter');
         });
     });
-
-    var url = "https://"+demo+".docusign.net/Member/PowerFormSigning.aspx?PowerFormId="+ formId +"&Tennant_UserName="+ formInfo.given_name + "&Tennant_Email="+ formInfo.email + "&given_name="+ formInfo.given_name +"&family_name="+formInfo.family_name+"&address_line_1="+ formInfo.address_line_1+"&phone_number="+ formInfo.phone_number+"&phone_number_alt="+formInfo.phone_number_alt+"&locality="+formInfo.locality+"&administrative_district_level_1="+formInfo.administrative_district_level_1+"&postal_code="+formInfo.postal_code+"&country="+formInfo.country+"&drivers_license_num="+formInfo.drivers_license_num+"&drivers_license_state="+formInfo.drivers_license_state+"&additional_occupant_1="+formInfo.additional_occupant_1+"&additional_occupant_2="+formInfo.additional_occupant_2+"&additional_occupant_3="+formInfo.additional_occupant_3+"&additional_occupant_4="+formInfo.additional_occupant_4+"&additional_occupant_1_age="+formInfo.additional_occupant_1_age+"&additional_occupant_2_age="+formInfo.additional_occupant_2_age+"&additional_occupant_3_age="+formInfo.additional_occupant_3_age+"&additional_occupant_4_age="+formInfo.additional_occupant_4_age+"&pets_number_of="+formInfo.pets_number_of+"&pets_type="+formInfo.pets_type+"&pets_breed="+formInfo.pets_breed+"&unit_type="+formInfo.unit_type+"&unit_license="+formInfo.unit_license+"&unit_state="+formInfo.unit_state+"&unit_year="+formInfo.unit_year+"&unit_length="+formInfo.unit_length+"&vehicle_1_type="+formInfo.vehicle_1_type+"&vehicle_2_type="+formInfo.vehicle_2_type+"&vehicle_1_license="+formInfo.vehicle_1_license+"&vehicle_2_license="+formInfo.vehicle_2_license+"&vehicle_1_state="+formInfo.vehicle_1_state+"&vehicle_2_state="+formInfo.vehicle_2_state+"&vehicle_1_year="+formInfo.vehicle_1_year+"&vehicle_2_year="+formInfo.vehicle_2_year+"&daily="+daily+"&weekly="+weekly+"&monthly="+monthly+"&thirtyAmp="+thirtyAmp+"&fiftyAmp="+fiftyAmp+"&KWH_rate="+KWH_rate+"&reading="+reading+"&meter="+meter+"&checkin="+checkInDate+"&checkout="+checkOutDate+"&pro_rated_rent="+proRatedRent+"&pro_rated_day="+proRatedDay+"&pro_rated_month="+proRatedMonth+"&pro_rated_year="+proRatedYear+"&first_full_month="+firstFullMonth+"&termination_date="+terminationDate;
+      
+    var url = "https://"+demo+".docusign.net/Member/PowerFormSigning.aspx?PowerFormId="+ formId +"&Tennant_UserName="+ formInfo.given_name + " " + formInfo.family_name +"&Tennant_Email="+ formInfo.email + "&given_name="+ formInfo.given_name +"&family_name="+formInfo.family_name+"&address_line_1="+ formInfo.address_line_1+"&phone_number="+ formInfo.phone_number+"&phone_number_alt="+formInfo.phone_number_alt+"&locality="+formInfo.locality+"&administrative_district_level_1="+formInfo.administrative_district_level_1+"&postal_code="+formInfo.postal_code+"&country="+formInfo.country+"&drivers_license_num="+formInfo.drivers_license_num+"&drivers_license_state="+formInfo.drivers_license_state+"&additional_occupant_1="+formInfo.additional_occupant_1+"&additional_occupant_2="+formInfo.additional_occupant_2+"&additional_occupant_3="+formInfo.additional_occupant_3+"&additional_occupant_4="+formInfo.additional_occupant_4+"&additional_occupant_1_age="+formInfo.additional_occupant_1_age+"&additional_occupant_2_age="+formInfo.additional_occupant_2_age+"&additional_occupant_3_age="+formInfo.additional_occupant_3_age+"&additional_occupant_4_age="+formInfo.additional_occupant_4_age+"&pets_number_of="+formInfo.pets_number_of+"&pets_type="+formInfo.pets_type+"&pets_breed="+formInfo.pets_breed+"&unit_type="+formInfo.unit_type+"&unit_license="+formInfo.unit_license+"&unit_state="+formInfo.unit_state+"&unit_year="+formInfo.unit_year+"&unit_length="+formInfo.unit_length+"&vehicle_1_type="+formInfo.vehicle_1_type+"&vehicle_2_type="+formInfo.vehicle_2_type+"&vehicle_1_license="+formInfo.vehicle_1_license+"&vehicle_2_license="+formInfo.vehicle_2_license+"&vehicle_1_state="+formInfo.vehicle_1_state+"&vehicle_2_state="+formInfo.vehicle_2_state+"&vehicle_1_year="+formInfo.vehicle_1_year+"&vehicle_2_year="+formInfo.vehicle_2_year+"&daily="+daily+"&weekly="+weekly+"&monthly="+monthly+"&thirtyAmp="+thirtyAmp+"&fiftyAmp="+fiftyAmp+"&KWH_rate="+KWH_rate+"&reading="+reading+"&meter="+meter+"&checkin="+checkInDate+"&checkout="+checkOutDate+"&pro_rated_rent="+proRatedRent+"&pro_rated_day="+proRatedDay+"&pro_rated_month="+proRatedMonth+"&pro_rated_year="+proRatedYear+"&first_full_month="+firstFullMonth+"&termination_date="+terminationDate;
 
     var win = window.open(url, '_blank');
     win.focus();

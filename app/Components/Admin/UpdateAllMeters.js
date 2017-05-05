@@ -238,13 +238,13 @@ sumbitNewMeter() {
               primary={true}
               onClick={this.sumbitNewReadings}
               />  
-              <Link to='monthlyBilling'>
+              {/*<Link to='monthlyBilling'>
                <RaisedButton
                 style={submitButton}
                 label="Monthly Billing"
                 primary={true}
                 />
-              </Link>  
+              </Link> */} 
              {/*<RaisedButton
               style={submitButton}
               label="New Meter"

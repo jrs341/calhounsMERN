@@ -20,13 +20,13 @@ export default class Admin extends React.Component {
         <Col md={8} offset={{ md: 2 }}>
           <Card>
             <CardActions>
-              <Link to={'checkinQuestions'}>
+              {/*<Link to={'checkinQuestions'}>
                 <RaisedButton 
                   style={buttonStyle}
                   label='Checkin'
                   primary={true}
                   />
-              </Link>
+              </Link>*/}
               <Link to={'checkout'}>
                 <RaisedButton 
                   style={buttonStyle}
@@ -34,6 +34,13 @@ export default class Admin extends React.Component {
                   primary={true}  
                 />
               </Link>
+              <Link to='monthlyBilling'>
+               <RaisedButton
+                style={buttonStyle}
+                label="Monthly Billing"
+                primary={true}
+                />
+              </Link> 
               <Link to={'updateMeters'}>
                 <RaisedButton
                   style={buttonStyle}

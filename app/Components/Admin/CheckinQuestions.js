@@ -139,6 +139,27 @@ export default class CheckinQuestions extends React.Component {
 		this.getAvailable50AmpRvSpaces = this.getAvailable50AmpRvSpaces.bind(this);
 	}
 
+componentWillMount() {
+	this.props.dispatch(changeCabinState(event, false));
+	this.props.dispatch(changeRvSpaceState(event, false));
+	console.log('will mount');
+}
+componentWillUnmount() {
+	this.setState({
+		daily: false,
+		weekly: false,
+		monthly: false,
+		button: true,
+		availableCabins: [],
+		available30AmpSpaces: [],
+		available50AmpSpaces: [],
+		checkin: ''
+	});
+	// this.props.dispatch(changeCabinState(event, false));
+	// this.props.dispatch(changeRvSpaceState(event, false));
+	console.log('unmount');
+}
+
  getAvailableCabins() {
     return axios({
       type: 'GET',
@@ -191,6 +212,7 @@ export default class CheckinQuestions extends React.Component {
 	      if (response.data == "") {
 	        console.log('error!');
 	      } else {
+	      	console.log(response.data);
 	        this.updateAvailable30AmpRvSpaces(response.data);
 	        }
 	    });
@@ -290,7 +312,7 @@ export default class CheckinQuestions extends React.Component {
 	}
 
 	rvSpaceState(event, isInputChecked) {
-		this.props.dispatch(changeRvSpaceState(event, isInputChecked))
+		this.props.dispatch(changeRvSpaceState(event, isInputChecked));
 	}
 
 	thirtyAmpState(event, isInputChecked) {

@@ -103,7 +103,7 @@ app.get("/searchCustomer/:email", function(req, res){
 });
 
 app.get("/customerBillingInfo", function(req, res) {
-  Customer.find({meter: /^[A-J]/ }, {given_name: 1, family_name: 1, email: 1, rate: 1, checkin: 1, reading: 1}, function(error, doc){
+  Customer.find({meter: /^[A-J]/ }, {given_name: 1, family_name: 1, email: 1, rate: 1, checkin: 1, reading: 1, meter: 1}, function(error, doc){
     if (error) {
       res.send(error);
     } else {

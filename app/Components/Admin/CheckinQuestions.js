@@ -142,7 +142,7 @@ export default class CheckinQuestions extends React.Component {
 componentWillMount() {
 	this.props.dispatch(changeCabinState(event, false));
 	this.props.dispatch(changeRvSpaceState(event, false));
-	console.log('will mount');
+	// console.log('will mount');
 }
 componentWillUnmount() {
 	this.setState({
@@ -157,7 +157,7 @@ componentWillUnmount() {
 	});
 	// this.props.dispatch(changeCabinState(event, false));
 	// this.props.dispatch(changeRvSpaceState(event, false));
-	console.log('unmount');
+	// console.log('unmount');
 }
 
  getAvailableCabins() {
@@ -166,9 +166,9 @@ componentWillUnmount() {
       url: '/availableCabins/'
     }).then((response) => {
       if (response.data == "") {
-        console.log('error!');
+        // console.log('error!');
       } else {
-      	console.log(response.data);
+      	// console.log(response.data);
         this.updateAvailableCabins(response.data);
         }
     });
@@ -210,9 +210,9 @@ componentWillUnmount() {
 	      url: '/available30Amp/'
 	    }).then((response) => {
 	      if (response.data == "") {
-	        console.log('error!');
+	        // console.log('error!');
 	      } else {
-	      	console.log(response.data);
+	      	// console.log(response.data);
 	        this.updateAvailable30AmpRvSpaces(response.data);
 	        }
 	    });
@@ -222,7 +222,7 @@ componentWillUnmount() {
 	      url: '/available30AmpDailyWeekly/'
 	    }).then((response) => {
 	      if (response.data == "") {
-	        console.log('error!');
+	        // console.log('error!');
 	      } else {
 	        this.updateAvailable30AmpRvSpaces(response.data);
 	        }
@@ -255,7 +255,7 @@ componentWillUnmount() {
 	      url: '/available50Amp/'
 	    }).then((response) => {
 	      if (response.data == "") {
-	        console.log('error!');
+	        // console.log('error!');
 	      } else {
 	        this.updateAvailable50AmpRvSpaces(response.data);
 	        }
@@ -266,7 +266,7 @@ componentWillUnmount() {
 	      url: '/available50AmpDailyWeekly/'
 	    }).then((response) => {
 	      if (response.data == "") {
-	        console.log('error!');
+	        // console.log('error!');
 	      } else {
 	        this.updateAvailable50AmpRvSpaces(response.data);
 	        }

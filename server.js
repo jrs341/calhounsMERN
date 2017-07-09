@@ -113,10 +113,10 @@ app.get("/customerBillingInfo", function(req, res) {
 });
 
 app.get("/checkOutByCustomerEmail/:searchInput", function(req, res){
-    console.log(req.params.searchInput);
+    // console.log(req.params.searchInput);
     Customer.findOne({email: req.params.searchInput},{meter: 1, reading: 1, given_name: 1, family_name: 1, email: 1}, function(error, doc) {
     if (error) {
-      console.log(error);
+      // console.log(error);
       res.send(error);
     }
     else {
@@ -126,7 +126,7 @@ app.get("/checkOutByCustomerEmail/:searchInput", function(req, res){
 });
 
 app.get("/checkOutByMeter/:searchInput", function(req, res){
-    console.log(req.params.searchInput);
+    // console.log(req.params.searchInput);
     Customer.findOne({meter: req.params.searchInput},{meter: 1, reading: 1, given_name: 1, family_name: 1, email: 1}, function(error, doc) {
     if (error) {
       res.send(error);
@@ -229,11 +229,11 @@ app.post("/newMeter", function(req, res) {
   newMeter.save(function(error, doc) {
     if (error) {
       res.send(error);
-      console.log(error);
+      // console.log(error);
     }
     else {
       res.send(doc);
-      console.log(doc);
+      // console.log(doc);
     }
   })
 });
@@ -257,7 +257,7 @@ app.get("/availableCabins", function(req, res) {
       res.send(error);
     }
     else {
-      console.log(doc);
+      // console.log(doc);
       res.send(doc);
     }
   });
@@ -342,7 +342,7 @@ app.get("/lastMeterReading/:meter", function(req, res) {
 
 // this route will insert the mongo ID into the meter reading
 app.post("/addCustomerToMeter", function(req, res) {
-  console.log(req.body.email);
+  // console.log(req.body.email);
   MeterReadings.findOneAndUpdate({meter:req.body.meter}, {customer: req.body.email }, {upsert: true}, function(error, doc) {
     if (error) {
       res.send(error);
@@ -354,9 +354,9 @@ app.post("/addCustomerToMeter", function(req, res) {
 });
 
 app.post("/submitAllMeterReadings", function(req, res) {
-  console.log(req.body._id);
-  console.log(req.body.meter);
-  console.log(req.body.reading);
+  // console.log(req.body._id);
+  // console.log(req.body.meter);
+  // console.log(req.body.reading);
   MeterReadings.findOneAndUpdate({_id:req.body._id}, { $push: {reading: { reading: req.body.reading } }},{safe: true}, function(error, doc) {
     if (error) {
       res.send(error);
@@ -368,8 +368,8 @@ app.post("/submitAllMeterReadings", function(req, res) {
 });
 
 app.post("/submitFinalMeterReading", function(req, res) {
-  console.log(req.body.meter);
-  console.log(req.body.reading);
+  // console.log(req.body.meter);
+  // console.log(req.body.reading);
   MeterReadings.findOneAndUpdate({meter:req.body.meter}, { $push: {reading: { reading: req.body.reading } }},{safe: true}, function(error, doc) {
     if (error) {
       res.send(error);

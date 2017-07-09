@@ -55,7 +55,7 @@ export default class AddUser extends React.Component {
 			password: this.state.password
 
 		}).then(function(response){
-			console.log('added new employee');
+			// console.log('added new employee');
 		});
 	}
 

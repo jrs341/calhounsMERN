@@ -33,7 +33,7 @@ export default class Login extends React.Component {
 	}
 
 	getUserNameAndPassword(event) {
-		console.log(event.target.value);
+		// console.log(event.target.value);
 		return axios({
 			type: 'GET',
 			url: '/userName/'+ event.target.value

@@ -50,7 +50,7 @@ export default class MonthlyBilling extends React.Component {
       type: 'GET',
       url: '/customerBillingInfo/'
     }).then((response) => {
-        console.log(response.data);
+        // console.log(response.data);
         this.updateCustomerBillingInfo(response.data);
     });
   }

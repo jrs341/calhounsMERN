@@ -76,24 +76,24 @@ export default class UpdateAllMeters extends React.Component {
 
   updateMetersResponse(getRequestResponse) {
     this.setState({getMetersResponse: getRequestResponse});
-    console.log(this.state.getMetersResponse);
-    console.log(getRequestResponse);
+    // console.log(this.state.getMetersResponse);
+    // console.log(getRequestResponse);
   }
 
   updateFormRow(event, newInput) {
     var newReading = this.state.getMetersResponse;
     newReading[event.target.name].reading = Number(event.target.value);
     this.setState({getMetersResponse: newReading});
-    console.log(newReading[event.target.name]);
+    // console.log(newReading[event.target.name]);
   }
 
   sumbitNewMeterId(event) {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.setState({newMeterId: event.target.value});
   }
 
   sumbitNewMeterReading(event) {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.setState({newMeterReading: Number(event.target.value)});
   }
 
@@ -112,9 +112,9 @@ export default class UpdateAllMeters extends React.Component {
   }
 
   metersToRemoveLastReading(event) {
-    console.log(event.target.name);
+    // console.log(event.target.name);
     metersToRemoveLastReading.push(event.target.name);
-    console.log(metersToRemoveLastReading);
+    // console.log(metersToRemoveLastReading);
   }
 
   removeLastReadingPostRoute() {
@@ -123,13 +123,13 @@ export default class UpdateAllMeters extends React.Component {
       {
         meter: metersToRemoveLastReading[i]
       }).then(function(response){
-        console.log('reading removed from customer');
+        // console.log('reading removed from customer');
       });
       axios.post('/removeLastEntryFromMeterReading',
       {
         meter: metersToRemoveLastReading[i]
       }).then(function(response){
-        console.log('reading removed from meter');
+        // console.log('reading removed from meter');
       });
     }
   }
@@ -140,7 +140,7 @@ export default class UpdateAllMeters extends React.Component {
       url: '/meter/'
     }).then((response) => {
       if (response.data == "") {
-        console.log('error!');
+        // console.log('error!');
       } else {
         this.updateMetersResponse(response.data);
         }
@@ -162,7 +162,7 @@ sumbitNewReadings() {
         reading: array[i].reading
 
       }).then(function(response){ 
-      console.log('saved to meter collection');
+      // console.log('saved to meter collection');
     });
       axios.post('/submitAllCustomerMeterReadings', 
       {
@@ -171,7 +171,7 @@ sumbitNewReadings() {
         reading: array[i].reading
 
       }).then(function(response){ 
-      console.log('saved to customer collection');
+      // console.log('saved to customer collection');
     });
   }
 }
@@ -194,7 +194,7 @@ sumbitNewMeter() {
       {
         meter: this.state.newMeterId,
       }).then(function(response){ 
-      console.log('saved');
+      // console.log('saved');
     });
   }
 

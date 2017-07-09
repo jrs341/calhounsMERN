@@ -194,7 +194,7 @@ export default class Checkin extends React.Component {
         postRoute = '/submitCustomer';
       } else {
         this.updateSearchResponse(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         foundCustomer = true;
         this.updateSearchResultInfo('Please verfiy all of your information is still correct.');
         postRoute = '/updateCustomer';
@@ -222,22 +222,22 @@ export default class Checkin extends React.Component {
     var rate;
     var firstLastDay = new Date();
 
-    console.log(new Date(firstLastDay.getFullYear(), firstLastDay.getMonth()+1, 0).getDate());
+    // console.log(new Date(firstLastDay.getFullYear(), firstLastDay.getMonth()+1, 0).getDate());
     var proRatedRent;
     // last day of the month
     if (this.props.checkInDate.getDate() == new Date(firstLastDay.getFullYear(), firstLastDay.getMonth()+1, 0).getDate()){
-      console.log('last day');
+      // console.log('last day');
       proRatedRent = 26.50;
       
     // first day of the month
     } else if (this.props.checkInDate.getDate() == new Date(firstLastDay.getFullYear(), firstLastDay.getMonth(), 1).getDate()){
-      console.log('first day');
+      // console.log('first day');
       proRatedRent = 0.00
       
     // everything in between
     } else {
       proRatedRent = (new Date(firstLastDay.getFullYear(),firstLastDay.getMonth()+1, 0).getDate()) - ((this.props.checkInDate.getDate())*26.50).toFixed(2);
-        console.log('everything else');
+        // console.log('everything else');
     };
     
     var proRatedDay = this.props.checkInDate.getDate();
@@ -341,13 +341,13 @@ export default class Checkin extends React.Component {
         checkout: this.props.checkOutDate,
         rate: rate
       }).then(function(response){ 
-        console.log('saved');
+        // console.log('saved');
         axios.post('/addCustomerToMeter',
         {
           meter: meter,
           email: formInfo.email
         }).then(function(response){
-          console.log('added to meter');
+          // console.log('added to meter');
         });
     });
       

@@ -66,19 +66,19 @@ export default class Checkout extends React.Component {
       meter: this.state.meter,
       reading: this.state.finalMeterReading
     }).then(function(response) {
-      console.log('Saved Final');
+      // console.log('Saved Final');
     });
     axios.post('/removeCustomerFromMeter', 
     {
       meter: this.state.meter
     }).then(function(response) {
-      console.log('Customer Removed from Meter');
+      // console.log('Customer Removed from Meter');
     });
     axios.post('/removeMeterFromCustomer',
     {
       email: this.state.email
     }).then(function(response) {
-      console.log('Meter Removed from Customer');
+      // console.log('Meter Removed from Customer');
     })
   }
 
@@ -91,7 +91,7 @@ export default class Checkout extends React.Component {
       if (response.data == "") {
         this.updateSearchResultInfo('Sorry we did not find that email in out records, please try a different email or enter the meter ID');
       } else {
-        console.log(response.data);
+        // console.log(response.data);
         this.updateCustomerInfo(response);
         this.updateSearchResultInfo('Enter the final meter reading to continue');
       }
@@ -106,7 +106,7 @@ export default class Checkout extends React.Component {
       if (response.data == "") {
         this.updateSearchResultInfo('Sorry we did not find that meter ID in out records, please try a searching with your email address');
       } else {
-        console.log(response.data);
+        // console.log(response.data);
         this.updateCustomerInfo(response);
         this.updateSearchResultInfo('Enter the final meter reading to continue');
       }

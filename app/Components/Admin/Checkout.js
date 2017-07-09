@@ -157,7 +157,7 @@ export default class Checkout extends React.Component {
                 floatingLabelText='Enter final meter reading'
                 onChange={this.updateFinalKWHtotal}
               />
-              <Link to='payment'>
+              <Link to='checkoutConfirm'>
               <RaisedButton
                 style={submitButton}
                 label="Submit Final Meter Reading"

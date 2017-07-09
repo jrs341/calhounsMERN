@@ -14,7 +14,9 @@ import MonthlyBilling from '../Components/Admin/MonthlyBilling'
 import CheckinQuestions from '../Components/Admin/CheckinQuestions'
 import Reservations from '../pages/Reservations'
 import Checkin from '../Components/Admin/Checkin'
+import CheckinConfirm from '../pages/CheckinConfirm'
 import Checkout from '../Components/Admin/Checkout'
+import CheckoutConfirm from '../pages/CheckoutConfirm'
 import Payment from '../pages/Payment'
 
 module.exports = (
@@ -29,7 +31,9 @@ module.exports = (
         <Route path="addUser" component={AddUser} />
         <Route path="checkinQuestions" component={CheckinQuestions}/>
       	<Route path="checkin" component={Checkin} />
+        <Route path="checkinConfirm" component={CheckinConfirm} />
       	<Route path="checkout" component={Checkout} />
+        <Route path="checkoutConfirm" component={CheckoutConfirm} />
         {/*<Route path="payment" component={Payment} />*/}
       	<Route path="updateMeters" component={UpdateAllMeters} />
         <Route path="monthlyBilling" component={MonthlyBilling} />

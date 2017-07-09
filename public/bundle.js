@@ -39235,9 +39235,17 @@ var _Checkin = __webpack_require__(280);
 
 var _Checkin2 = _interopRequireDefault(_Checkin);
 
+var _CheckinConfirm = __webpack_require__(664);
+
+var _CheckinConfirm2 = _interopRequireDefault(_CheckinConfirm);
+
 var _Checkout = __webpack_require__(281);
 
 var _Checkout2 = _interopRequireDefault(_Checkout);
+
+var _CheckoutConfirm = __webpack_require__(665);
+
+var _CheckoutConfirm2 = _interopRequireDefault(_CheckoutConfirm);
 
 var _Payment = __webpack_require__(663);
 
@@ -39260,7 +39268,9 @@ module.exports = _react2.default.createElement(
     _react2.default.createElement(_reactRouter.Route, { path: 'addUser', component: _AddUser2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'checkinQuestions', component: _CheckinQuestions2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'checkin', component: _Checkin2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: 'checkinConfirm', component: _CheckinConfirm2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'checkout', component: _Checkout2.default }),
+    _react2.default.createElement(_reactRouter.Route, { path: 'checkoutConfirm', component: _CheckoutConfirm2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'updateMeters', component: _UpdateAllMeters2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'monthlyBilling', component: _MonthlyBilling2.default }),
     _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default })
@@ -40722,7 +40732,7 @@ var Checkin = (_dec = (0, _reactRedux.connect)(function (store) {
               null,
               _react2.default.createElement(
                 _reactRouter.Link,
-                { to: 'payment' },
+                { to: 'checkinConfirm' },
                 _react2.default.createElement(_RaisedButton2.default, {
                   style: submitButton,
                   label: 'Submit',
@@ -40980,7 +40990,7 @@ var Checkout = function (_React$Component) {
               }),
               _react2.default.createElement(
                 _reactRouter.Link,
-                { to: 'payment' },
+                { to: 'checkoutConfirm' },
                 _react2.default.createElement(_RaisedButton2.default, {
                   style: submitButton,
                   label: 'Submit Final Meter Reading',
@@ -84512,6 +84522,190 @@ var Payment = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Payment;
+
+/***/ }),
+/* 664 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = __webpack_require__(20);
+
+var _reactGridSystem = __webpack_require__(26);
+
+var _Card = __webpack_require__(34);
+
+var _RaisedButton = __webpack_require__(30);
+
+var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var buttonStyle = {
+  width: 200,
+  display: 'block',
+  marginBottom: 10,
+  marginLeft: 'auto',
+  marginRight: 'auto'
+};
+
+var CheckinConfirm = function (_React$Component) {
+  _inherits(CheckinConfirm, _React$Component);
+
+  function CheckinConfirm() {
+    _classCallCheck(this, CheckinConfirm);
+
+    return _possibleConstructorReturn(this, (CheckinConfirm.__proto__ || Object.getPrototypeOf(CheckinConfirm)).apply(this, arguments));
+  }
+
+  _createClass(CheckinConfirm, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactGridSystem.Row,
+        null,
+        _react2.default.createElement(
+          _reactGridSystem.Col,
+          { md: 8, offset: { md: 2 } },
+          _react2.default.createElement(
+            _Card.Card,
+            null,
+            _react2.default.createElement(_Card.CardTitle, {
+              title: 'You have completed the checkin process please review and digitally sign the Site Service Agreement for RV spaces or Lease agreement for Cabins.'
+            }),
+            _react2.default.createElement(
+              _Card.CardActions,
+              null,
+              _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/' },
+                _react2.default.createElement(_RaisedButton2.default, {
+                  style: buttonStyle,
+                  label: 'Return to Main Page',
+                  primary: true
+                })
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return CheckinConfirm;
+}(_react2.default.Component);
+
+exports.default = CheckinConfirm;
+
+/***/ }),
+/* 665 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouter = __webpack_require__(20);
+
+var _reactGridSystem = __webpack_require__(26);
+
+var _Card = __webpack_require__(34);
+
+var _RaisedButton = __webpack_require__(30);
+
+var _RaisedButton2 = _interopRequireDefault(_RaisedButton);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var buttonStyle = {
+  width: 200,
+  display: 'block',
+  marginBottom: 10,
+  marginLeft: 'auto',
+  marginRight: 'auto'
+};
+
+var CheckinConfirm = function (_React$Component) {
+  _inherits(CheckinConfirm, _React$Component);
+
+  function CheckinConfirm() {
+    _classCallCheck(this, CheckinConfirm);
+
+    return _possibleConstructorReturn(this, (CheckinConfirm.__proto__ || Object.getPrototypeOf(CheckinConfirm)).apply(this, arguments));
+  }
+
+  _createClass(CheckinConfirm, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        _reactGridSystem.Row,
+        null,
+        _react2.default.createElement(
+          _reactGridSystem.Col,
+          { md: 8, offset: { md: 2 } },
+          _react2.default.createElement(
+            _Card.Card,
+            null,
+            _react2.default.createElement(_Card.CardTitle, {
+              title: 'You have completed the checkout process if the customer is leaving please check for an open invoice and add the final electric bill to the open invoice and charge the customer for that amount.  Then notify Jason that a space or cabin has become available.  If the customer is moving to a new space, create a ticket in Square with the final useage, do not include any usage that is already on an open invoice'
+            }),
+            _react2.default.createElement(
+              _Card.CardActions,
+              null,
+              _react2.default.createElement(
+                _reactRouter.Link,
+                { to: '/' },
+                _react2.default.createElement(_RaisedButton2.default, {
+                  style: buttonStyle,
+                  label: 'Return to Main Page',
+                  primary: true
+                })
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return CheckinConfirm;
+}(_react2.default.Component);
+
+exports.default = CheckinConfirm;
 
 /***/ })
 /******/ ]);

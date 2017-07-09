@@ -384,7 +384,7 @@ export default class Checkin extends React.Component {
               {this.inputFieldInfo.map(fieldInfo => this.formRow(fieldInfo))}
             </CardText>
             <CardActions>
-            <Link to='payment'>
+            <Link to='checkinConfirm'>
             <RaisedButton
                   style={submitButton}
                   label="Submit"

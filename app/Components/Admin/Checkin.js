@@ -217,7 +217,12 @@ export default class Checkin extends React.Component {
     var weekly = '';
     var monthly = '';
     var checkInDate = this.props.checkInDate.getDate() + ' ' + month[this.props.checkInDate.getMonth()] + ' ' + this.props.checkInDate.getFullYear();
-    var checkOutDate = this.props.checkOutDate.getDate() + ' ' + month[this.props.checkOutDate.getMonth()] + ' ' + this.props.checkOutDate.getFullYear();
+    var checkOutDate = 0
+    if (this.props.checkOutDate === 0) {
+      checkOutDate = 'Not Provided'
+    } else {
+    this.props.checkOutDate.getDate() + ' ' + month[this.props.checkOutDate.getMonth()] + ' ' + this.props.checkOutDate.getFullYear();
+    };
     var terminationDate = '1 ' + month[this.props.checkInDate.getMonth()+2] + ' ' + this.props.checkInDate.getFullYear();
     var rate;
     var firstLastDay = new Date();

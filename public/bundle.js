@@ -39261,7 +39261,6 @@ module.exports = _react2.default.createElement(
     _react2.default.createElement(_reactRouter.Route, { path: 'checkinQuestions', component: _CheckinQuestions2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'checkin', component: _Checkin2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'checkout', component: _Checkout2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'payment', component: _Payment2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'updateMeters', component: _UpdateAllMeters2.default }),
     _react2.default.createElement(_reactRouter.Route, { path: 'monthlyBilling', component: _MonthlyBilling2.default }),
     _react2.default.createElement(_reactRouter.IndexRoute, { component: _HomePage2.default })

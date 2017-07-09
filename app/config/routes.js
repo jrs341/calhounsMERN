@@ -30,7 +30,7 @@ module.exports = (
         <Route path="checkinQuestions" component={CheckinQuestions}/>
       	<Route path="checkin" component={Checkin} />
       	<Route path="checkout" component={Checkout} />
-        <Route path="payment" component={Payment} />
+        {/*<Route path="payment" component={Payment} />*/}
       	<Route path="updateMeters" component={UpdateAllMeters} />
         <Route path="monthlyBilling" component={MonthlyBilling} />
       <IndexRoute component={HomePage} />
